@@ -11,7 +11,7 @@ let routerMode = 'history';
 let baseImgPath = 'http://hopefully.qiniudn.com/';
 
 if (process.env.NODE_ENV == 'development') {
-	baseUrl = 'http://localhost:3000';
+	baseUrl = 'http://localhost:8083';
 }else{
 	baseUrl = 'http://cangdu.org:8001';
 }
