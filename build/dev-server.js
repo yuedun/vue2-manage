@@ -65,8 +65,9 @@ app.use(hotMiddleware)
 var staticPath = path.posix.join(config.dev.assetsPublicPath, config.dev.assetsSubDirectory)
 app.use(staticPath, express.static('./static'))
 
-//前端调用自带API服务
+//****************前端调用自带API服务****************
 apiServer(app)
+//****************前端调用自带API服务****************
 
 var uri = 'http://localhost:' + port
 
