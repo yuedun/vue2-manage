@@ -145,7 +145,7 @@
 					    <el-table-column 
 					    	label="操作" 
 					    	width="120">
-					    <template scope="scope">
+					    <template slot-scope="props">
 					        <el-button
 					          size="small"
 					          type="danger"

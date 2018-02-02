@@ -1,6 +1,4 @@
 module.exports = function (app) {
-    console.log("appsevice");
-    
     //登录
     app.post('/admin/login', function (req, res) {
         console.log(">>>>>>>>>");
@@ -12,7 +10,7 @@ module.exports = function (app) {
     app.get('/admin/info', function (req, res) {
         console.log(">>>>>>>>>");
         
-        res.json({})
+        res.json({username:"yuedun"})
     });
     app.get('/admin/singout', function (req, res) {
         res.json({status:1})
@@ -23,28 +21,41 @@ module.exports = function (app) {
             username: "叶良辰",
             registe_time: "2018-01-30 14:23:45",
             city: "上海"
+        },{
+            username: "叶良辰",
+            registe_time: "2018-01-30 14:23:45",
+            city: "上海"
+        },{
+            username: "叶良辰",
+            registe_time: "2018-01-30 14:23:45",
+            city: "上海"
+        },{
+            username: "叶良辰",
+            registe_time: "2018-01-30 14:23:45",
+            city: "上海"
         }])
     });
     app.get('/statis/api/count', function (req, res) {
-        var date = req.params.date;
+        console.log("/statis/api/count");
+        
         res.json({
             count: 12
         })
     });
     app.get('/users/count', function (req, res) {
-        var date = req.params.date;
+        console.log("/users/count");
         res.json({
             count: 12
         })
     });
     app.get('/admin/count', function (req, res) {
-        var date = req.params.date;
+        console.log("/admin/count");
         res.json({
             count: 12
         })
     });
     app.get('/bos/orders/count', function (req, res) {
-        var date = req.params.date;
+        console.log("/bos/orders/count");
         res.json({
             count: 12
         })
@@ -77,6 +88,24 @@ module.exports = function (app) {
         var date = req.params.date;
         res.json({
             count: 12
+        })
+    });
+    app.get('/shopping/addShop', function (req, res) {
+        var date = req.params.date;
+        res.json({
+            status: 1
+        })
+    });
+    app.get('/cities', function (req, res) {
+        var date = req.params.date;
+        res.json({
+            id: 1
+        })
+    });
+    app.get('/pois', function (req, res) {
+        var date = req.params.date;
+        res.json({
+            address: "上海"
         })
     });
     
