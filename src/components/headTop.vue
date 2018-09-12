@@ -62,7 +62,7 @@
 <style lang="less">
 	@import '../style/mixin';
 	.header_container{
-		background-color: #EFF2F7;
+		background-color: #324057;
 		height: 60px;
 		display: flex;
 		justify-content: space-between;
