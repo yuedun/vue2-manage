@@ -8,7 +8,7 @@ module.exports = {
     assetsRoot: path.resolve(__dirname, '../manage'),
     assetsSubDirectory: 'static',
     assetsPublicPath: '/manage/',
-    productionSourceMap: true,
+    productionSourceMap: false,
     // Gzip off by default as many popular static hosts such as
     // Surge or Netlify already gzip all static assets for you.
     // Before setting to `true`, make sure to:
@@ -42,6 +42,7 @@ module.exports = {
         '/payapi',
         '/admin',
         '/statis',
+        '/img',
     ],
     // CSS Sourcemaps off by default because relative paths are "buggy"
     // with this option, according to the CSS-Loader README

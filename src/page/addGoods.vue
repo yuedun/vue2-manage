@@ -99,7 +99,7 @@
 						      label="价格">
 						    </el-table-column>
 						    <el-table-column label="操作" >
-						    <template scope="scope"> 
+						    <template slot-scope="scope">
 						        <el-button
 						          size="small"
 						          type="danger"
@@ -330,6 +330,18 @@
 					            	type: 'success',
 					            	message: '添加成功'
 					          	});
+					          	this.foodForm = {
+				    				name: '',
+				    				description: '',
+				    				image_path: '',
+				    				activity: '',
+				    				attributes: [],
+				    				specs: [{
+				    					specs: '默认',
+							          	packing_fee: 0,
+							          	price: 20,
+				    				}],
+				    			}
 							}else{
 								this.$message({
 					            	type: 'error',
@@ -409,7 +421,7 @@
 		}
 		span{
 			.sc(14px, #999);
-			transition: all 400ms;	
+			transition: all 400ms;
 		}
 		.edit_icon{
 			color: #ccc;

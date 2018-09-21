@@ -76,7 +76,7 @@
 							}">
 						</el-time-select>
 					</el-form-item>
-					
+
 					<el-form-item label="上传店铺头像">
 						<el-upload
 						  class="avatar-uploader"
@@ -142,10 +142,10 @@
 					      align="cneter"
 					      label="活动详情">
 					    </el-table-column>
-					    <el-table-column 
-					    	label="操作" 
+					    <el-table-column
+					    	label="操作"
 					    	width="120">
-					    <template scope="scope">
+					    <template slot-scope="scope">
 					        <el-button
 					          size="small"
 					          type="danger"
@@ -191,7 +191,7 @@
        	 			image_path: '',
        	 			business_license_image: '',
        	 			catering_service_license_image: '',
-       	 			
+
 		        },
 		        rules: {
 					name: [
@@ -336,7 +336,7 @@
 		        		this.$message({
 				            type: 'info',
 				            message: '请输入活动详情'
-				        }); 
+				        });
 		        		return
 		        	}
 		          	let newObj = {};
@@ -368,14 +368,14 @@
 					        	name: '进店领券',
 					        	description: value,
 		          			}
-		          			break;			
+		          			break;
 		          	}
 		          	this.activities.push(newObj);
 		        }).catch(() => {
 		          	this.$message({
 		            	type: 'info',
 		            	message: '取消输入'
-		          	});       
+		          	});
 		        });
 		    },
 		    handleDelete(index){
@@ -394,6 +394,34 @@
 					            	type: 'success',
 					            	message: '添加成功'
 					          	});
+					          	this.formData = {
+									name: '', //店铺名称
+									address: '', //地址
+									latitude: '',
+									longitude: '',
+									description: '', //介绍
+									phone: '',
+									promotion_info: '',
+									float_delivery_fee: 5, //运费
+									float_minimum_order_amount: 20, //起价
+									is_premium: true,
+									delivery_mode: true,
+									new: true,
+									bao: true,
+									zhun: true,
+									piao: true,
+									startTime: '',
+				       	 			endTime: '',
+				       	 			image_path: '',
+				       	 			business_license_image: '',
+				       	 			catering_service_license_image: '',
+						        };
+						        this.selectedCategory = ['快餐便当', '简餐'];
+						        this.activities = [{
+						        	icon_name: '减',
+						        	name: '满减优惠',
+						        	description: '满30减5，满60减8',
+							    }];
 							}else{
 								this.$message({
 					            	type: 'error',
