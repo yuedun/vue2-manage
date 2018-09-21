@@ -9,7 +9,7 @@
                 :row-key="row => row.index"
                 style="width: 100%">
                 <el-table-column type="expand">
-                  <template scope="props">
+                  <template slot-scope="props">
                     <el-form label-position="left" inline class="demo-table-expand">
                       <el-form-item label="食品名称">
                         <span>{{ props.row.name }}</span>
@@ -54,7 +54,7 @@
                   prop="rating">
                 </el-table-column>
                 <el-table-column label="操作" width="160">
-                  <template scope="scope">
+                  <template slot-scope="scope">
                     <el-button
                       size="small"
                       @click="handleEdit(scope.row)">编辑</el-button>
@@ -123,7 +123,7 @@
 					      label="价格">
 					    </el-table-column>
 					    <el-table-column label="操作" >
-					    <template scope="scope"> 
+					    <template slot-scope="scope"> 
 					        <el-button
 					          size="small"
 					          type="danger"
