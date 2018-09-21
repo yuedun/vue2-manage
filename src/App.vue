@@ -1,18 +1,13 @@
 <template>
-  <div id="app">
-    <router-view></router-view>
-  </div>
+    <div id="app" class="fillcontain">
+		    <router-view></router-view>
+    </div>
 </template>
 
 <script>
-import Hello from './components/Hello'
-
-export default {
-  // name: 'app',
-  // components: {
-  //   Hello
-  // }
-}
+    export default {
+    	
+    }
 </script>
 
 <style lang="less">

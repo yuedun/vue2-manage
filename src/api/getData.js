@@ -72,7 +72,7 @@ export const adminCount = () => fetch('/admin/count');
  * 获取定位城市
  */
 
-export const cityGuess = () => fetch('/cities', {
+export const cityGuess = () => fetch('/v1/cities', {
 	type: 'guess'
 });
 
@@ -86,7 +86,7 @@ export const addShop = data => fetch('/shopping/addShop', data, 'POST');
  * 获取搜索地址
  */
 
-export const searchplace = (cityid, value) => fetch('/pois', {
+export const searchplace = (cityid, value) => fetch('/v1/pois', {
 	type: 'search',
 	city_id: cityid,
 	keyword: value
@@ -116,7 +116,7 @@ export const addFood = data => fetch('/shopping/addfood', data, 'POST');
  * category 种类列表
  */
 
-export const foodCategory = (latitude, longitude) => fetch('/shopping/restaurant/category');
+export const foodCategory = (latitude, longitude) => fetch('/shopping/v2/restaurant/category');
 
 /**
  * 获取餐馆列表
@@ -152,50 +152,50 @@ export const deleteResturant = restaurant_id => fetch('/shopping/restaurant/' + 
  * 获取食品列表
  */
 
-export const getFoods = data => fetch('/shopping/foods', data);
+export const getFoods = data => fetch('/shopping/v2/foods', data);
 
 /**
  * 获取食品数量
  */
 
-export const getFoodsCount = data => fetch('/shopping/foods/count', data);
+export const getFoodsCount = data => fetch('/shopping/v2/foods/count', data);
 
 
 /**
  * 获取menu列表
  */
 
-export const getMenu = data => fetch('/shopping/menu', data);
+export const getMenu = data => fetch('/shopping/v2/menu', data);
 
 /**
  * 获取menu详情
  */
 
-export const getMenuById = category_id => fetch('/shopping/menu/' + category_id);
+export const getMenuById = category_id => fetch('/shopping/v2/menu/' + category_id);
 
 /**
  * 更新食品信息
  */
 
-export const updateFood = data => fetch('/shopping/updatefood', data, 'POST');
+export const updateFood = data => fetch('/shopping/v2/updatefood', data, 'POST');
 
 /**
  * 删除食品
  */
 
-export const deleteFood = food_id => fetch('/shopping/food/' + food_id, {}, 'DELETE');
+export const deleteFood = food_id => fetch('/shopping/v2/food/' + food_id, {}, 'DELETE');
 
 /**
  * 获取用户列表
  */
 
-export const getUserList = data => fetch('/users/list', data);
+export const getUserList = data => fetch('/v1/users/list', data);
 
 /**
  * 获取用户数量
  */
 
-export const getUserCount = data => fetch('/users/count', data);
+export const getUserCount = data => fetch('/v1/users/count', data);
 
 /**
  * 获取订单列表
@@ -213,16 +213,16 @@ export const getOrderCount = data => fetch('/bos/orders/count', data);
  * 获取用户信息
  */
 
-export const getUserInfo = user_id => fetch('/user/' + user_id);
+export const getUserInfo = user_id => fetch('/v1/user/' + user_id);
 
 /**
  * 获取地址信息
  */
 
-export const getAddressById = address_id => fetch('/addresse/' + address_id);
+export const getAddressById = address_id => fetch('/v1/addresse/' + address_id);
 
 /**
  * 获取用户分布信息
  */
 
-export const getUserCity = () => fetch('/user/city/count');
+export const getUserCity = () => fetch('/v1/user/city/count');

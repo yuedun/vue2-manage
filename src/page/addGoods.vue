@@ -50,7 +50,7 @@
 					<el-form-item label="上传食品图片">
 						<el-upload
 						  class="avatar-uploader"
-						  :action="baseUrl + '/addimg/food'"
+						  :action="baseUrl + '/v1/addimg/food'"
 						  :show-file-list="false"
 						  :on-success="uploadImg"
 						  :before-upload="beforeImgUpload">
@@ -99,7 +99,7 @@
 						      label="价格">
 						    </el-table-column>
 						    <el-table-column label="操作" >
-						    <template slot-scope="scope"> 
+						    <template slot-scope="scope">
 						        <el-button
 						          size="small"
 						          type="danger"
@@ -421,7 +421,7 @@
 		}
 		span{
 			.sc(14px, #999);
-			transition: all 400ms;	
+			transition: all 400ms;
 		}
 		.edit_icon{
 			color: #ccc;

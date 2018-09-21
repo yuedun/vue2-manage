@@ -1,4 +1,6 @@
 module.exports = function (app) {
+    console.log(">>>>>>>>>>>>>>>");
+    
     //登录
     app.post('/admin/login', function (req, res) {
         console.log(">>>>>>>>>");

@@ -2,7 +2,10 @@
     <div class="fillcontain">
         <head-top></head-top>
         <div class="table_container">
-            <el-table :data="tableDatas" highlight-current-row style="width: 100%">
+            <el-table
+                :data="tableData"
+                highlight-current-row
+                style="width: 100%">
                 <el-table-column
                   type="index"
                   width="100">
@@ -42,8 +45,7 @@
     export default {
         data(){
             return {
-                //默认数据
-                tableDatas: [{
+                tableData: [{
                   registe_time: '2016-05-02',
                   username: '王小虎',
                   city: '上海市普陀区金沙江路 1518 弄'
@@ -71,9 +73,22 @@
     		headTop,
     	},
         created(){
-            this.getUsers();
+            this.initData();
         },
         methods: {
+            async initData(){
+                try{
+                    const countData = await getUserCount();
+                    if (countData.status == 1) {
+                        this.count = countData.count;
+                    }else{
+                        throw new Error('获取数据失败');
+                    }
+                    this.getUsers();
+                }catch(err){
+                    console.log('获取数据失败', err);
+                }
+            },
             handleSizeChange(val) {
                 console.log(`每页 ${val} 条`);
             },
@@ -84,13 +99,13 @@
             },
             async getUsers(){
                 const Users = await getUserList({offset: this.offset, limit: this.limit});
-                this.tableDatas = [];
+                this.tableData = [];
                 Users.forEach(item => {
                     const tableData = {};
                     tableData.username = item.username;
                     tableData.registe_time = item.registe_time;
                     tableData.city = item.city;
-                    this.tableDatas.push(tableData);
+                    this.tableData.push(tableData);
                 })
             }
         },

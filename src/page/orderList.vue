@@ -80,7 +80,6 @@
             this.initData();
         },
         mounted(){
-            
         },
         methods: {
             async initData(){
@@ -125,10 +124,10 @@
 	            	const userInfo = await getUserInfo(row.user_id);
 	            	const addressInfo = await getAddressById(row.address_id);
 
-	                this.tableData.splice(row.index, 1, {...row, ...{restaurant_name: restaurant.name, restaurant_address: restaurant.address, address: addressInfo.address, user_name: userInfo.username}}); 
+	                this.tableData.splice(row.index, 1, {...row, ...{restaurant_name: restaurant.name, restaurant_address: restaurant.address, address: addressInfo.address, user_name: userInfo.username}});
                     this.$nextTick(() => {
                         this.expendRow.push(row.index);
-                    })	
+                    })
 	            }else{
                     const index = this.expendRow.indexOf(row.index);
                     this.expendRow.splice(index, 1)

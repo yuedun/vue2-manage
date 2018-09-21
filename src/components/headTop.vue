@@ -3,7 +3,7 @@
 
 		<el-breadcrumb separator="/">
 			<el-breadcrumb-item :to="{ path: '/manage' }">首页</el-breadcrumb-item>
-			<el-breadcrumb-item v-for="(item, index) in $route.meta" v-bind:key="index">{{item}}{{index}}</el-breadcrumb-item>
+			<el-breadcrumb-item v-for="(item, index) in $route.meta" :key="index">{{item}}</el-breadcrumb-item>
 		</el-breadcrumb>
 		<el-dropdown @command="handleCommand" menu-align='start'>
 			<img :src="baseImgPath + adminInfo.avatar" class="avator">
@@ -62,7 +62,7 @@
 <style lang="less">
 	@import '../style/mixin';
 	.header_container{
-		background-color: #324057;
+		background-color: #EFF2F7;
 		height: 60px;
 		display: flex;
 		justify-content: space-between;
