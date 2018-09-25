@@ -104,7 +104,7 @@
                     <el-form-item label="商铺图片" label-width="100px">
                         <el-upload
                           class="avatar-uploader"
-                          :action="baseUrl + '/v1/addimg/shop'"
+                          :action="baseUrl + '/addimg/shop'"
                           :show-file-list="false"
                           :on-success="handleServiceAvatarScucess"
                           :before-upload="beforeAvatarUpload">

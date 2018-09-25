@@ -50,7 +50,7 @@
 					<el-form-item label="上传食品图片">
 						<el-upload
 						  class="avatar-uploader"
-						  :action="baseUrl + '/v1/addimg/food'"
+						  :action="baseUrl + '/addimg/food'"
 						  :show-file-list="false"
 						  :on-success="uploadImg"
 						  :before-upload="beforeImgUpload">

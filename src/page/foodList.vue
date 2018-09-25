@@ -96,7 +96,7 @@
                     <el-form-item label="食品图片" label-width="100px">
                         <el-upload
                           class="avatar-uploader"
-                          :action="baseUrl + '/v1/addimg/food'"
+                          :action="baseUrl + '/addimg/food'"
                           :show-file-list="false"
                           :on-success="handleServiceAvatarScucess"
                           :before-upload="beforeAvatarUpload">

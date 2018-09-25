@@ -1,17 +1,11 @@
 module.exports = function (app) {
-    console.log(">>>>>>>>>>>>>>>");
-    
     //登录
     app.post('/admin/login', function (req, res) {
-        console.log(">>>>>>>>>");
-        
         res.json({
             status: 1
         })
     });
     app.get('/admin/info', function (req, res) {
-        console.log(">>>>>>>>>");
-        
         res.json({username:"yuedun"})
     });
     app.get('/admin/singout', function (req, res) {
@@ -45,8 +39,8 @@ module.exports = function (app) {
         })
     });
     app.get('/users/count', function (req, res) {
-        console.log("/users/count");
         res.json({
+            status: 1,
             count: 12
         })
     });
