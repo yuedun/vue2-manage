@@ -44,11 +44,11 @@ compiler.plugin('compilation', function (compilation) {
 
 // proxy api requests
 Object.keys(proxyTable).forEach(function (context) {
-  var options = proxyTable[context]
-  if (typeof options === 'string') {
-    options = { target: options }
-  }
-  app.use(proxyMiddleware(options.filter || context, options))
+	var options = proxyTable[context]
+	if (typeof options === 'string') {
+		options = { target: options }
+	}
+	app.use(proxyMiddleware(options.filter || context, options))
 })
 
 // handle fallback for HTML5 history API
@@ -81,7 +81,7 @@ devMiddleware.waitUntilValid(() => {
 	console.log('> Listening at ' + uri + '\n')
 	// when env is testing, don't need open it
 	if (autoOpenBrowser && process.env.NODE_ENV !== 'testing') {
-		// opn(uri)
+		opn(uri);
 	}
 	_resolve()
 })
