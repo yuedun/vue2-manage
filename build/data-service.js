@@ -6,41 +6,59 @@ module.exports = function (app) {
         })
     });
     app.get('/admin/info', function (req, res) {
-        res.json({username:"yuedun"})
+        res.json({ username: "yuedun" })
     });
     app.get('/admin/singout', function (req, res) {
-        res.json({status:1})
+        res.json({ status: 1 })
     });
 
     app.get('/users/list', function (req, res) {
-        res.json([{
+        let list = [{
             username: "叶良辰",
             registe_time: "2018-01-30 14:23:45",
             city: "上海"
-        },{
-            username: "叶良辰",
-            registe_time: "2018-01-30 14:23:45",
+        }, {
+            username: "辰月",
+            registe_time: "2018-01-30 14:23:46",
             city: "上海"
-        },{
-            username: "叶良辰",
-            registe_time: "2018-01-30 14:23:45",
+        }, {
+            username: "月儿",
+            registe_time: "2018-01-30 14:23:47",
             city: "上海"
-        },{
-            username: "叶良辰",
-            registe_time: "2018-01-30 14:23:45",
+        }, {
+            username: "尔克",
+            registe_time: "2018-01-30 14:23:48",
             city: "上海"
-        }])
-    });
-    app.get('/statis/api/count', function (req, res) {
-        console.log("/statis/api/count");
-        
-        res.json({
-            count: 12
-        })
+        }, {
+            username: "克勤",
+            registe_time: "2018-01-30 14:23:49",
+            city: "上海"
+        }, {
+            username: "秦敏丽",
+            registe_time: "2018-01-30 14:23:50",
+            city: "上海"
+        }, {
+            username: "李子茹",
+            registe_time: "2018-01-30 14:23:51",
+            city: "上海"
+        }, {
+            username: "茹成娣",
+            registe_time: "2018-01-30 14:23:52",
+            city: "上海"
+        }];
+        const offset = req.query.offset;
+        const limit = req.query.limit * ((req.query.offset / req.query.limit) + 1);
+        let results = list.slice(offset, limit);
+        res.json(results);
     });
     app.get('/users/count', function (req, res) {
         res.json({
             status: 1,
+            count: 8
+        })
+    });
+    app.get('/statis/api/count', function (req, res) {
+        res.json({
             count: 12
         })
     });
@@ -104,5 +122,5 @@ module.exports = function (app) {
             address: "上海"
         })
     });
-    
+
 }

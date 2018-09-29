@@ -13,7 +13,7 @@
 				</el-table-column>
 			</el-table>
 			<div class="Pagination" style="text-align: left;margin-top: 10px;">
-				<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-size="20" layout="total, prev, pager, next" :total="count">
+				<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-size="5" layout="total, prev, pager, next" :total="count">
 				</el-pagination>
 			</div>
 		</div>
@@ -50,7 +50,7 @@
 	            ],
 	            currentRow: null,
 	            offset: 0,
-	            limit: 20,
+	            limit: 5,
 	            count: 0,
 	            currentPage: 1
 	        };
