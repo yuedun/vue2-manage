@@ -45,7 +45,7 @@ npm run dev (访问本地后台系统)
 
 #### (可在后台管理系统添加商铺，食品等数据，并在前端地址查看效果)
 
-[查看效果请戳这里](http://cangdu.org/manage/)
+[查看效果请戳这里](http://vue.hopefly.top/)
 
 
 ## 部分截图
