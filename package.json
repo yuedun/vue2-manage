@@ -5,8 +5,7 @@
   "author": "yuedun <light_v@163.com>",
   "private": true,
   "scripts": {
-    "dev": "cross-env NODE_ENV=online node build/dev-server.js",
-    "local": "cross-env NODE_ENV=local node build/dev-server.js",
+    "dev": "cross-env NODE_ENV=local node build/dev-server.js",
     "build": "node build/build.js",
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "test": "npm run unit"
