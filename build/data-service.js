@@ -1,3 +1,6 @@
+/**
+ * 提供api服务
+ */
 module.exports = function (app) {
     //登录
     app.post('/admin/login', function (req, res) {

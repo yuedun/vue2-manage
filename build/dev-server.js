@@ -63,7 +63,7 @@ app.use(hotMiddleware)
 
 // serve pure static assets
 var staticPath = path.posix.join(config.dev.assetsPublicPath, config.dev.assetsSubDirectory)
-app.use(staticPath, express.static('./static'))
+app.use(staticPath, express.static('./static'));// 图片请求路径/static/img/xx.jpg
 
 //****************前端调用自带API服务****************
 apiServer(app);
