@@ -1,12 +1,26 @@
+
+const got = require('got');
 /**
  * 提供api服务
  */
 module.exports = function (app) {
     //登录
-    app.post('/admin/login', function (req, res) {
-        res.json({
-            status: 1
-        })
+    app.post('/admin/login', async (req, res) => {
+        try {
+            const response = await got.get('http://localhost:3004/user/login', {
+                // searchParams: args,
+                responseType: 'json'
+            });
+            console.log(response.body);
+            res.cookie('token', response.body.data);
+            res.send({
+                status: 1,
+                token: response.body.data
+            })
+        } catch (error) {
+            console.log(error);
+            //=> 'Internal server error ...'
+        }
     });
     app.get('/admin/info', function (req, res) {
         res.json({ username: "yuedun" })
@@ -124,6 +138,23 @@ module.exports = function (app) {
         res.json({
             address: "上海"
         })
+    });
+    app.get('/api/website', async function (req, res) {
+        var args = req.query;
+        try {
+            const response = await got.get('http://localhost:3004/api/website', {
+                searchParams: args,
+                headers: {
+                    'Cookie': 'sdf'
+                },
+                responseType: 'json'
+            });
+            console.log(response.body);
+            res.send(response.body.data)
+        } catch (error) {
+            console.log(error);
+            //=> 'Internal server error ...'
+        }
     });
 
 }

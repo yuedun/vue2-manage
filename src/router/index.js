@@ -6,7 +6,7 @@ Vue.use(Router)
 //webpack代码分割 require.ensure(dependencies: String[], callback: function(require), chunkName: String)
 
 const login = r => require.ensure([], () => r(require('@/page/login')), 'login');
-const manage = r => require.ensure([], () => r(require('@/page/manage')), 'manage');
+const menubar = r => require.ensure([], () => r(require('@/page/menubar')), 'menubar');
 const home = r => require.ensure([], () => r(require('@/page/home')), 'home');
 const addShop = r => require.ensure([], () => r(require('@/page/addShop')), 'addShop');
 const addGoods = r => require.ensure([], () => r(require('@/page/addGoods')), 'addGoods');
@@ -22,6 +22,8 @@ const uploadImg = r => require.ensure([], () => r(require('@/page/uploadImg')), 
 const adminSet = r => require.ensure([], () => r(require('@/page/adminSet')), 'adminSet');
 const sendMessage = r => require.ensure([], () => r(require('@/page/sendMessage')), 'sendMessage');
 const explain = r => require.ensure([], () => r(require('@/page/explain')), 'explain');
+const newWebsite = r => require.ensure([], () => r(require('@/page/newWebsite')), 'newWebsite');
+const websiteList = r => require.ensure([], () => r(require('@/page/websiteList')), 'websiteList');
 
 const routes = [
 	{
@@ -30,7 +32,7 @@ const routes = [
 	},
 	{
 		path: '/manage',
-		component: manage,
+		component: menubar,
 		name: '',
 		children: [{
 			path: '',
@@ -64,6 +66,14 @@ const routes = [
 			path: '/adminList',
 			component: adminList,
 			meta: ['数据管理', '管理员列表'],
+		},{
+			path: '/newWebsite',
+			component: newWebsite,
+			meta: ['网站管理', '新建网站'],
+		},{
+			path: '/websiteList',
+			component: websiteList,
+			meta: ['网站管理', '网站列表'],
 		}
 		//,{
 		// 	path: '/visitor',

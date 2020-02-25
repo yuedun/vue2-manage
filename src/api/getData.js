@@ -226,3 +226,8 @@ export const getAddressById = address_id => fetch('/v1/addresse/' + address_id);
  */
 
 export const getUserCity = () => fetch('/v1/user/city/count');
+
+/**
+ * 网站列表
+ */
+export const getWebsiteList = data => fetch('/api/website',data, 'GET');
