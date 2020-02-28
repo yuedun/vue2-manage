@@ -54,6 +54,18 @@ npm run dev (访问本地后台系统)
 
 <img src="https://github.com/bailicangdu/vue2-manage/blob/master/screenshots/manage_shop.png"/>
 
+## 错误记录
+```
+ ERROR  Failed to compile with 6 errors                                      6:13:29 PM
+These dependencies were not found:
+
+* net in ./~/express/lib/request.js
+* fs in ./~/express/lib/view.js, ./~/etag/index.js and 3 others
+
+To install them, you can run: npm install --save net fs
+
+```
+原因：前端js中引入了后端express
 
 ## License
 

@@ -1,5 +1,4 @@
 import fetch from '@/config/fetch';
-import { response } from 'express';
 const axios = require('axios');
 
 /**

@@ -1,8 +1,6 @@
 
 const got = require('got');
-const { CookieJar } = require('tough-cookie');
 const cookie = require('cookie');
-const { promisify } = require('util');
 /**
  * 提供api服务
  */
@@ -144,6 +142,7 @@ module.exports = function (app) {
     });
     app.get('/api/website', async function (req, res) {
         var args = req.query;
+        const token = req.cookies.token;
         try {
             const response = await got.get('http://localhost:3004/api/website', {
                 searchParams: args,
@@ -162,6 +161,8 @@ module.exports = function (app) {
     app.post('/api/website/update', async function (req, res) {
         var args = req.body;
         const token = req.cookies.token;
+        console.log(args, token);
+        
         try {
             const body = await got.post('http://localhost:3004/api/website/update', {
                 json: args,

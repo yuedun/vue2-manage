@@ -67,7 +67,12 @@
                         </el-select>
                     </el-form-item>
                     <el-form-item label="组件" label-width="100px">
-                        <el-input v-model="selectTable.content" autocomplete="off"></el-input>
+                        <el-input
+                            type="textarea"
+                            :rows="5"
+                            placeholder="请输入内容"
+                            v-model="selectTable.content">
+                        </el-input>
                     </el-form-item>
                 </el-form>
                 <div slot="footer" class="dialog-footer">
@@ -148,7 +153,8 @@
                             type: 'success',
                             message: '修改成功'
                         });
-                        this.tableData.splice(index, 1);
+                        this.dialogFormVisible = false;
+                        this.getWebsiteList();
                     }else{
                         throw new Error(res.message)
                     }
