@@ -72,7 +72,7 @@
                 </el-form>
                 <div slot="footer" class="dialog-footer">
                     <el-button @click="dialogFormVisible = false">取 消</el-button>
-                    <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
+                    <el-button type="primary" @click="updateWebsite">确 定</el-button>
                 </div>
                 </el-dialog>
         </div>
@@ -82,7 +82,7 @@
 <script>
     import headTop from '../components/headTop'
     import {baseUrl, baseImgPath} from '@/config/env'
-    import {cityGuess, getWebsiteList, getResturantsCount, foodCategory, updateResturant, searchplace, deleteResturant} from '@/api/getData'
+    import {getWebsiteList, updateWebsite, deleteResturant} from '@/api/getData'
     export default {
         data(){
             return {
@@ -96,7 +96,6 @@
                 currentPage: 1,
                 selectTable: {},
                 dialogFormVisible: false,
-                categoryOptions: [],
                 selectedCategory: [],
                 address: {},
             }
@@ -141,8 +140,25 @@
                 this.selectTable = row;
                 this.dialogFormVisible = true;                
             },
-            addFood(index, row){
-                this.$router.push({ path: 'addGoods', query: { restaurant_id: row.id }})
+            async updateWebsite(){
+                try{
+                    const res = await updateWebsite(this.selectTable);
+                    if (res.data.status == 1) {
+                        this.$message({
+                            type: 'success',
+                            message: '修改成功'
+                        });
+                        this.tableData.splice(index, 1);
+                    }else{
+                        throw new Error(res.message)
+                    }
+                }catch(err){
+                    this.$message({
+                        type: 'error',
+                        message: err.message
+                    });
+                    console.log('修改失败')
+                }
             },
             async handleDelete(index, row) {
                 try{
@@ -162,67 +178,6 @@
                         message: err.message
                     });
                     console.log('删除店铺失败')
-                }
-            },
-            async querySearchAsync(queryString, cb) {
-                if (queryString) {
-                    try{
-                        const cityList = await searchplace(this.city.id, queryString);
-                        if (cityList instanceof Array) {
-                            cityList.map(item => {
-                                item.value = item.address;
-                                return item;
-                            })
-                            cb(cityList)
-                        }
-                    }catch(err){
-                        console.log(err)
-                    }
-                }
-            },
-            addressSelect(vale){
-                const {address, latitude, longitude} = vale;
-                this.address = {address, latitude, longitude};
-            },
-            handleServiceAvatarScucess(res, file) {
-                if (res.status == 1) {
-                    this.selectTable.image_path = res.image_path;
-                }else{
-                    this.$message.error('上传图片失败！');
-                }
-            },
-            beforeAvatarUpload(file) {
-                const isRightType = (file.type === 'image/jpeg') || (file.type === 'image/png');
-                const isLt2M = file.size / 1024 / 1024 < 2;
-
-                if (!isRightType) {
-                    this.$message.error('上传头像图片只能是 JPG 格式!');
-                }
-                if (!isLt2M) {
-                    this.$message.error('上传头像图片大小不能超过 2MB!');
-                }
-                return isRightType && isLt2M;
-            },
-            async updateShop(){
-                this.dialogFormVisible = false;
-                try{
-                    Object.assign(this.selectTable, this.address);
-                    this.selectTable.category = this.selectedCategory.join('/');
-                    const res = await updateResturant(this.selectTable)
-                    if (res.status == 1) {
-                        this.$message({
-                            type: 'success',
-                            message: '更新店铺信息成功'
-                        });
-                        this.getWebsiteList();
-                    }else{
-                        this.$message({
-                            type: 'error',
-                            message: res.message
-                        });
-                    }
-                }catch(err){
-                    console.log('更新餐馆信息失败', err);
                 }
             },
         },

@@ -1,4 +1,6 @@
-import fetch from '@/config/fetch'
+import fetch from '@/config/fetch';
+import { response } from 'express';
+const axios = require('axios');
 
 /**
  * 登陆
@@ -230,4 +232,11 @@ export const getUserCity = () => fetch('/v1/user/city/count');
 /**
  * 网站列表
  */
-export const getWebsiteList = data => fetch('/api/website',data, 'GET');
+export const getWebsiteList = data => fetch('/api/website', data, 'GET');
+
+/**
+ * 修改网站
+ */
+export const updateWebsite = data => {
+	return axios.post('/api/website/update', data);
+}

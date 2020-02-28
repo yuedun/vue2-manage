@@ -2,28 +2,31 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 Vue.use(Router)
-//@符号代表src目录，@config代表config目录
-//webpack代码分割 require.ensure(dependencies: String[], callback: function(require), chunkName: String)
-
-const login = r => require.ensure([], () => r(require('@/page/login')), 'login');
-const menubar = r => require.ensure([], () => r(require('@/page/menubar')), 'menubar');
-const home = r => require.ensure([], () => r(require('@/page/home')), 'home');
-const addShop = r => require.ensure([], () => r(require('@/page/addShop')), 'addShop');
-const addGoods = r => require.ensure([], () => r(require('@/page/addGoods')), 'addGoods');
-const userList = r => require.ensure([], () => r(require('@/page/userList')), 'userList');
-const shopList = r => require.ensure([], () => r(require('@/page/shopList')), 'shopList');
-const foodList = r => require.ensure([], () => r(require('@/page/foodList')), 'foodList');
-const orderList = r => require.ensure([], () => r(require('@/page/orderList')), 'orderList');
-const adminList = r => require.ensure([], () => r(require('@/page/adminList')), 'adminList');
-const visitor = r => require.ensure([], () => r(require('@/page/visitor')), 'visitor');
-const newMember = r => require.ensure([], () => r(require('@/page/newMember')), 'newMember');
-const uploadImg = r => require.ensure([], () => r(require('@/page/uploadImg')), 'uploadImg');
-// const vueEdit = r => require.ensure([], () => r(require('@/page/vueEdit')), 'vueEdit');
-const adminSet = r => require.ensure([], () => r(require('@/page/adminSet')), 'adminSet');
-const sendMessage = r => require.ensure([], () => r(require('@/page/sendMessage')), 'sendMessage');
-const explain = r => require.ensure([], () => r(require('@/page/explain')), 'explain');
-const newWebsite = r => require.ensure([], () => r(require('@/page/newWebsite')), 'newWebsite');
-const websiteList = r => require.ensure([], () => r(require('@/page/websiteList')), 'websiteList');
+/**
+ * @符号代表src目录，@config代表config目录
+ * require.ensure() 方法来实现代码打包分离
+ * require.ensure() 是 webpack 特有的，已经被 import() 取代。
+ * require.ensure(dependencies: String[], callback: function(require), chunkName: String)
+*/
+const login = () => import('@/page/login');
+const menubar = () => import('@/page/menubar');
+const home = () => import('@/page/home');
+const addShop = () => import('@/page/addShop');
+const addGoods = () => import('@/page/addGoods');
+const userList = () => import('@/page/userList');
+const shopList = () => import('@/page/shopList');
+const foodList = () => import('@/page/foodList');
+const orderList = () => import('@/page/orderList');
+const adminList = () => import('@/page/adminList');
+const visitor = () => import('@/page/visitor');
+const newMember = () => import('@/page/newMember');
+const uploadImg = () => import('@/page/uploadImg');
+// const vueEdit = () => import('@/page/vueEdit'));
+const adminSet = () => import('@/page/adminSet');
+const sendMessage = () => import('@/page/sendMessage');
+const explain = () => import('@/page/explain');
+const newWebsite = () => import('@/page/newWebsite');
+const websiteList = () => import('@/page/websiteList');
 
 const routes = [
 	{
