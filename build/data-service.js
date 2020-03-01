@@ -1,12 +1,39 @@
+
+const got = require('got');
+const cookie = require('cookie');
 /**
  * 提供api服务
  */
 module.exports = function (app) {
+    const instance = got.extend({
+        hooks: {
+            beforeRequest: [
+                options => {
+                    if (!options.context && !options.context.token) {
+                        throw new Error('Token required');
+                    }
+                    options.headers.cookie = options.context.token;
+                }
+            ]
+        }
+    });
     //登录
-    app.post('/admin/login', function (req, res) {
-        res.json({
-            status: 1
-        })
+    app.post('/admin/login', async (req, res) => {
+        try {
+            const response = await got.get('http://localhost:3004/user/login', {
+                // searchParams: args,
+                responseType: 'json'
+            });
+            console.log(response.body);
+            res.cookie('token', response.body.data);
+            res.send({
+                status: 1,
+                token: response.body.data
+            })
+        } catch (error) {
+            console.log(error);
+            //=> 'Internal server error ...'
+        }
     });
     app.get('/admin/info', function (req, res) {
         res.json({ username: "yuedun" })
@@ -124,6 +151,67 @@ module.exports = function (app) {
         res.json({
             address: "上海"
         })
+    });
+    app.get('/api/website', async function (req, res) {
+        var args = req.query;
+        const token = req.cookies.token;
+        const context = {
+            token: cookie.serialize('token', token)
+        }
+        try {
+            const response = await instance.get('http://localhost:3004/api/website', {
+                searchParams: args,
+                context,
+                responseType: 'json'
+            });
+            console.log(response.body);
+            res.send(response.body.data)
+        } catch (error) {
+            console.log(error);
+            //=> 'Internal server error ...'
+        }
+    });
+    app.post('/api/website/update', async function (req, res) {
+        var args = req.body;
+        const token = req.cookies.token;
+        const context = {
+            token: cookie.serialize('token', token)
+        }
+        try {
+            const body = await got.post('http://localhost:3004/api/website/update', {
+                json: args,
+                responseType: 'json',
+                context
+            }).json();
+            console.log(body);
+            res.send({
+                status: 1
+            })
+        } catch (error) {
+            console.log(error);
+            //=> 'Internal server error ...'
+        }
+    });
+    app.post('/api/website/create', async function (req, res) {
+        var args = req.body;
+        const token = req.cookies.token;
+        const context = {
+            token: cookie.serialize('token', token)
+        }
+        try {
+            const body = await got.post('http://localhost:3004/api/website/create', {
+                json: args,
+                responseType: 'json',
+                context
+            }).json();
+            console.log(body);
+            res.send({
+                status: 1
+            })
+        } catch (error) {
+            console.log(error);
+            //=> 'Internal server error ...'
+        }
     });
 
 }

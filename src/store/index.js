@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import {getAdminInfo} from '@/api/getData'
+import { getAdminInfo } from '@/api/getData'
 
 Vue.use(Vuex)
 
@@ -11,21 +11,21 @@ const state = {
 }
 
 const mutations = {
-	saveAdminInfo(state, adminInfo){
+	saveAdminInfo(state, adminInfo) {
 		state.adminInfo = adminInfo;
 	}
 }
 
 const actions = {
-	async getAdminData({commit}){//等于getAdminData(context){context.commit()},解构了context
-		try{
+	async getAdminData({ commit }) {//等于getAdminData(context){context.commit()},解构了context
+		try {
 			const res = await getAdminInfo()
 			if (res.status == 1) {
 				commit('saveAdminInfo', res.data);//调用了mutations中的saveAdminInfo
-			}else{
+			} else {
 				throw new Error(res)
 			}
-		}catch(err){
+		} catch (err) {
 			console.log('您尚未登陆或者session失效')
 		}
 	}
