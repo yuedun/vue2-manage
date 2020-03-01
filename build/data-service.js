@@ -5,6 +5,18 @@ const cookie = require('cookie');
  * 提供api服务
  */
 module.exports = function (app) {
+    const instance = got.extend({
+        hooks: {
+            beforeRequest: [
+                options => {
+                    if (!options.context && !options.context.token) {
+                        throw new Error('Token required');
+                    }
+                    options.headers.cookie = options.context.token;
+                }
+            ]
+        }
+    });
     //登录
     app.post('/admin/login', async (req, res) => {
         try {
@@ -143,12 +155,13 @@ module.exports = function (app) {
     app.get('/api/website', async function (req, res) {
         var args = req.query;
         const token = req.cookies.token;
+        const context = {
+            token: cookie.serialize('token', token)
+        }
         try {
-            const response = await got.get('http://localhost:3004/api/website', {
+            const response = await instance.get('http://localhost:3004/api/website', {
                 searchParams: args,
-                headers: {
-                    cookie: cookie.serialize('token', token)
-                },
+                context,
                 responseType: 'json'
             });
             console.log(response.body);
@@ -161,19 +174,39 @@ module.exports = function (app) {
     app.post('/api/website/update', async function (req, res) {
         var args = req.body;
         const token = req.cookies.token;
-        console.log(args, token);
-        
+        const context = {
+            token: cookie.serialize('token', token)
+        }
         try {
             const body = await got.post('http://localhost:3004/api/website/update', {
                 json: args,
                 responseType: 'json',
-                headers: {
-                    cookie: cookie.serialize('token', token)
-                }
+                context
             }).json();
             console.log(body);
             res.send({
-                status:1
+                status: 1
+            })
+        } catch (error) {
+            console.log(error);
+            //=> 'Internal server error ...'
+        }
+    });
+    app.post('/api/website/create', async function (req, res) {
+        var args = req.body;
+        const token = req.cookies.token;
+        const context = {
+            token: cookie.serialize('token', token)
+        }
+        try {
+            const body = await got.post('http://localhost:3004/api/website/create', {
+                json: args,
+                responseType: 'json',
+                context
+            }).json();
+            console.log(body);
+            res.send({
+                status: 1
             })
         } catch (error) {
             console.log(error);

@@ -4,13 +4,15 @@
 			<el-col :span="4" style="min-height: 100%; background-color: #324057;">
 				<el-menu :default-active="defaultActive" style="min-height: 100%;" router>
 					<el-menu-item index="manage">
-						<i class="el-icon-menu"></i>首页</el-menu-item>
-						<el-submenu index="8">
-							<template slot="title">
-								<i class="el-icon-office-building"></i>网站生成器</template>
-							<el-menu-item index="newWebsite">新建网站</el-menu-item>
-							<el-menu-item index="websiteList">网站列表</el-menu-item>
-						</el-submenu>
+						<i class="el-icon-menu"></i>首页
+					</el-menu-item>
+					<el-submenu index="8">
+						<template slot="title">
+							<i class="el-icon-office-building"></i>网站生成器</template>
+						<el-menu-item index="newWebsite">新建网站</el-menu-item>
+						<el-menu-item index="websiteList">网站列表</el-menu-item>
+					</el-submenu>
+					<!-- 
 					<el-submenu index="2">
 						<template slot="title">
 							<i class="el-icon-document"></i>数据管理</template>
@@ -20,13 +22,14 @@
 						<el-menu-item index="orderList">订单列表</el-menu-item>
 						<el-menu-item index="adminList">管理员列表</el-menu-item>
 					</el-submenu>
-					<!-- 
+					
 					<el-submenu index="3">
 						<template slot="title">
 							<i class="el-icon-plus"></i>添加数据</template>
 						<el-menu-item index="addShop">添加商铺</el-menu-item>
 						<el-menu-item index="addGoods">添加商品</el-menu-item>
 					</el-submenu>
+					
 					<el-submenu index="4">
 						<template slot="title">
 							<i class="el-icon-star-on"></i>图表</template>
