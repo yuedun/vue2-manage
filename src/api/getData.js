@@ -246,3 +246,7 @@ export const updateWebsite = data => {
 export const addWebsite = data => {
 	return axios.post('/api/website/create', data);
 }
+//删除网站
+export const deleteWebsite = data => {
+	return axios.get('/api/website/delete/' + data);
+}

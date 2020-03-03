@@ -44,7 +44,7 @@ module.exports = function (app) {
         }
     });
     app.get('/admin/info', function (req, res) {
-        res.json({ username: "yuedun" })
+        res.json({ status: 1, data: { username: "yuedun", avatar: 'default.jpg' } })
     });
     app.get('/admin/singout', function (req, res) {
         res.json({ status: 1 })
@@ -207,6 +207,25 @@ module.exports = function (app) {
         try {
             const body = await instance.post('api/website/create', {
                 json: args,
+                responseType: 'json',
+                context
+            }).json();
+            res.send({
+                status: 1
+            })
+        } catch (error) {
+            console.log(error);
+            //=> 'Internal server error ...'
+        }
+    });
+    app.get('/api/website/delete/:id', async function (req, res) {
+        const token = req.cookies.token;
+        const context = {
+            token: cookie.serialize('token', token)
+        }
+        try {
+            const body = await instance.post('api/website/delete/' + req.params.id, {
+                // json: args,
                 responseType: 'json',
                 context
             }).json();
