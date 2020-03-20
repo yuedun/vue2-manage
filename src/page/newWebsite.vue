@@ -8,11 +8,11 @@
           <el-form-item label="网站名称" prop="name">
             <el-input v-model="foodForm.name"></el-input>
           </el-form-item>
-          <el-form-item label="网站url" prop="description">
-            <el-input v-model="foodForm.description"></el-input>
+          <el-form-item label="网站url" prop="url">
+            <el-input v-model="foodForm.url"></el-input>
           </el-form-item>
           <el-form-item label="网站分类">
-            <el-select v-model="foodForm.category" multiple placeholder="请选择">
+            <el-select v-model="foodForm.category" placeholder="请选择">
               <el-option v-for="item in attributes" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
             </el-select>
@@ -22,7 +22,7 @@
             </el-input>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click="addWebsite('foodForm')">确认</el-button>
+            <el-button type="primary" @click="addWebsite()">确认</el-button>
           </el-form-item>
         </el-form>
       </el-col>
@@ -38,31 +38,23 @@
       return {
         foodForm: {
           name: "",
-          description: "",
-          image_path: "",
-          activity: "",
-          attributes: [],
-          specs: [
-            {
-              specs: "默认",
-              packing_fee: 0,
-              price: 20
-            }
-          ]
+          category: "",
+          url: "",
+          content: ""
         },
         foodrules: {
           name: [{ required: true, message: "请输入网站名称", trigger: "blur" }]
         },
         attributes: [
           {
-            value: "新",
-            label: "新品"
+            value: "IT",
+            label: "IT"
           },
           {
-            value: "招牌",
-            label: "招牌"
+            value: "教育",
+            label: "教育"
           }
-        ],
+        ]
       };
     },
     components: {
@@ -70,29 +62,15 @@
     },
     created() {},
     methods: {
-      async addFood(foodForm) {
+      async addWebsite() {
         try {
-          const result = await addWebsite(params);
+          const result = await addWebsite(this.foodForm);
           if (result.status == 1) {
             console.log(result);
             this.$message({
               type: "success",
               message: "添加成功"
             });
-            this.foodForm = {
-              name: "",
-              description: "",
-              image_path: "",
-              activity: "",
-              attributes: [],
-              specs: [
-                {
-                  specs: "默认",
-                  packing_fee: 0,
-                  price: 20
-                }
-              ]
-            };
           } else {
             this.$message({
               type: "error",

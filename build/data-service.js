@@ -6,6 +6,7 @@ const cookie = require('cookie');
  */
 module.exports = function (app) {
     const instance = got.extend({
+        prefixUrl: 'http://localhost:3004',
         hooks: {
             beforeRequest: [
                 options => {
@@ -14,7 +15,15 @@ module.exports = function (app) {
                     }
                     options.headers.cookie = options.context.token;
                 }
-            ]
+            ],
+            afterResponse: [
+                (response, retryWithMergedOptions) => {
+                    console.log("<<", JSON.stringify(response.body));
+
+                    // No changes otherwise
+                    return response;
+                }
+            ],
         }
     });
     //登录
@@ -24,7 +33,6 @@ module.exports = function (app) {
                 // searchParams: args,
                 responseType: 'json'
             });
-            console.log(response.body);
             res.cookie('token', response.body.data);
             res.send({
                 status: 1,
@@ -36,7 +44,7 @@ module.exports = function (app) {
         }
     });
     app.get('/admin/info', function (req, res) {
-        res.json({ username: "yuedun" })
+        res.json({ status: 1, data: { username: "yuedun", avatar: 'default.jpg' } })
     });
     app.get('/admin/singout', function (req, res) {
         res.json({ status: 1 })
@@ -159,12 +167,11 @@ module.exports = function (app) {
             token: cookie.serialize('token', token)
         }
         try {
-            const response = await instance.get('http://localhost:3004/api/website', {
+            const response = await instance.get('api/website', {
                 searchParams: args,
                 context,
                 responseType: 'json'
             });
-            console.log(response.body);
             res.send(response.body.data)
         } catch (error) {
             console.log(error);
@@ -178,12 +185,11 @@ module.exports = function (app) {
             token: cookie.serialize('token', token)
         }
         try {
-            const body = await got.post('http://localhost:3004/api/website/update', {
+            const body = await instance.post('api/website/update', {
                 json: args,
                 responseType: 'json',
                 context
             }).json();
-            console.log(body);
             res.send({
                 status: 1
             })
@@ -199,12 +205,30 @@ module.exports = function (app) {
             token: cookie.serialize('token', token)
         }
         try {
-            const body = await got.post('http://localhost:3004/api/website/create', {
+            const body = await instance.post('api/website/create', {
                 json: args,
                 responseType: 'json',
                 context
             }).json();
-            console.log(body);
+            res.send({
+                status: 1
+            })
+        } catch (error) {
+            console.log(error);
+            //=> 'Internal server error ...'
+        }
+    });
+    app.get('/api/website/delete/:id', async function (req, res) {
+        const token = req.cookies.token;
+        const context = {
+            token: cookie.serialize('token', token)
+        }
+        try {
+            const body = await instance.post('api/website/delete/' + req.params.id, {
+                // json: args,
+                responseType: 'json',
+                context
+            }).json();
             res.send({
                 status: 1
             })
