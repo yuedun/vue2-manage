@@ -27,9 +27,9 @@ module.exports = function (app) {
         }
     });
     //登录
-    app.post('/admin/login', async (req, res) => {
+    app.post('/users/login', async (req, res) => {
         try {
-            const response = await got.get('http://localhost:3004/user/login', {
+            const response = await got.post('http://localhost:3004/users/login', {
                 // searchParams: args,
                 responseType: 'json'
             });
@@ -43,7 +43,7 @@ module.exports = function (app) {
             //=> 'Internal server error ...'
         }
     });
-    app.get('/admin/info', function (req, res) {
+    app.get('/users/info', function (req, res) {
         res.json({ status: 1, data: { username: "yuedun", avatar: 'default.jpg' } })
     });
     app.get('/admin/singout', function (req, res) {
@@ -224,7 +224,7 @@ module.exports = function (app) {
             token: cookie.serialize('token', token)
         }
         try {
-            const body = await instance.post('api/website/delete/' + req.params.id, {
+            const body = await instance.get('api/website/delete/' + req.params.id, {
                 // json: args,
                 responseType: 'json',
                 context

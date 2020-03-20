@@ -5,7 +5,7 @@ const axios = require('axios');
  * 登陆
  */
 
-export const login = data => fetch('/admin/login', data, 'POST');
+export const login = data => fetch('/users/login', data, 'POST');
 
 /**
  * 退出
@@ -17,7 +17,7 @@ export const signout = () => fetch('/admin/singout');
  * 获取用户信息
  */
 
-export const getAdminInfo = () => fetch('/admin/info');
+export const getAdminInfo = () => fetch('/users/info');
 
 /**
  * api请求量
