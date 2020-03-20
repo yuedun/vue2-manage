@@ -1,5 +1,5 @@
 <template>
-	<div class="manage_page fillcontain">
+	<div class="fillcontain">
 		<el-row style="height: 100%;">
 			<el-col :span="4" style="min-height: 100%; background-color: #324057;">
 				<el-menu :default-active="defaultActive" style="min-height: 100%;" router>
@@ -67,22 +67,20 @@
 
 <script>
 	export default {
-	    computed: {
-	        defaultActive: function() {
+		computed: {
+			defaultActive: function() {
 				console.log(this.$route.path.replace("/", ""));
-				
-				return 'website';
-	        }
-	    }
+
+				return "website";
+			}
+		}
 	};
 </script>
 
 
 <style lang="less" scoped>
 @import "../style/mixin";
-.manage_page {
-}
 .el-submenu-title {
-    color: white;
+	color: white;
 }
 </style>

@@ -29,7 +29,7 @@ module.exports = function (app) {
     //登录
     app.post('/admin/login', async (req, res) => {
         try {
-            const response = await got.get('/user/login', {
+            const response = await got.get('http://localhost:3004/user/login', {
                 // searchParams: args,
                 responseType: 'json'
             });
