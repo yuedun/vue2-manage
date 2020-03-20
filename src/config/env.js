@@ -14,7 +14,7 @@ if (process.env.NODE_ENV == 'development') {
 	baseUrl = '';
     baseImgPath = '/static/img/';
 }else{
-	baseUrl = '//vue.hopefly.top/';
+	baseUrl = '//vue.hopefly.top';
     baseImgPath = '//vue.hopefly.top/img/';
 }
 
