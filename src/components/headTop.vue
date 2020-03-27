@@ -40,7 +40,7 @@
 					this.$router.push("/manage");
 				} else if (command == "singout") {
 					const res = await signout();
-					if (res.status == 1) {
+					if (res.data.status == 1) {
 						this.$message({
 							type: "success",
 							message: "退出成功"

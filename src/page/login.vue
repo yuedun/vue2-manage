@@ -61,10 +61,10 @@
 				this.$refs[formName].validate(async valid => {
 					if (valid) {
 						const res = await login({
-							user_name: this.loginForm.username,
+							userName: this.loginForm.username,
 							password: this.loginForm.password
 						});
-						if (res.status == 1) {
+						if (res.data.status == 1) {
 							this.$message({
 								type: "success",
 								message: "登录成功"

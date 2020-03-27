@@ -5,19 +5,42 @@ const axios = require('axios');
  * 登陆
  */
 
-export const login = data => fetch('/users/login', data, 'POST');
+export const login = data => axios.post('/user/login', data);
 
 /**
  * 退出
  */
 
-export const signout = () => fetch('/admin/singout');
+export const signout = () => axios.get('/user/logout');
 
 /**
  * 获取用户信息
  */
 
 export const getAdminInfo = () => fetch('/users/info');
+
+/**
+ * 网站列表
+ */
+export const getWebsiteList = data => axios('/website', { params: data });
+// export const getWebsiteList = data => fetch('/api/website', data, 'GET');
+
+/**
+ * 修改网站
+ */
+export const updateWebsite = data => {
+	return axios.put('/website/update', data);
+}
+/**
+ * 添加网站
+ */
+export const addWebsite = data => {
+	return axios.post('/website/create', data);
+}
+//删除网站
+export const deleteWebsite = data => {
+	return axios.delete('/website/delete/' + data);
+}
 
 /**
  * api请求量
@@ -227,26 +250,3 @@ export const getAddressById = address_id => fetch('/v1/addresse/' + address_id);
  */
 
 export const getUserCity = () => fetch('/v1/user/city/count');
-
-/**
- * 网站列表
- */
-export const getWebsiteList = data => axios('/api/website', { params: data });
-// export const getWebsiteList = data => fetch('/api/website', data, 'GET');
-
-/**
- * 修改网站
- */
-export const updateWebsite = data => {
-	return axios.post('/api/website/update', data);
-}
-/**
- * 添加网站
- */
-export const addWebsite = data => {
-	return axios.post('/api/website/create', data);
-}
-//删除网站
-export const deleteWebsite = data => {
-	return axios.get('/api/website/delete/' + data);
-}

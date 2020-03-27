@@ -55,7 +55,9 @@
     	methods: {
     		async initData(){
     			const today = dtime().format('YYYY-MM-DD')
-    			Promise.all([userCount(today), orderCount(today), adminDayCount(today), getUserCount(), getOrderCount(), adminCount()])
+    			Promise.all([
+					// userCount(today), orderCount(today), adminDayCount(today), getUserCount(), getOrderCount(), adminCount()
+					])
     			.then(res => {
     				this.userCount = res[0].count;
     				this.orderCount = res[1].count;
@@ -69,11 +71,11 @@
     		},
     		async getSevenData(){
     			const apiArr = [[],[],[]];
-    			this.sevenDay.forEach(item => {
-    				apiArr[0].push(userCount(item))
-    				apiArr[1].push(orderCount(item))
-                    apiArr[2].push(adminDayCount(item))
-    			})
+    			// this.sevenDay.forEach(item => {
+    			// 	apiArr[0].push(userCount(item))
+    			// 	apiArr[1].push(orderCount(item))
+                //     apiArr[2].push(adminDayCount(item))
+    			// })
     			const promiseArr = [...apiArr[0], ...apiArr[1], ...apiArr[2]]
     			Promise.all(promiseArr).then(res => {
     				const resArr = [[],[],[]];

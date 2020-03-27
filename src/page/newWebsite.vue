@@ -65,7 +65,7 @@
       async addWebsite() {
         try {
           const result = await addWebsite(this.foodForm);
-          if (result.status == 1) {
+          if (result.data.status == 1) {
             console.log(result);
             this.$message({
               type: "success",

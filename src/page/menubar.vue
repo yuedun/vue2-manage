@@ -69,14 +69,12 @@
 	export default {
 		computed: {
 			defaultActive: function() {
-				console.log(this.$route.path.replace("/", ""));
-
-				return "website";
+				this.$route.path.replace("/", "")
+				return "manage";
 			}
 		}
 	};
 </script>
-
 
 <style lang="less" scoped>
 @import "../style/mixin";

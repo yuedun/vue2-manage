@@ -149,7 +149,7 @@
 			async handleDelete(index, row) {
 				try {
 					const res = await deleteWebsite(row.id);
-					if (res.status == 1) {
+					if (res.data.status == 1) {
 						this.$message({
 							type: "success",
 							message: "删除成功"

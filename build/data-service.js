@@ -6,14 +6,16 @@ const cookie = require('cookie');
  */
 module.exports = function (app) {
     const instance = got.extend({
-        prefixUrl: 'http://localhost:3004',
+        prefixUrl: 'http://localhost:8900',
         hooks: {
             beforeRequest: [
                 options => {
                     if (!options.context && !options.context.token) {
                         throw new Error('Token required');
                     }
-                    options.headers.cookie = options.context.token;
+
+                    options.headers["Authorization"] = "Bearer " + options.context.jwt;
+                    console.log(options);
                 }
             ],
             afterResponse: [
@@ -27,16 +29,111 @@ module.exports = function (app) {
         }
     });
     //登录
-    app.post('/users/login', async (req, res) => {
+    app.post('/user/login', async (req, res) => {
         try {
-            const response = await got.post('http://localhost:3004/users/login', {
-                // searchParams: args,
+            var args = req.body;
+            const response = await got.post('http://localhost:8900/user/login', {
+                json: args,
                 responseType: 'json'
             });
-            res.cookie('token', response.body.data);
+            console.log(response.body);
+
+            res.cookie('token', response.body.token, { expires: new Date(response.body.expire) });
             res.send({
                 status: 1,
-                token: response.body.data
+                token: response.body.token
+            })
+        } catch (error) {
+            console.log(error);
+            //=> 'Internal server error ...'
+        }
+    });
+
+    // 登出
+    app.get('/user/logout', async function (req, res) {
+        const response = await got.get('http://localhost:8900/user/logout', {
+            responseType: 'json'
+        });
+        console.log(response.body);
+
+        res.clearCookie('token');
+        res.json({ status: 1 })
+    });
+
+    app.get('/website', async function (req, res) {
+        var args = req.query;
+        const token = req.cookies.token;
+        const context = {
+            token: cookie.serialize('token', token),
+            jwt: token
+        }
+        try {
+            const response = await instance.get('website', {
+                searchParams: args,
+                context,
+                responseType: 'json'
+            });
+            res.send(response.body.data)
+        } catch (error) {
+            console.log(error);
+            //=> 'Internal server error ...'
+        }
+    });
+
+    app.put('/website/update', async function (req, res) {
+        var args = req.body;
+        const token = req.cookies.token;
+        const context = {
+            token: cookie.serialize('token', token)
+        }
+        try {
+            const body = await instance.put('website/update', {
+                json: args,
+                responseType: 'json',
+                context
+            }).json();
+            res.send({
+                status: 1
+            })
+        } catch (error) {
+            console.log(error);
+            //=> 'Internal server error ...'
+        }
+    });
+
+    app.post('/website/create', async function (req, res) {
+        var args = req.body;
+        const token = req.cookies.token;
+        const context = {
+            token: cookie.serialize('token', token)
+        }
+        try {
+            const body = await instance.post('website/create', {
+                json: args,
+                responseType: 'json',
+                context
+            }).json();
+            res.send({
+                status: 1
+            })
+        } catch (error) {
+            console.log(error);
+            //=> 'Internal server error ...'
+        }
+    });
+    app.delete('/website/delete/:id', async function (req, res) {
+        const token = req.cookies.token;
+        const context = {
+            token: cookie.serialize('token', token)
+        }
+        try {
+            const body = await instance.delete('website/delete/' + req.params.id, {
+                // json: args,
+                responseType: 'json',
+                context
+            }).json();
+            res.send({
+                status: 1
             })
         } catch (error) {
             console.log(error);
@@ -45,9 +142,6 @@ module.exports = function (app) {
     });
     app.get('/users/info', function (req, res) {
         res.json({ status: 1, data: { username: "yuedun", avatar: 'default.jpg' } })
-    });
-    app.get('/admin/singout', function (req, res) {
-        res.json({ status: 1 })
     });
 
     app.get('/users/list', function (req, res) {
@@ -160,82 +254,4 @@ module.exports = function (app) {
             address: "上海"
         })
     });
-    app.get('/api/website', async function (req, res) {
-        var args = req.query;
-        const token = req.cookies.token;
-        const context = {
-            token: cookie.serialize('token', token)
-        }
-        try {
-            const response = await instance.get('api/website', {
-                searchParams: args,
-                context,
-                responseType: 'json'
-            });
-            res.send(response.body.data)
-        } catch (error) {
-            console.log(error);
-            //=> 'Internal server error ...'
-        }
-    });
-    app.post('/api/website/update', async function (req, res) {
-        var args = req.body;
-        const token = req.cookies.token;
-        const context = {
-            token: cookie.serialize('token', token)
-        }
-        try {
-            const body = await instance.post('api/website/update', {
-                json: args,
-                responseType: 'json',
-                context
-            }).json();
-            res.send({
-                status: 1
-            })
-        } catch (error) {
-            console.log(error);
-            //=> 'Internal server error ...'
-        }
-    });
-    app.post('/api/website/create', async function (req, res) {
-        var args = req.body;
-        const token = req.cookies.token;
-        const context = {
-            token: cookie.serialize('token', token)
-        }
-        try {
-            const body = await instance.post('api/website/create', {
-                json: args,
-                responseType: 'json',
-                context
-            }).json();
-            res.send({
-                status: 1
-            })
-        } catch (error) {
-            console.log(error);
-            //=> 'Internal server error ...'
-        }
-    });
-    app.get('/api/website/delete/:id', async function (req, res) {
-        const token = req.cookies.token;
-        const context = {
-            token: cookie.serialize('token', token)
-        }
-        try {
-            const body = await instance.get('api/website/delete/' + req.params.id, {
-                // json: args,
-                responseType: 'json',
-                context
-            }).json();
-            res.send({
-                status: 1
-            })
-        } catch (error) {
-            console.log(error);
-            //=> 'Internal server error ...'
-        }
-    });
-
 }
