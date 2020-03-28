@@ -2,6 +2,21 @@
 	<div class="fillcontain">
 		<head-top></head-top>
 		<div class="table_container">
+			<el-form :inline="true" :model="searchForm" class="demo-form-inline">
+				<el-form-item label="网站名">
+					<el-input v-model="searchForm.name" placeholder="网站名"></el-input>
+				</el-form-item>
+				<el-form-item label="分类">
+					<el-select v-model="searchForm.category" placeholder="分类">
+						<el-option label="" value=""></el-option>
+						<el-option label="IT" value="IT"></el-option>
+						<el-option label="教育" value="教育"></el-option>
+					</el-select>
+				</el-form-item>
+				<el-form-item>
+					<el-button type="primary" @click="onSubmit">查询</el-button>
+				</el-form-item>
+			</el-form>
 			<template>
 				<el-table :data="tableData" stripe style="width: 100%">
 					<el-table-column prop="name" label="网站名称">
@@ -79,7 +94,11 @@
 				selectTable: {},
 				dialogFormVisible: false,
 				selectedCategory: [],
-				address: {}
+				address: {},
+				searchForm: {
+					name: "",
+					category: ""
+				}
 			};
 		},
 		created() {
@@ -99,7 +118,9 @@
 			async getWebsiteList() {
 				const websites = await getWebsiteList({
 					offset: this.offset,
-					limit: this.limit
+					limit: this.limit,
+					name: this.searchForm.name,
+					category: this.searchForm.category,
 				});
 				this.tableData = [];
 				websites.data.forEach(item => {
@@ -124,6 +145,10 @@
 			handleEdit(index, row) {
 				this.selectTable = row;
 				this.dialogFormVisible = true;
+			},
+			//查询
+			onSubmit() {
+				this.getWebsiteList()
 			},
 			async updateWebsite() {
 				try {
