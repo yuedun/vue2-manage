@@ -18,15 +18,17 @@ const home = () => import('@/page/home');
 // const foodList = () => import('@/page/foodList');
 // const orderList = () => import('@/page/orderList');
 // const adminList = () => import('@/page/adminList');
-const visitor = () => import('@/page/visitor');
-const newMember = () => import('@/page/newMember');
-const uploadImg = () => import('@/page/uploadImg');
+// const visitor = () => import('@/page/visitor');
+// const newMember = () => import('@/page/newMember');
+// const uploadImg = () => import('@/page/uploadImg');
 // const vueEdit = () => import('@/page/vueEdit'));
-const adminSet = () => import('@/page/adminSet');
-const sendMessage = () => import('@/page/sendMessage');
-const explain = () => import('@/page/explain');
-const newWebsite = () => import('@/page/newWebsite');
-const websiteList = () => import('@/page/websiteList');
+// const adminSet = () => import('@/page/adminSet');
+// const sendMessage = () => import('@/page/sendMessage');
+// const explain = () => import('@/page/explain');
+const newWebsite = () => import('@/page/website-new');
+const websiteList = () => import('@/page/website-list');
+const newComponent = () => import('@/page/component-new');
+const componentList = () => import('@/page/component-list');
 
 const routes = [
 	{
@@ -49,6 +51,14 @@ const routes = [
 			path: '/websiteList',
 			component: websiteList,
 			meta: ['网站管理', '网站列表'],
+		}, {
+			path: '/newComponent',
+			component: newComponent,
+			meta: ['网站管理', '新建组件'],
+		}, {
+			path: '/componentList',
+			component: componentList,
+			meta: ['网站管理', '组件列表'],
 		}
 			// , {
 			// 	path: '/addShop',

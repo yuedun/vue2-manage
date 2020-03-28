@@ -41,6 +41,27 @@ export const addWebsite = data => {
 export const deleteWebsite = data => {
 	return axios.delete('/website/delete/' + data);
 }
+/**
+ * 网站列表
+ */
+export const getComponentList = data => axios('/component', { params: data });
+
+/**
+ * 修改网站
+ */
+export const updateComponent = data => {
+	return axios.put('/component/update', data);
+}
+/**
+ * 添加网站
+ */
+export const addComponent = data => {
+	return axios.post('/component/create', data);
+}
+//删除网站
+export const deleteComponent = data => {
+	return axios.delete('/component/delete/' + data);
+}
 
 /**
  * api请求量
