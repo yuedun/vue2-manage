@@ -44,7 +44,9 @@ module.exports = function (app) {
             })
         } catch (error) {
             console.log(error);
-            //=> 'Internal server error ...'
+            res.send({
+                status: 0
+            })
         }
     });
 
@@ -75,7 +77,9 @@ module.exports = function (app) {
             res.send(response.body.data)
         } catch (error) {
             console.log(error);
-            //=> 'Internal server error ...'
+            res.send({
+                status: 0
+            })
         }
     });
 
@@ -97,7 +101,9 @@ module.exports = function (app) {
             })
         } catch (error) {
             console.log(error);
-            //=> 'Internal server error ...'
+            res.send({
+                status: 0
+            })
         }
     });
 
@@ -119,7 +125,9 @@ module.exports = function (app) {
             })
         } catch (error) {
             console.log(error);
-            //=> 'Internal server error ...'
+            res.send({
+                status: 0
+            })
         }
     });
     app.delete('/website/delete/:id', async function (req, res) {
@@ -139,7 +147,9 @@ module.exports = function (app) {
             })
         } catch (error) {
             console.log(error);
-            //=> 'Internal server error ...'
+            res.send({
+                status: 0
+            })
         }
     });
 
@@ -159,7 +169,9 @@ module.exports = function (app) {
             res.send(response.body.data)
         } catch (error) {
             console.log(error);
-            //=> 'Internal server error ...'
+            res.send({
+                status: 0
+            })
         }
     });
 
@@ -181,7 +193,9 @@ module.exports = function (app) {
             })
         } catch (error) {
             console.log(error);
-            //=> 'Internal server error ...'
+            res.send({
+                status: 0
+            })
         }
     });
 
@@ -203,7 +217,9 @@ module.exports = function (app) {
             })
         } catch (error) {
             console.log(error);
-            //=> 'Internal server error ...'
+            res.send({
+                status: 0
+            })
         }
     });
     app.delete('/component/delete/:id', async function (req, res) {
@@ -223,7 +239,9 @@ module.exports = function (app) {
             })
         } catch (error) {
             console.log(error);
-            //=> 'Internal server error ...'
+            res.send({
+                status: 0
+            })
         }
     });
     app.get('/users/info', function (req, res) {

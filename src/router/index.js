@@ -11,6 +11,8 @@ Vue.use(Router)
 const login = () => import('@/page/login');
 const menubar = () => import('@/page/menubar');
 const home = () => import('@/page/home');
+const websiteList = () => import('@/page/website-list');
+const componentList = () => import('@/page/component-list');
 // const addShop = () => import('@/page/addShop');
 // const addGoods = () => import('@/page/addGoods');
 // const userList = () => import('@/page/userList');
@@ -25,10 +27,6 @@ const home = () => import('@/page/home');
 // const adminSet = () => import('@/page/adminSet');
 // const sendMessage = () => import('@/page/sendMessage');
 // const explain = () => import('@/page/explain');
-const newWebsite = () => import('@/page/website-new');
-const websiteList = () => import('@/page/website-list');
-const newComponent = () => import('@/page/component-new');
-const componentList = () => import('@/page/component-list');
 
 const routes = [
 	{
@@ -44,17 +42,9 @@ const routes = [
 			component: home,
 			meta: [],
 		}, {
-			path: '/newWebsite',
-			component: newWebsite,
-			meta: ['网站管理', '新建网站'],
-		}, {
 			path: '/websiteList',
 			component: websiteList,
 			meta: ['网站管理', '网站列表'],
-		}, {
-			path: '/newComponent',
-			component: newComponent,
-			meta: ['网站管理', '新建组件'],
 		}, {
 			path: '/componentList',
 			component: componentList,

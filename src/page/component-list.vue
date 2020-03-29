@@ -16,6 +16,9 @@
 				<el-form-item>
 					<el-button type="primary" @click="onSubmit">查询</el-button>
 				</el-form-item>
+				<el-form-item>
+					<el-button type="success" @click="handleNew">新增</el-button>
+				</el-form-item>
 			</el-form>
 			<template>
 				<el-table :data="tableData" stripe style="width: 100%">
@@ -37,30 +40,47 @@
 				<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-size="20" layout="total, prev, pager, next" :total="count">
 				</el-pagination>
 			</div>
-			<el-dialog title="修改组件信息" :visible.sync="dialogFormVisible">
-				<el-form :model="selectTable">
+			<el-dialog title="新增组件信息" :visible.sync="addDialogFormVisible">
+				<el-form :model="foodForm">
 					<el-form-item label="组件名" label-width="100px">
-						<el-input v-model="selectTable.name" autocomplete="off"></el-input>
+						<el-input v-model="foodForm.name" autocomplete="off"></el-input>
 					</el-form-item>
 					<el-form-item label="分类" label-width="100px">
-						<el-select v-model="selectTable.category" placeholder="请选择分类">
+						<el-select v-model="foodForm.category" placeholder="请选择分类">
 							<el-option label="教育" value="教育"></el-option>
 							<el-option label="政企" value="政企"></el-option>
 							<el-option label="IT" value="IT"></el-option>
 						</el-select>
 					</el-form-item>
-					<el-form-item label="url地址" label-width="100px">
-						<el-input v-model="selectTable.url" autocomplete="off"></el-input>
-					</el-form-item>
 					<el-form-item label="状态" label-width="100px">
-						<el-select v-model="selectTable.status" placeholder="请选择状态">
+						<el-select v-model="foodForm.status" placeholder="请选择状态">
 							<el-option label="启用" value="1"></el-option>
 							<el-option label="禁用" value="0"></el-option>
 						</el-select>
 					</el-form-item>
 				</el-form>
 				<div slot="footer" class="dialog-footer">
-					<el-button @click="dialogFormVisible = false">取 消</el-button>
+					<el-button @click="addDialogFormVisible = false">取 消</el-button>
+					<el-button type="primary" @click="addComponent">确 定</el-button>
+				</div>
+			</el-dialog>
+			<el-dialog title="修改组件信息" :visible.sync="updateDialogFormVisible">
+				<el-form :model="foodForm" :rules="foodrules" ref="foodForm" label-width="110px" class="form food_form">
+					<el-form-item label="组件名称" prop="name">
+						<el-input v-model="foodForm.name"></el-input>
+					</el-form-item>
+					<el-form-item label="组件分类">
+						<el-select v-model="foodForm.category" placeholder="请选择">
+							<el-option v-for="item in attributes" :key="item.value" :label="item.label" :value="item.value">
+							</el-option>
+						</el-select>
+					</el-form-item>
+					<el-form-item>
+						<el-button type="primary" @click="addComponent()">确认</el-button>
+					</el-form-item>
+				</el-form>
+				<div slot="footer" class="dialog-footer">
+					<el-button @click="updateDialogFormVisible = false">取 消</el-button>
 					<el-button type="primary" @click="updateComponent">确 定</el-button>
 				</div>
 			</el-dialog>
@@ -74,7 +94,8 @@
 	import {
 		getComponentList,
 		updateComponent,
-		deleteComponent
+		deleteComponent,
+		addComponent
 	} from "@/api/getData";
 	export default {
 		data() {
@@ -87,12 +108,36 @@
 				tableData: [{}],
 				currentPage: 1,
 				selectTable: {},
-				dialogFormVisible: false,
+				addDialogFormVisible: false,
+				updateDialogFormVisible: false,
 				selectedCategory: [],
 				searchForm: {
 					name: "",
 					category: ""
-				}
+				},
+				foodForm: {
+					name: "",
+					category: "",
+				},
+				foodrules: {
+					name: [
+						{
+							required: true,
+							message: "请输入组件名称",
+							trigger: "blur"
+						}
+					]
+				},
+				attributes: [
+					{
+						value: "IT",
+						label: "IT"
+					},
+					{
+						value: "教育",
+						label: "教育"
+					}
+				]
 			};
 		},
 		created() {
@@ -114,7 +159,7 @@
 					offset: this.offset,
 					limit: this.limit,
 					name: this.searchForm.name,
-					category: this.searchForm.category,
+					category: this.searchForm.category
 				});
 				this.tableData = [];
 				components.data.forEach(item => {
@@ -140,7 +185,31 @@
 			},
 			// 查询
 			onSubmit() {
-				this.getComponentList()
+				this.getComponentList();
+			},
+			handleNew(index, row) {
+				this.addDialogFormVisible = true;
+			},
+			async addComponent() {
+				try {
+					this.foodForm.status = Number(this.foodForm.status);
+					const result = await addComponent(this.foodForm);
+					if (result.data.status == 1) {
+						console.log(result);
+						this.$message({
+							type: "success",
+							message: "添加成功"
+						});
+						this.getComponentList();
+					} else {
+						this.$message({
+							type: "error",
+							message: result.message
+						});
+					}
+				} catch (err) {
+					console.log(err);
+				}
 			},
 			async updateComponent() {
 				try {

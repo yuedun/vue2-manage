@@ -9,9 +9,7 @@
 					<el-submenu index="8">
 						<template slot="title">
 							<i class="el-icon-office-building"></i>网站生成器</template>
-						<el-menu-item index="newWebsite">新建网站</el-menu-item>
 						<el-menu-item index="websiteList">网站列表</el-menu-item>
-						<el-menu-item index="newComponent">新建组件</el-menu-item>
 						<el-menu-item index="componentList">组件列表</el-menu-item>
 					</el-submenu>
 					<!-- 
