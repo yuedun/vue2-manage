@@ -65,18 +65,15 @@
 				</div>
 			</el-dialog>
 			<el-dialog title="修改组件信息" :visible.sync="updateDialogFormVisible">
-				<el-form :model="foodForm" :rules="foodrules" ref="foodForm" label-width="110px" class="form food_form">
+				<el-form :model="selectTable" :rules="foodrules" ref="selectTable" label-width="110px" class="form food_form">
 					<el-form-item label="组件名称" prop="name">
-						<el-input v-model="foodForm.name"></el-input>
+						<el-input v-model="selectTable.name"></el-input>
 					</el-form-item>
 					<el-form-item label="组件分类">
-						<el-select v-model="foodForm.category" placeholder="请选择">
+						<el-select v-model="selectTable.category" placeholder="请选择">
 							<el-option v-for="item in attributes" :key="item.value" :label="item.label" :value="item.value">
 							</el-option>
 						</el-select>
-					</el-form-item>
-					<el-form-item>
-						<el-button type="primary" @click="addComponent()">确认</el-button>
 					</el-form-item>
 				</el-form>
 				<div slot="footer" class="dialog-footer">
@@ -103,9 +100,9 @@
 				baseUrl,
 				baseImgPath,
 				offset: 0,
-				limit: 20,
+				limit: 10,
 				count: 0,
-				tableData: [{}],
+				tableData: [],
 				currentPage: 1,
 				selectTable: {},
 				addDialogFormVisible: false,
@@ -117,7 +114,7 @@
 				},
 				foodForm: {
 					name: "",
-					category: "",
+					category: ""
 				},
 				foodrules: {
 					name: [
@@ -155,14 +152,15 @@
 				}
 			},
 			async getComponentList() {
-				const components = await getComponentList({
+				const res = await getComponentList({
 					offset: this.offset,
 					limit: this.limit,
 					name: this.searchForm.name,
 					category: this.searchForm.category
 				});
-				this.tableData = [];
-				components.data.forEach(item => {
+				this.count = res.data.count;
+				this.tableData = [];//清空数据，否则分页会累积
+				res.data.result.forEach(item => {
 					const tableData = {};
 					tableData.name = item.name;
 					tableData.category = item.category;
@@ -181,7 +179,7 @@
 			},
 			handleEdit(index, row) {
 				this.selectTable = row;
-				this.dialogFormVisible = true;
+				this.updateDialogFormVisible = true;
 			},
 			// 查询
 			onSubmit() {
@@ -195,11 +193,11 @@
 					this.foodForm.status = Number(this.foodForm.status);
 					const result = await addComponent(this.foodForm);
 					if (result.data.status == 1) {
-						console.log(result);
 						this.$message({
 							type: "success",
 							message: "添加成功"
 						});
+						this.addDialogFormVisible = false;
 						this.getComponentList();
 					} else {
 						this.$message({

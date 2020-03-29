@@ -68,7 +68,7 @@
 				</el-form>
 				<div slot="footer" class="dialog-footer">
 					<el-button @click="dialogFormVisible = false">取 消</el-button>
-					<el-button type="primary" @click="updateWebsite">确 定</el-button>
+					<el-button type="primary" @click="addWebsite">确 定</el-button>
 				</div>
 			</el-dialog>
 			<el-dialog title="修改网站信息" :visible.sync="updateDialogFormVisible">
@@ -122,9 +122,9 @@
 				baseImgPath,
 				city: {},
 				offset: 0,
-				limit: 20,
+				limit: 10,
 				count: 0,
-				tableData: [{}],
+				tableData: [],
 				currentPage: 1,
 				selectTable: {},
 				addDialogFormVisible: false,
@@ -177,14 +177,15 @@
 				}
 			},
 			async getWebsiteList() {
-				const websites = await getWebsiteList({
+				const res = await getWebsiteList({
 					offset: this.offset,
 					limit: this.limit,
 					name: this.searchForm.name,
 					category: this.searchForm.category
 				});
+				this.count = res.data.count;
 				this.tableData = [];
-				websites.data.forEach(item => {
+				res.data.result.forEach(item => {
 					const tableData = {};
 					tableData.name = item.name;
 					tableData.category = item.category;
@@ -212,13 +213,15 @@
 			},
 			async addWebsite() {
 				try {
-					const result = await addWebsite(this.foodForm);
+					const result = await addWebsite(this.addWebsiteForm);
 					if (result.data.status == 1) {
 						console.log(result);
 						this.$message({
 							type: "success",
 							message: "添加成功"
 						});
+						this.addDialogFormVisible = false;
+						this.getWebsiteList();
 					} else {
 						this.$message({
 							type: "error",
