@@ -28,20 +28,17 @@ module.exports = function (app) {
         }
     });
     //登录
-    app.post('/api/user/login', async (req, res) => {
+    app.post('/user/login', async (req, res) => {
         try {
             var args = req.body;
-            const response = await got.post('http://localhost:8900/user/login', {
+            const body = await got.post('http://localhost:8900/user/login', {
                 json: args,
                 responseType: 'json'
-            });
-            console.log(response.body);
+            }).json();
+            console.log(body);
 
-            res.cookie('token', response.body.token, { expires: new Date(response.body.expire) });
-            res.send({
-                status: 1,
-                token: response.body.token
-            })
+            res.cookie('token', body.token, { expires: new Date(body.expire) });
+            res.send(body);
         } catch (error) {
             console.log(error);
             res.send({
@@ -51,17 +48,17 @@ module.exports = function (app) {
     });
 
     // 登出
-    app.get('/api/user/logout', async function (req, res) {
-        const response = await got.get('http://localhost:8900/user/logout', {
+    app.get('/user/logout', async function (req, res) {
+        const body = await got.get('http://localhost:8900/user/logout', {
             responseType: 'json'
-        });
-        console.log(response.body);
+        }).json();
+        console.log(body);
 
         res.clearCookie('token');
         res.json({ status: 1 })
     });
 
-    app.get('/api/website', async function (req, res) {
+    app.get('/website', async function (req, res) {
         var args = req.query;
         const token = req.cookies.token;
         const context = {
@@ -69,12 +66,12 @@ module.exports = function (app) {
             jwt: token
         }
         try {
-            const response = await instance.get('website', {
+            const body = await instance.get('website', {
                 searchParams: args,
                 context,
                 responseType: 'json'
-            });
-            res.send(response.body.data)
+            }).json();
+            res.send(body);
         } catch (error) {
             console.log(error);
             res.send({
@@ -83,7 +80,7 @@ module.exports = function (app) {
         }
     });
 
-    app.put('/api/website/update', async function (req, res) {
+    app.put('/website/update', async function (req, res) {
         var args = req.body;
         const token = req.cookies.token;
         const context = {
@@ -96,9 +93,7 @@ module.exports = function (app) {
                 responseType: 'json',
                 context
             }).json();
-            res.send({
-                status: 1
-            })
+            res.send(body);
         } catch (error) {
             console.log(error);
             res.send({
@@ -107,7 +102,7 @@ module.exports = function (app) {
         }
     });
 
-    app.post('/api/website/create', async function (req, res) {
+    app.post('/website/create', async function (req, res) {
         var args = req.body;
         const token = req.cookies.token;
         const context = {
@@ -120,9 +115,7 @@ module.exports = function (app) {
                 responseType: 'json',
                 context
             }).json();
-            res.send({
-                status: 1
-            })
+            res.send(body);
         } catch (error) {
             console.log(error);
             res.send({
@@ -130,7 +123,7 @@ module.exports = function (app) {
             })
         }
     });
-    app.delete('/api/website/delete/:id', async function (req, res) {
+    app.delete('/website/delete/:id', async function (req, res) {
         const token = req.cookies.token;
         const context = {
             token: cookie.serialize('token', token),
@@ -142,9 +135,7 @@ module.exports = function (app) {
                 responseType: 'json',
                 context
             }).json();
-            res.send({
-                status: 1
-            })
+            res.send(body);
         } catch (error) {
             console.log(error);
             res.send({
@@ -153,7 +144,7 @@ module.exports = function (app) {
         }
     });
 
-    app.get('/api/component', async function (req, res) {
+    app.get('/component', async function (req, res) {
         var args = req.query;
         const token = req.cookies.token;
         const context = {
@@ -161,12 +152,12 @@ module.exports = function (app) {
             jwt: token
         }
         try {
-            const response = await instance.get('component', {
+            const body = await instance.get('component', {
                 searchParams: args,
                 context,
                 responseType: 'json'
-            });
-            res.send(response.body.data)
+            }).json();
+            res.send(body);
         } catch (error) {
             console.log(error);
             res.send({
@@ -175,7 +166,7 @@ module.exports = function (app) {
         }
     });
 
-    app.put('/api/component/update', async function (req, res) {
+    app.put('/component/update', async function (req, res) {
         var args = req.body;
         const token = req.cookies.token;
         const context = {
@@ -188,9 +179,7 @@ module.exports = function (app) {
                 responseType: 'json',
                 context
             }).json();
-            res.send({
-                status: 1
-            })
+            res.send(body);
         } catch (error) {
             console.log(error);
             res.send({
@@ -199,7 +188,7 @@ module.exports = function (app) {
         }
     });
 
-    app.post('/api/component/create', async function (req, res) {
+    app.post('/component/create', async function (req, res) {
         var args = req.body;
         const token = req.cookies.token;
         const context = {
@@ -212,9 +201,7 @@ module.exports = function (app) {
                 responseType: 'json',
                 context
             }).json();
-            res.send({
-                status: 1
-            })
+            res.send(body);
         } catch (error) {
             console.log(error);
             res.send({
@@ -222,7 +209,7 @@ module.exports = function (app) {
             })
         }
     });
-    app.delete('/api/component/delete/:id', async function (req, res) {
+    app.delete('/component/delete/:id', async function (req, res) {
         const token = req.cookies.token;
         const context = {
             token: cookie.serialize('token', token),
@@ -234,9 +221,7 @@ module.exports = function (app) {
                 responseType: 'json',
                 context
             }).json();
-            res.send({
-                status: 1
-            })
+            res.send(body);
         } catch (error) {
             console.log(error);
             res.send({
@@ -244,7 +229,7 @@ module.exports = function (app) {
             })
         }
     });
-    app.get('/users/info', function (req, res) {
+    app.get('/user/info', function (req, res) {
         res.json({ status: 1, data: { username: "yuedun", avatar: 'default.jpg' } })
     });
 
@@ -293,7 +278,7 @@ module.exports = function (app) {
             count: 8
         })
     });
-    app.get('/statis/api/count', function (req, res) {
+    app.get('/statis/count', function (req, res) {
         res.json({
             count: 12
         })

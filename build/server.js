@@ -11,7 +11,7 @@ var express = require('express')
 var cookieParse = require('cookie-parser')
 var webpack = require('webpack');
 var bodyParser = require('body-parser');
-var proxyMiddleware = require('http-proxy-middleware')
+var { createProxyMiddleware } = require('http-proxy-middleware')
 var webpackConfig = process.env.NODE_ENV === 'testing'
 	? require('./webpack.prod.conf')
 	: require('./webpack.dev.conf')
@@ -44,18 +44,20 @@ compiler.plugin('compilation', function (compilation) {
 	})
 })
 
-// proxy api requests
-Object.keys(proxyTable).forEach(function (context) {
-	var options = proxyTable[context]
-	if (typeof options === 'string') {
-		options = { target: options }
-	}
-	app.use(proxyMiddleware(options.filter || context, options))
-})
-
 // handle fallback for HTML5 history API
 app.use(require('connect-history-api-fallback')())
 app.use(cookieParse());
+
+app.use('/api', createProxyMiddleware({
+	target: 'http://localhost:8002/',
+	changeOrigin: true,
+	logLevel: 'debug',
+	pathRewrite: { '^/api': '' },
+	onProxyReq: function (proxyReq, req, res) {
+		proxyReq.setHeader('Authorization', "Bearer " + req.cookies.token);
+	}
+}))
+
 app.use(bodyParser.json());
 // serve webpack bundle output
 app.use(devMiddleware)

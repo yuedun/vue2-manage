@@ -28,19 +28,6 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {},
-    context: [ //代理路径
-      // '/api',
-      '/shopping',
-      '/ugc',
-      '/bos',
-      '/member',
-      '/promotion',
-      '/eus',
-      '/payapi',
-      '/admin',
-      '/statis',
-      '/img',
-    ],
     // CSS Sourcemaps off by default because relative paths are "buggy"
     // with this option, according to the CSS-Loader README
     // (https://github.com/webpack/css-loader#sourcemaps)

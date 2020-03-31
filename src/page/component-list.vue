@@ -160,7 +160,7 @@
 				});
 				this.count = res.data.count;
 				this.tableData = [];//清空数据，否则分页会累积
-				res.data.result.forEach(item => {
+				res.data.data.result.forEach(item => {
 					const tableData = {};
 					tableData.name = item.name;
 					tableData.category = item.category;
@@ -212,7 +212,7 @@
 			async updateComponent() {
 				try {
 					const res = await updateComponent(this.selectTable);
-					if (res.data.status == 1) {
+					if (res.status == 200) {
 						this.$message({
 							type: "success",
 							message: "修改成功"
@@ -233,7 +233,7 @@
 			async handleDelete(index, row) {
 				try {
 					const res = await deleteComponent(row.id);
-					if (res.data.status == 1) {
+					if (res.status == 200) {
 						this.$message({
 							type: "success",
 							message: "删除成功"

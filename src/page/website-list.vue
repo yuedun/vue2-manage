@@ -185,7 +185,7 @@
 				});
 				this.count = res.data.count;
 				this.tableData = [];
-				res.data.result.forEach(item => {
+				res.data.data.result.forEach(item => {
 					const tableData = {};
 					tableData.name = item.name;
 					tableData.category = item.category;
@@ -215,7 +215,6 @@
 				try {
 					const result = await addWebsite(this.addWebsiteForm);
 					if (result.data.status == 1) {
-						console.log(result);
 						this.$message({
 							type: "success",
 							message: "添加成功"
@@ -239,7 +238,7 @@
 			async updateWebsite() {
 				try {
 					const res = await updateWebsite(this.selectTable);
-					if (res.data.status == 1) {
+					if (res.status == 200) {
 						this.$message({
 							type: "success",
 							message: "修改成功"
@@ -260,7 +259,7 @@
 			async handleDelete(index, row) {
 				try {
 					const res = await deleteWebsite(row.id);
-					if (res.data.status == 1) {
+					if (res.status == 200) {
 						this.$message({
 							type: "success",
 							message: "删除成功"

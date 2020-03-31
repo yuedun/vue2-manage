@@ -17,12 +17,12 @@ export const signout = () => axios.get('/api/user/logout');
  * 获取用户信息
  */
 
-export const getAdminInfo = () => fetch('/api/users/info');
+export const getAdminInfo = () => fetch('/api/user/info/1');
 
 /**
  * 网站列表
  */
-export const getWebsiteList = data => axios('/api/website', { params: data });
+export const getWebsiteList = data => axios.get('/api/website/', { params: data });
 // export const getWebsiteList = data => fetch('/api/website', data, 'GET');
 
 /**

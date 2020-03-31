@@ -64,7 +64,7 @@
 							userName: this.loginForm.username,
 							password: this.loginForm.password
 						});
-						if (res.data.status == 1) {
+						if (res.data.code == 200) {
 							this.$message({
 								type: "success",
 								message: "登录成功"
