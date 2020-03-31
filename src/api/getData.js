@@ -5,62 +5,62 @@ const axios = require('axios');
  * 登陆
  */
 
-export const login = data => axios.post('/user/login', data);
+export const login = data => axios.post('/api/user/login', data);
 
 /**
  * 退出
  */
 
-export const signout = () => axios.get('/user/logout');
+export const signout = () => axios.get('/api/user/logout');
 
 /**
  * 获取用户信息
  */
 
-export const getAdminInfo = () => fetch('/users/info');
+export const getAdminInfo = () => fetch('/api/users/info');
 
 /**
  * 网站列表
  */
-export const getWebsiteList = data => axios('/website', { params: data });
+export const getWebsiteList = data => axios('/api/website', { params: data });
 // export const getWebsiteList = data => fetch('/api/website', data, 'GET');
 
 /**
  * 修改网站
  */
 export const updateWebsite = data => {
-	return axios.put('/website/update', data);
+	return axios.put('/api/website/update', data);
 }
 /**
  * 添加网站
  */
 export const addWebsite = data => {
-	return axios.post('/website/create', data);
+	return axios.post('/api/website/create', data);
 }
 //删除网站
 export const deleteWebsite = data => {
-	return axios.delete('/website/delete/' + data);
+	return axios.delete('/api/website/delete/' + data);
 }
 /**
  * 网站列表
  */
-export const getComponentList = data => axios('/component', { params: data });
+export const getComponentList = data => axios('/api/component', { params: data });
 
 /**
  * 修改网站
  */
 export const updateComponent = data => {
-	return axios.put('/component/update', data);
+	return axios.put('/api/component/update', data);
 }
 /**
  * 添加网站
  */
 export const addComponent = data => {
-	return axios.post('/component/create', data);
+	return axios.post('/api/component/create', data);
 }
 //删除网站
 export const deleteComponent = data => {
-	return axios.delete('/component/delete/' + data);
+	return axios.delete('/api/component/delete/' + data);
 }
 
 /**

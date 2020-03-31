@@ -29,6 +29,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {},
     context: [ //代理路径
+      // '/api',
       '/shopping',
       '/ugc',
       '/bos',

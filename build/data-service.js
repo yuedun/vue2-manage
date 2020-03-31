@@ -28,7 +28,7 @@ module.exports = function (app) {
         }
     });
     //登录
-    app.post('/user/login', async (req, res) => {
+    app.post('/api/user/login', async (req, res) => {
         try {
             var args = req.body;
             const response = await got.post('http://localhost:8900/user/login', {
@@ -51,7 +51,7 @@ module.exports = function (app) {
     });
 
     // 登出
-    app.get('/user/logout', async function (req, res) {
+    app.get('/api/user/logout', async function (req, res) {
         const response = await got.get('http://localhost:8900/user/logout', {
             responseType: 'json'
         });
@@ -61,7 +61,7 @@ module.exports = function (app) {
         res.json({ status: 1 })
     });
 
-    app.get('/website', async function (req, res) {
+    app.get('/api/website', async function (req, res) {
         var args = req.query;
         const token = req.cookies.token;
         const context = {
@@ -83,7 +83,7 @@ module.exports = function (app) {
         }
     });
 
-    app.put('/website/update', async function (req, res) {
+    app.put('/api/website/update', async function (req, res) {
         var args = req.body;
         const token = req.cookies.token;
         const context = {
@@ -107,7 +107,7 @@ module.exports = function (app) {
         }
     });
 
-    app.post('/website/create', async function (req, res) {
+    app.post('/api/website/create', async function (req, res) {
         var args = req.body;
         const token = req.cookies.token;
         const context = {
@@ -130,7 +130,7 @@ module.exports = function (app) {
             })
         }
     });
-    app.delete('/website/delete/:id', async function (req, res) {
+    app.delete('/api/website/delete/:id', async function (req, res) {
         const token = req.cookies.token;
         const context = {
             token: cookie.serialize('token', token),
@@ -153,7 +153,7 @@ module.exports = function (app) {
         }
     });
 
-    app.get('/component', async function (req, res) {
+    app.get('/api/component', async function (req, res) {
         var args = req.query;
         const token = req.cookies.token;
         const context = {
@@ -175,7 +175,7 @@ module.exports = function (app) {
         }
     });
 
-    app.put('/component/update', async function (req, res) {
+    app.put('/api/component/update', async function (req, res) {
         var args = req.body;
         const token = req.cookies.token;
         const context = {
@@ -199,7 +199,7 @@ module.exports = function (app) {
         }
     });
 
-    app.post('/component/create', async function (req, res) {
+    app.post('/api/component/create', async function (req, res) {
         var args = req.body;
         const token = req.cookies.token;
         const context = {
@@ -222,7 +222,7 @@ module.exports = function (app) {
             })
         }
     });
-    app.delete('/component/delete/:id', async function (req, res) {
+    app.delete('/api/component/delete/:id', async function (req, res) {
         const token = req.cookies.token;
         const context = {
             token: cookie.serialize('token', token),
