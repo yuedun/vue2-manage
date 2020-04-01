@@ -7,7 +7,6 @@ var baseWebpackConfig = require('./webpack.base.conf')
 var CopyWebpackPlugin = require('copy-webpack-plugin')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
-var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 var env = process.env.NODE_ENV === 'testing'
@@ -60,7 +59,8 @@ var webpackConfig = merge(baseWebpackConfig, {
     }),
     // extract css into its own file
     new ExtractTextPlugin({
-      filename: utils.assetsPath('css/[name].[md5:contenthash:hex:8].css')
+      filename: utils.assetsPath('css/[name].[md5:contenthash:hex:8].css'),
+      allChunks: true
     }),
     new VueLoaderPlugin(),
     // generate dist index.html with correct asset hash for caching.
