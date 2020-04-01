@@ -23,7 +23,6 @@ export const getAdminInfo = () => fetch('/api/user/info/1');
  * 网站列表
  */
 export const getWebsiteList = data => axios.get('/api/website/', { params: data });
-// export const getWebsiteList = data => fetch('/api/website', data, 'GET');
 
 /**
  * 修改网站

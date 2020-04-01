@@ -158,7 +158,7 @@
 					name: this.searchForm.name,
 					category: this.searchForm.category
 				});
-				this.count = res.data.count;
+				this.count = res.data.data.count;
 				this.tableData = [];//清空数据，否则分页会累积
 				res.data.data.result.forEach(item => {
 					const tableData = {};

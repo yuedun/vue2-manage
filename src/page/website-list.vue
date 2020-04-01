@@ -183,7 +183,7 @@
 					name: this.searchForm.name,
 					category: this.searchForm.category
 				});
-				this.count = res.data.count;
+				this.count = res.data.data.count;
 				this.tableData = [];
 				res.data.data.result.forEach(item => {
 					const tableData = {};

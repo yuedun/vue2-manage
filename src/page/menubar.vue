@@ -42,6 +42,7 @@
 						    <el-menu-item index="uploadImg">上传图片</el-menu-item>
 						<el-menu-item index="vueEdit">文本编辑</el-menu-item>
 					</el-submenu>
+					 -->
 					<el-submenu index="6">
 						<template slot="title">
 							<i class="el-icon-setting"></i>设置</template>
@@ -53,7 +54,7 @@
 							<i class="el-icon-warning"></i>说明</template>
 						<el-menu-item index="explain">说明</el-menu-item>
 					</el-submenu>
-					 -->
+					 
 				</el-menu>
 			</el-col>
 			<el-col :span="20" style="height: 100%;overflow: auto;">

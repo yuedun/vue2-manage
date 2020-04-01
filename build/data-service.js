@@ -229,7 +229,7 @@ module.exports = function (app) {
             })
         }
     });
-    app.get('/user/info', function (req, res) {
+    app.get('/user/info/:id', function (req, res) {
         res.json({ status: 1, data: { username: "yuedun", avatar: 'default.jpg' } })
     });
 

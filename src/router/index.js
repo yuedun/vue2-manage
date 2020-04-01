@@ -24,7 +24,7 @@ const componentList = () => import('@/page/component-list');
 // const newMember = () => import('@/page/newMember');
 // const uploadImg = () => import('@/page/uploadImg');
 // const vueEdit = () => import('@/page/vueEdit'));
-// const adminSet = () => import('@/page/adminSet');
+const adminSet = () => import('@/page/adminSet');
 // const sendMessage = () => import('@/page/sendMessage');
 // const explain = () => import('@/page/explain');
 
@@ -94,11 +94,13 @@ const routes = [
 			// 	path: '/vueEdit',
 			// 	component: vueEdit,
 			// 	meta: ['编辑', '文本编辑'],
-			// }, {
-			// 	path: '/adminSet',
-			// 	component: adminSet,
-			// 	meta: ['设置', '管理员设置'],
-			// }, {
+			// }
+			,{
+				path: '/adminSet',
+				component: adminSet,
+				meta: ['设置', '管理员设置'],
+			}
+			// , {
 			// 	path: '/sendMessage',
 			// 	component: sendMessage,
 			// 	meta: ['设置', '发送通知'],
