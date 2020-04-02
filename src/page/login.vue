@@ -64,11 +64,16 @@
 							userName: this.loginForm.username,
 							password: this.loginForm.password
 						});
-						if (res.data.code == 200) {
+						if (res.status == 200) {
 							this.$message({
 								type: "success",
 								message: "登录成功"
 							});
+							document.cookie =
+								"token=" +
+								escape(res.data.token) +
+								";expires=" +
+								new Date(res.data.expire).toGMTString();
 							this.$router.push("manage");
 						} else {
 							this.$message({

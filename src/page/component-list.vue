@@ -89,7 +89,7 @@
 	import headTop from "../components/headTop";
 	import { baseUrl, baseImgPath } from "@/config/env";
 	import {
-		getComponentList,
+		componentList,
 		updateComponent,
 		deleteComponent,
 		addComponent
@@ -152,22 +152,29 @@
 				}
 			},
 			async getComponentList() {
-				const res = await getComponentList({
-					offset: this.offset,
-					limit: this.limit,
-					name: this.searchForm.name,
-					category: this.searchForm.category
-				});
-				this.count = res.data.data.count;
-				this.tableData = [];//清空数据，否则分页会累积
-				res.data.data.result.forEach(item => {
-					const tableData = {};
-					tableData.name = item.name;
-					tableData.category = item.category;
-					tableData.id = item.id;
-					tableData.status = item.status + "";
-					this.tableData.push(tableData);
-				});
+				try {
+					const res = await componentList({
+						offset: this.offset,
+						limit: this.limit,
+						name: this.searchForm.name,
+						category: this.searchForm.category
+					});
+					this.count = res.data.data.count;
+					this.tableData = []; //清空数据，否则分页会累积
+					res.data.data.result.forEach(item => {
+						const tableData = {};
+						tableData.name = item.name;
+						tableData.category = item.category;
+						tableData.id = item.id;
+						tableData.status = item.status + "";
+						this.tableData.push(tableData);
+					});
+				} catch (error) {
+					this.$message({
+						type: "error",
+						message: error.response.data.message
+					});
+				}
 			},
 			handleSizeChange(val) {
 				console.log(`每页 ${val} 条`);

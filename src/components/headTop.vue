@@ -40,11 +40,12 @@
 					this.$router.push("/manage");
 				} else if (command == "singout") {
 					const res = await signout();
-					if (res.data.status == 1) {
+					if (res.status == 200) {
 						this.$message({
 							type: "success",
 							message: "退出成功"
 						});
+						document.cookie = "token=''";
 						this.$router.push("/");
 					} else {
 						this.$message({

@@ -41,23 +41,23 @@ export const deleteWebsite = data => {
 	return axios.delete('/api/website/delete/' + data);
 }
 /**
- * 网站列表
+ * 组件列表
  */
-export const getComponentList = data => axios('/api/component', { params: data });
+export const componentList = data => axios.get('/api/component/', { params: data });
 
 /**
- * 修改网站
+ * 修改组件
  */
 export const updateComponent = data => {
 	return axios.put('/api/component/update', data);
 }
 /**
- * 添加网站
+ * 添加组件
  */
 export const addComponent = data => {
 	return axios.post('/api/component/create', data);
 }
-//删除网站
+//删除组件
 export const deleteComponent = data => {
 	return axios.delete('/api/component/delete/' + data);
 }

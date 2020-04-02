@@ -37,19 +37,25 @@ var hotMiddleware = require('webpack-hot-middleware')(compiler, {
 	log: () => { }
 })
 // force page reload when html-webpack-plugin template changes
-compiler.plugin('compilation', function (compilation) {
-	compilation.plugin('html-webpack-plugin-after-emit', function (data, cb) {
-		hotMiddleware.publish({ action: 'reload' })
-		cb()
-	})
-})
+// compiler.plugin('compilation', function (compilation) {
+// 	compilation.plugin('html-webpack-plugin-after-emit', function (data, cb) {
+// 		hotMiddleware.publish({ action: 'reload' })
+// 		cb()
+// 	})
+// })
+compiler.hooks.compile.tap('MyPlugin', (compilation) => {
+	hotMiddleware.publish({ action: 'reload' })
+	// compilation.plugin('html-webpack-plugin-after-emit', function (data, cb) {
+	// 	cb()
+	// })
+});
 
 // handle fallback for HTML5 history API
 app.use(require('connect-history-api-fallback')())
 app.use(cookieParse());
 
 app.use('/api', createProxyMiddleware({
-	target: 'http://localhost:8002/',
+	target: 'http://localhost:8900/',
 	changeOrigin: true,
 	logLevel: 'debug',
 	pathRewrite: { '^/api': '' },

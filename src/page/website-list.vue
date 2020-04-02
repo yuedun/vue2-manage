@@ -177,24 +177,31 @@
 				}
 			},
 			async getWebsiteList() {
-				const res = await getWebsiteList({
-					offset: this.offset,
-					limit: this.limit,
-					name: this.searchForm.name,
-					category: this.searchForm.category
-				});
-				this.count = res.data.data.count;
-				this.tableData = [];
-				res.data.data.result.forEach(item => {
-					const tableData = {};
-					tableData.name = item.name;
-					tableData.category = item.category;
-					tableData.content = item.content;
-					tableData.id = item.id;
-					tableData.status = item.status + "";
-					tableData.url = item.url;
-					this.tableData.push(tableData);
-				});
+				try {
+					const res = await getWebsiteList({
+						offset: this.offset,
+						limit: this.limit,
+						name: this.searchForm.name,
+						category: this.searchForm.category
+					});
+					this.count = res.data.data.count;
+					this.tableData = [];
+					res.data.data.result.forEach(item => {
+						const tableData = {};
+						tableData.name = item.name;
+						tableData.category = item.category;
+						tableData.content = item.content;
+						tableData.id = item.id;
+						tableData.status = item.status + "";
+						tableData.url = item.url;
+						this.tableData.push(tableData);
+					});
+				} catch (error) {
+					this.$message({
+						type: "error",
+						message: error.response.data.message
+					});
+				}
 			},
 			handleSizeChange(val) {
 				console.log(`每页 ${val} 条`);
