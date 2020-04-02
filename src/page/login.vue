@@ -70,7 +70,7 @@
 								message: "登录成功"
 							});
 							document.cookie =
-								"token=" +
+								"jwt=" +
 								escape(res.data.token) +
 								";expires=" +
 								new Date(res.data.expire).toGMTString();
