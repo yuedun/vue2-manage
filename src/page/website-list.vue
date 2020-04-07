@@ -28,9 +28,21 @@
 					</el-table-column>
 					<el-table-column prop="url" label="地址">
 					</el-table-column>
+					<el-table-column prop="icon" label="icon">
+						<template slot-scope="scope">
+							<el-link icon="el-icon-view" @click="handleIcon(scope.row.icon)">查看</el-link>
+						</template>
+					</el-table-column>
+					<el-table-column prop="keywords" label="keywords">
+					</el-table-column>
+					<el-table-column prop="description" label="description">
+					</el-table-column>
 					<el-table-column prop="status" label="状态">
 					</el-table-column>
-					<el-table-column prop="content" label="组件">
+					<el-table-column prop="components" label="组件">
+						<template slot-scope="scope">
+							<el-link icon="el-icon-view" @click="handleComponents(scope.row.components)">查看</el-link>
+						</template>
 					</el-table-column>
 					<el-table-column label="操作">
 						<template slot-scope="scope">
@@ -59,7 +71,7 @@
 						</el-select>
 					</el-form-item>
 					<el-form-item label="组件" label-width="100px">
-						<el-input type="textarea" :rows="5" placeholder="请输入内容" v-model="addWebsiteForm.content">
+						<el-input type="textarea" :rows="5" placeholder="请输入内容" v-model="addWebsiteForm.components">
 						</el-input>
 					</el-form-item>
 					<el-form-item>
@@ -93,14 +105,24 @@
 						</el-select>
 					</el-form-item>
 					<el-form-item label="组件" label-width="100px">
-						<el-input type="textarea" :rows="5" placeholder="请输入内容" v-model="selectTable.content">
-						</el-input>
+						<template>
+							<el-transfer filterable :titles="['所有组件', '选择组件']" filter-placeholder="请输入" v-model="selectTable.components" :data="allComponents">
+							</el-transfer>
+						</template>
 					</el-form-item>
 				</el-form>
 				<div slot="footer" class="dialog-footer">
 					<el-button @click="updateDialogFormVisible = false">取 消</el-button>
 					<el-button type="primary" @click="updateWebsite">确 定</el-button>
 				</div>
+			</el-dialog>
+			<el-dialog title="查看图片" :visible.sync="iconDialogVisible" width="20%">
+				<img :src="icon" alt="" srcset="">
+			</el-dialog>
+			<el-dialog title="查看组件" :visible.sync="componentsDialogVisible" width="30%">
+				<ul>
+					<li v-for="(value, name) in components" :key="name">{{value.name}}</li>
+				</ul>
 			</el-dialog>
 		</div>
 	</div>
@@ -113,7 +135,8 @@
 		getWebsiteList,
 		updateWebsite,
 		deleteWebsite,
-		addWebsite
+		addWebsite,
+		componentList
 	} from "@/api/getData";
 	export default {
 		data() {
@@ -129,11 +152,13 @@
 				selectTable: {},
 				addDialogFormVisible: false,
 				updateDialogFormVisible: false,
+				iconDialogVisible: false,
+				componentsDialogVisible: false,
 				addWebsiteForm: {
 					name: "",
 					category: "",
 					url: "",
-					content: ""
+					components: ""
 				},
 				selectedCategory: [],
 				address: {},
@@ -159,7 +184,13 @@
 						value: "教育",
 						label: "教育"
 					}
-				]
+				],
+				icon: "",
+				components: [],
+				allComponents: [],
+				filterMethod(query, item) {
+					return item.pinyin.indexOf(query) > -1;
+				}
 			};
 		},
 		created() {
@@ -187,14 +218,7 @@
 					this.count = res.data.data.count;
 					this.tableData = [];
 					res.data.data.result.forEach(item => {
-						const tableData = {};
-						tableData.name = item.name;
-						tableData.category = item.category;
-						tableData.content = item.content;
-						tableData.id = item.id;
-						tableData.status = item.status + "";
-						tableData.url = item.url;
-						this.tableData.push(tableData);
+						this.tableData.push(item);
 					});
 				} catch (error) {
 					this.$message({
@@ -214,8 +238,27 @@
 			handleNew(index, row) {
 				this.addDialogFormVisible = true;
 			},
-			handleEdit(index, row) {
+			async handleEdit(index, row) {
+				try {
+					const res = await componentList();
+					if (res.status == 200) {
+						var componentArray = [];
+						res.data.data.result.forEach((item, index) => {
+							componentArray.push({
+								label: item.name,
+								key: index
+							});
+						});
+						this.allComponents = componentArray;
+					} else {
+						this.allComponents = [];
+					}
+				} catch (err) {
+					console.log(err);
+					this.allComponents = [];
+				}
 				this.selectTable = row;
+				// this.selectTable.components = componentList;
 				this.updateDialogFormVisible = true;
 			},
 			async addWebsite() {
@@ -282,6 +325,16 @@
 					});
 					console.log("删除失败");
 				}
+			},
+			handleIcon(icon) {
+				console.log(icon);
+				this.icon = icon;
+				this.iconDialogVisible = true;
+			},
+			handleComponents(components) {
+				console.log(components);
+				this.components = components;
+				this.componentsDialogVisible = true;
 			}
 		}
 	};

@@ -26,6 +26,39 @@
 					</el-table-column>
 					<el-table-column prop="category" label="分类">
 					</el-table-column>
+					<el-table-column prop="title_h_1" label="标题一">
+					</el-table-column>
+					<el-table-column prop="title_h_2" label="标题二">
+					</el-table-column>
+					<el-table-column prop="title_h_3" label="标题三">
+					</el-table-column>
+					<el-table-column prop="description" label="描述">
+					</el-table-column>
+					<el-table-column prop="background_img" label="背景图">
+						<template slot-scope="scope">
+							<el-link icon="el-icon-view" @click="handleIcon(scope.row.background_img)">查看</el-link>
+						</template>
+					</el-table-column>
+					<el-table-column prop="big_img" label="展示大图">
+						<template slot-scope="scope">
+							<el-link icon="el-icon-view" @click="handleIcon(scope.row.big_img)">查看</el-link>
+						</template>
+					</el-table-column>
+					<el-table-column prop="elements" label="元素">
+						<template slot-scope="scope">
+							<el-link icon="el-icon-view" @click="handleIcon(scope.row.elements)">查看</el-link>
+						</template>
+					</el-table-column>
+					<el-table-column prop="links" label="链接组">
+						<template slot-scope="scope">
+							<el-link icon="el-icon-view" @click="handleIcon(scope.row.links)">查看</el-link>
+						</template>
+					</el-table-column>
+					<el-table-column prop="extras" label="扩展数据">
+						<template slot-scope="scope">
+							<el-link icon="el-icon-view" @click="handleIcon(scope.row.extras)">查看</el-link>
+						</template>
+					</el-table-column>
 					<el-table-column prop="status" label="状态">
 					</el-table-column>
 					<el-table-column label="操作">
@@ -52,6 +85,33 @@
 							<el-option label="IT" value="IT"></el-option>
 						</el-select>
 					</el-form-item>
+					<el-form-item label="标题一" label-width="100px">
+						<el-input v-model="foodForm.title_h_1" autocomplete="off"></el-input>
+					</el-form-item>
+					<el-form-item label="标题二" label-width="100px">
+						<el-input v-model="foodForm.title_h_2" autocomplete="off"></el-input>
+					</el-form-item>
+					<el-form-item label="标题三" label-width="100px">
+						<el-input v-model="foodForm.title_h_3" autocomplete="off"></el-input>
+					</el-form-item>
+					<el-form-item label="描述" label-width="100px">
+						<el-input v-model="foodForm.description" autocomplete="off"></el-input>
+					</el-form-item>
+					<el-form-item label="背景图" label-width="100px">
+						<el-input v-model="foodForm.background_img" autocomplete="off"></el-input>
+					</el-form-item>
+					<el-form-item label="展示图" label-width="100px">
+						<el-input v-model="foodForm.big_img" autocomplete="off"></el-input>
+					</el-form-item>
+					<el-form-item label="元素" label-width="100px">
+						<el-input v-model="foodForm.elements" autocomplete="off"></el-input>
+					</el-form-item>
+					<el-form-item label="链接" label-width="100px">
+						<el-input v-model="foodForm.links" autocomplete="off"></el-input>
+					</el-form-item>
+					<el-form-item label="扩展数据" label-width="100px">
+						<el-input v-model="foodForm.extras" autocomplete="off"></el-input>
+					</el-form-item>
 					<el-form-item label="状态" label-width="100px">
 						<el-select v-model="foodForm.status" placeholder="请选择状态">
 							<el-option label="启用" value="1"></el-option>
@@ -75,11 +135,47 @@
 							</el-option>
 						</el-select>
 					</el-form-item>
+					<el-form-item label="标题一" label-width="100px">
+						<el-input v-model="selectTable.title_h_1" autocomplete="off"></el-input>
+					</el-form-item>
+					<el-form-item label="标题二" label-width="100px">
+						<el-input v-model="selectTable.title_h_2" autocomplete="off"></el-input>
+					</el-form-item>
+					<el-form-item label="标题三" label-width="100px">
+						<el-input v-model="selectTable.title_h_3" autocomplete="off"></el-input>
+					</el-form-item>
+					<el-form-item label="描述" label-width="100px">
+						<el-input v-model="selectTable.description" autocomplete="off"></el-input>
+					</el-form-item>
+					<el-form-item label="背景图" label-width="100px">
+						<el-input v-model="selectTable.background_img" autocomplete="off"></el-input>
+					</el-form-item>
+					<el-form-item label="展示图" label-width="100px">
+						<el-input v-model="selectTable.big_img" autocomplete="off"></el-input>
+					</el-form-item>
+					<el-form-item label="元素" label-width="100px">
+						<el-input v-model="selectTable.elements" autocomplete="off"></el-input>
+					</el-form-item>
+					<el-form-item label="链接" label-width="100px">
+						<el-input v-model="selectTable.links" autocomplete="off"></el-input>
+					</el-form-item>
+					<el-form-item label="扩展数据" label-width="100px">
+						<el-input v-model="selectTable.extras" autocomplete="off"></el-input>
+					</el-form-item>
+					<el-form-item label="状态" label-width="100px">
+						<el-select v-model="selectTable.status" placeholder="请选择状态">
+							<el-option label="启用" value="1"></el-option>
+							<el-option label="禁用" value="0"></el-option>
+						</el-select>
+					</el-form-item>
 				</el-form>
 				<div slot="footer" class="dialog-footer">
 					<el-button @click="updateDialogFormVisible = false">取 消</el-button>
 					<el-button type="primary" @click="updateComponent">确 定</el-button>
 				</div>
+			</el-dialog>
+			<el-dialog title="查看图片" :visible.sync="iconDialogVisible" width="30%">
+				<p>{{icon}}</p>
 			</el-dialog>
 		</div>
 	</div>
@@ -107,6 +203,7 @@
 				selectTable: {},
 				addDialogFormVisible: false,
 				updateDialogFormVisible: false,
+				iconDialogVisible: false,
 				selectedCategory: [],
 				searchForm: {
 					name: "",
@@ -134,7 +231,8 @@
 						value: "教育",
 						label: "教育"
 					}
-				]
+				],
+				icon: ""
 			};
 		},
 		created() {
@@ -162,12 +260,7 @@
 					this.count = res.data.data.count;
 					this.tableData = []; //清空数据，否则分页会累积
 					res.data.data.result.forEach(item => {
-						const tableData = {};
-						tableData.name = item.name;
-						tableData.category = item.category;
-						tableData.id = item.id;
-						tableData.status = item.status + "";
-						this.tableData.push(tableData);
+						this.tableData.push(item);
 					});
 				} catch (error) {
 					this.$message({
@@ -186,7 +279,13 @@
 			},
 			handleEdit(index, row) {
 				this.selectTable = row;
+				this.selectTable.elements = JSON.stringify(row.elements)
+				this.selectTable.links = JSON.stringify(row.links)
 				this.updateDialogFormVisible = true;
+			},
+			handleIcon(icon) {
+				this.icon = icon;
+				this.iconDialogVisible = true;
 			},
 			// 查询
 			onSubmit() {
@@ -218,13 +317,18 @@
 			},
 			async updateComponent() {
 				try {
-					const res = await updateComponent(this.selectTable);
+					let updateObj = this.selectTable;
+					let eles = JSON.parse(this.selectTable.elements);
+					updateObj.elements = eles;
+					let links = JSON.parse(this.selectTable.links);
+					updateObj.links = links;
+					const res = await updateComponent(updateObj);
 					if (res.status == 200) {
 						this.$message({
 							type: "success",
 							message: "修改成功"
 						});
-						this.dialogFormVisible = false;
+						this.updateDialogFormVisible = false;
 						this.getComponentList();
 					} else {
 						throw new Error(res.message);

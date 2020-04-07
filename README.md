@@ -1,7 +1,7 @@
 
 # About
 
-此项目是 vue + element-ui 构建的后台管理系统，所有的数据都是从服务器实时获取的真实数据，具有真实的注册、登陆、管理数据、权限验证等功能。
+此项目是 vue + element-ui 构建的后台管理系统，是一个标准的线上项目架构。
 
 
 # 说明
@@ -20,8 +20,9 @@
 
 ## 技术栈
 
-vue2 + vuex + vue-router + webpack + ES6/7 + less + element-ui
-
+vue-v2.6.11 + vuex-v3.1.3 + vue-router-v3.1.6 + webpack-v4.42.1 + ES6/7 + less + element-ui-v2.13.0 + babel-v7.9.0
+https://cn.vuejs.org/v2/guide/syntax.html
+https://element.eleme.cn/#/zh-CN/component/layout
 
 ## 项目运行
 
@@ -40,6 +41,14 @@ npm run dev (访问本地后台系统)
 
 ```
 
+# 线上部署
+NGINX代理配置
+```
+location ^~ /api/ {
+    add_header 'Access-Control-Allow-Origin' '*';
+    proxy_pass http://localhost:8900/;
+}
+```
 
 # 效果演示
 
@@ -50,23 +59,10 @@ npm run dev (访问本地后台系统)
 
 ## 部分截图
 
-<img src="https://github.com/bailicangdu/vue2-manage/blob/master/screenshots/manage_home.png"/>
+<img src="https://github.com/yuedun/vue2-manage/blob/master/screenshots/manage_home.png"/>
 
-<img src="https://github.com/bailicangdu/vue2-manage/blob/master/screenshots/manage_shop.png"/>
-
-## 错误记录
-```
- ERROR  Failed to compile with 6 errors                                      6:13:29 PM
-These dependencies were not found:
-
-* net in ./~/express/lib/request.js
-* fs in ./~/express/lib/view.js, ./~/etag/index.js and 3 others
-
-To install them, you can run: npm install --save net fs
-
-```
-原因：前端js中引入了后端express
+<img src="https://github.com/yuedun/vue2-manage/blob/master/screenshots/manage_shop.png"/>
 
 ## License
 
-[GPL](https://github.com/bailicangdu/vue2-manage/blob/master/COPYING)
+[GPL](https://github.com/yuedun/vue2-manage/blob/master/COPYING)

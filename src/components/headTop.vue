@@ -45,7 +45,7 @@
 							type: "success",
 							message: "退出成功"
 						});
-						document.cookie = "token=''";
+						document.cookie = "jwt=''";
 						this.$router.push("/");
 					} else {
 						this.$message({
