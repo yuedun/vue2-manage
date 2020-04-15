@@ -64,6 +64,15 @@
 					<el-form-item label="网站url" prop="url">
 						<el-input v-model="addWebsiteForm.url"></el-input>
 					</el-form-item>
+					<el-form-item label="标签icon" prop="icon">
+						<el-input v-model="addWebsiteForm.icon"></el-input>
+					</el-form-item>
+					<el-form-item label="keywords" prop="keywords">
+						<el-input v-model="addWebsiteForm.keywords"></el-input>
+					</el-form-item>
+					<el-form-item label="description" prop="description">
+						<el-input v-model="addWebsiteForm.description"></el-input>
+					</el-form-item>
 					<el-form-item label="网站分类">
 						<el-select v-model="addWebsiteForm.category" placeholder="请选择">
 							<el-option v-for="item in attributes" :key="item.value" :label="item.label" :value="item.value">
@@ -71,15 +80,17 @@
 						</el-select>
 					</el-form-item>
 					<el-form-item label="组件" label-width="100px">
-						<el-input type="textarea" :rows="5" placeholder="请输入内容" v-model="addWebsiteForm.components">
-						</el-input>
+						<template>
+							<el-transfer v-model="selectTable.components" :data="allComponents">
+							</el-transfer>
+						</template>
 					</el-form-item>
 					<el-form-item>
 						<el-button type="primary" @click="addWebsite">确认</el-button>
 					</el-form-item>
 				</el-form>
 				<div slot="footer" class="dialog-footer">
-					<el-button @click="dialogFormVisible = false">取 消</el-button>
+					<el-button @click="addDialogFormVisible = false">取 消</el-button>
 					<el-button type="primary" @click="addWebsite">确 定</el-button>
 				</div>
 			</el-dialog>
@@ -88,15 +99,23 @@
 					<el-form-item label="网站名称" label-width="100px">
 						<el-input v-model="selectTable.name" autocomplete="off"></el-input>
 					</el-form-item>
-					<el-form-item label="分类" label-width="100px">
-						<el-select v-model="selectTable.category" placeholder="请选择分类">
-							<el-option label="教育" value="教育"></el-option>
-							<el-option label="政企" value="政企"></el-option>
-							<el-option label="IT" value="IT"></el-option>
-						</el-select>
-					</el-form-item>
 					<el-form-item label="url地址" label-width="100px">
 						<el-input v-model="selectTable.url" autocomplete="off"></el-input>
+					</el-form-item>
+					<el-form-item label="标签icon" label-width="100px">
+						<el-input v-model="selectTable.icon"></el-input>
+					</el-form-item>
+					<el-form-item label="keywords" label-width="100px">
+						<el-input v-model="selectTable.keywords"></el-input>
+					</el-form-item>
+					<el-form-item label="description" label-width="100px">
+						<el-input v-model="selectTable.description"></el-input>
+					</el-form-item>
+					<el-form-item label="分类" label-width="100px">
+						<el-select v-model="selectTable.category" placeholder="请选择分类">
+							<el-option v-for="item in attributes" :key="item.value" :label="item.label" :value="item.value">
+							</el-option>
+						</el-select>
 					</el-form-item>
 					<el-form-item label="状态" label-width="100px">
 						<el-select v-model="selectTable.status" placeholder="请选择状态">
@@ -106,7 +125,7 @@
 					</el-form-item>
 					<el-form-item label="组件" label-width="100px">
 						<template>
-							<el-transfer filterable :titles="['所有组件', '选择组件']" filter-placeholder="请输入" v-model="selectTable.components" :data="allComponents">
+							<el-transfer v-model="selectTable.components" :data="allComponents">
 							</el-transfer>
 						</template>
 					</el-form-item>
@@ -158,6 +177,9 @@
 					name: "",
 					category: "",
 					url: "",
+					icon: "",
+					keywords: "",
+					description: "",
 					components: ""
 				},
 				selectedCategory: [],
@@ -183,6 +205,10 @@
 					{
 						value: "教育",
 						label: "教育"
+					},
+					{
+						value: "政企",
+						label: "政企"
 					}
 				],
 				icon: "",
@@ -236,9 +262,18 @@
 				this.getWebsiteList();
 			},
 			handleNew(index, row) {
+				this.getAllComponents();
 				this.addDialogFormVisible = true;
 			},
 			async handleEdit(index, row) {
+				await this.getAllComponents();
+				console.log(this.allComponents);
+				
+				this.selectTable = row;
+				this.updateDialogFormVisible = true;
+			},
+			async getAllComponents() {
+				let that = this;
 				try {
 					const res = await componentList();
 					if (res.status == 200) {
@@ -249,22 +284,19 @@
 								key: index
 							});
 						});
-						this.allComponents = componentArray;
+						that.allComponents = componentArray;
 					} else {
-						this.allComponents = [];
+						that.allComponents = [];
 					}
 				} catch (err) {
 					console.log(err);
-					this.allComponents = [];
+					that.allComponents = [];
 				}
-				this.selectTable = row;
-				// this.selectTable.components = componentList;
-				this.updateDialogFormVisible = true;
 			},
 			async addWebsite() {
 				try {
 					const result = await addWebsite(this.addWebsiteForm);
-					if (result.data.status == 1) {
+					if (result.status == 200) {
 						this.$message({
 							type: "success",
 							message: "添加成功"

@@ -1,17 +1,14 @@
 <template>
 	<div class="fillcontain">
 		<el-row style="height: 100%;">
-			<el-col :span="4" style="min-height: 100%; background-color: #324057;">
+			<el-col :span="2" style="min-height: 100%; background-color: #324057;">
 				<el-menu :default-active="defaultActive" style="min-height: 100%;" router>
 					<el-menu-item index="manage">
 						<i class="el-icon-menu"></i>首页
 					</el-menu-item>
-					<el-submenu index="8">
-						<template slot="title">
-							<i class="el-icon-office-building"></i>网站生成器</template>
-						<el-menu-item index="websiteList">网站列表</el-menu-item>
-						<el-menu-item index="componentList">组件列表</el-menu-item>
-					</el-submenu>
+					<el-menu-item index="websiteList">网站列表</el-menu-item>
+					<el-menu-item index="componentList">组件列表</el-menu-item>
+					<el-menu-item index="drag">拖拽</el-menu-item>
 					<!-- 
 					<el-submenu index="2">
 						<template slot="title">
@@ -42,7 +39,7 @@
 						    <el-menu-item index="uploadImg">上传图片</el-menu-item>
 						<el-menu-item index="vueEdit">文本编辑</el-menu-item>
 					</el-submenu>
-					 -->
+					
 					<el-submenu index="6">
 						<template slot="title">
 							<i class="el-icon-setting"></i>设置</template>
@@ -54,10 +51,10 @@
 							<i class="el-icon-warning"></i>说明</template>
 						<el-menu-item index="explain">说明</el-menu-item>
 					</el-submenu>
-					 
+ 					-->
 				</el-menu>
 			</el-col>
-			<el-col :span="20" style="height: 100%;overflow: auto;">
+			<el-col :span="22" style="height: 100%;overflow: auto;">
 				<keep-alive>
 					<router-view></router-view>
 				</keep-alive>
@@ -70,7 +67,7 @@
 	export default {
 		computed: {
 			defaultActive: function() {
-				this.$route.path.replace("/", "")
+				this.$route.path.replace("/", "");
 				return "manage";
 			}
 		}

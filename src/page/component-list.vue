@@ -279,8 +279,9 @@
 			},
 			handleEdit(index, row) {
 				this.selectTable = row;
-				this.selectTable.elements = JSON.stringify(row.elements)
-				this.selectTable.links = JSON.stringify(row.links)
+				this.selectTable.elements = JSON.stringify(row.elements);
+				this.selectTable.links = JSON.stringify(row.links);
+				this.selectTable.extras = JSON.stringify(row.extras);
 				this.updateDialogFormVisible = true;
 			},
 			handleIcon(icon) {
@@ -317,11 +318,27 @@
 			},
 			async updateComponent() {
 				try {
-					let updateObj = this.selectTable;
+					let updateObj = {
+						_id: this.selectTable._id,
+						name: this.selectTable.name,
+						category: this.selectTable.category,
+						status: this.selectTable.status,
+						title_h_1: this.selectTable.title_h_1,
+						title_h_2: this.selectTable.title_h_2,
+						title_h_3: this.selectTable.title_h_3,
+						description: this.selectTable.description,
+						background_img: this.selectTable.background_img,
+						big_img: this.selectTable.big_img,
+						elements: [],
+						links: [],
+						extras: []
+					};
+
 					let eles = JSON.parse(this.selectTable.elements);
 					updateObj.elements = eles;
 					let links = JSON.parse(this.selectTable.links);
 					updateObj.links = links;
+					updateObj.extras = JSON.parse(this.selectTable.extras);
 					const res = await updateComponent(updateObj);
 					if (res.status == 200) {
 						this.$message({

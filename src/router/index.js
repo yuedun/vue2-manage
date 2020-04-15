@@ -27,6 +27,7 @@ const componentList = () => import('@/page/component-list');
 const adminSet = () => import('@/page/adminSet');
 // const sendMessage = () => import('@/page/sendMessage');
 // const explain = () => import('@/page/explain');
+const drag = () => import('@/page/drag');
 
 const routes = [
 	{
@@ -49,6 +50,10 @@ const routes = [
 			path: '/componentList',
 			component: componentList,
 			meta: ['网站管理', '组件列表'],
+		}, {
+			path: '/drag',
+			component: drag,
+			mate: ['网站管理', '拖拽']
 		}
 			// , {
 			// 	path: '/addShop',
@@ -95,11 +100,11 @@ const routes = [
 			// 	component: vueEdit,
 			// 	meta: ['编辑', '文本编辑'],
 			// }
-			,{
-				path: '/adminSet',
-				component: adminSet,
-				meta: ['设置', '管理员设置'],
-			}
+			, {
+			path: '/adminSet',
+			component: adminSet,
+			meta: ['设置', '管理员设置'],
+		}
 			// , {
 			// 	path: '/sendMessage',
 			// 	component: sendMessage,
