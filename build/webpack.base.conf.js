@@ -58,7 +58,8 @@ module.exports = {
         loader: 'url-loader',
         options: {
           limit: 10000,
-          name: utils.assetsPath('img/[name].[hash:7].[ext]')
+          name: utils.assetsPath('img/[name].[hash:7].[ext]'),
+          esModule: false//设置为true vue模板中的图片引用会显示我[object module]
         }
       },
       {
