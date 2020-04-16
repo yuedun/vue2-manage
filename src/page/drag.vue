@@ -4,7 +4,7 @@
 		<el-row :gutter="10">
 			<el-col :span="6" class="col-left">
 				<h3>组件列表</h3>
-				<draggable class="list-group wrapper" :list="allComponent" group="people" @change="log">
+				<draggable class="list-group wrapper" :list="allComponent" group="components" @change="log">
 					<div class="list-group-item item" v-for="(element, index) in allComponent" :key="element.name">
 						{{ element.name }} {{ element.category }}-{{index}}
 					</div>
@@ -13,8 +13,8 @@
 
 			<el-col :span="18">
 				<h3>展示区</h3>
-				<draggable class="list-group wrapper" :list="selectedComponent" group="people" @change="log">
-					<component v-for="element in selectedComponent" :key="element.name" v-bind:is="element.name" ></component>
+				<draggable class="list-group wrapper" :list="selectedComponent" group="components" @change="log">
+					<component v-for="element in selectedComponent" :key="element.name" v-bind:is="element.name"></component>
 				</draggable>
 				<div v-show="!selectedComponent.length" class="empty-info">
 					从左侧拖入组件进行表单设计
@@ -29,12 +29,14 @@
 	import { componentList } from "@/api/getData";
 	import sectionTwo from "../components/section-two";
 	import scrollBanner from "../components/scroll-banner";
+	import headerBox from "../components/header-box";
 	export default {
 		components: {
 			draggable,
 			headTop,
 			sectionTwo,
 			scrollBanner,
+			headerBox
 		},
 		data() {
 			return {
@@ -64,11 +66,14 @@
 						offset: this.offset,
 						limit: this.limit
 					});
-					this.allComponent = []; //清空数据，否则分页会累积
-					res.data.data.result.forEach(item => {
-						this.allComponent.push(item);
-					});
-
+					this.allComponent = [
+						{ name: "header-box", id: 0 },
+						{ name: "scroll-banner", id: 1 },
+						{ name: "section-two", id: 2 }
+					]; //清空数据，否则分页会累积
+					// res.data.data.result.forEach(item => {
+					// 	this.allComponent.push(item);
+					// });
 				} catch (error) {
 					this.$message({
 						type: "error",
@@ -95,7 +100,7 @@
 	cursor: move;
 	margin-bottom: 5px;
 }
-.col-left{
+.col-left {
 	border-right: 1px solid #42b983;
 }
 </style>
