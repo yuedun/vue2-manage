@@ -14,11 +14,11 @@
 			<el-col :span="18">
 				<h3>展示区</h3>
 				<draggable class="list-group wrapper" :list="selectedComponent" group="components" @change="log">
-					<component v-for="element in selectedComponent" :key="element.name" v-bind:is="element.name"></component>
+					<component v-for="element in selectedComponent" :key="element.name" v-bind:is="element.name" v-bind:pcomponent="element"></component>
+					<div v-show="!selectedComponent.length" class="empty-info">
+						从左侧拖入组件进行表单设计
+					</div>
 				</draggable>
-				<div v-show="!selectedComponent.length" class="empty-info">
-					从左侧拖入组件进行表单设计
-				</div>
 			</el-col>
 		</el-row>
 	</div>
@@ -26,7 +26,7 @@
 <script>
 	import draggable from "vuedraggable";
 	import headTop from "../components/headTop";
-	import { componentList } from "@/api/getData";
+	import { componentList, getComponent } from "@/api/getData";
 	import sectionTwo from "../components/section-two";
 	import scrollBanner from "../components/scroll-banner";
 	import headerBox from "../components/header-box";
@@ -40,8 +40,7 @@
 		},
 		data() {
 			return {
-				offset: 0,
-				limit: 10,
+				components: {},
 				allComponent: [],
 				selectedComponent: []
 			};
@@ -50,8 +49,10 @@
 			this.initData();
 		},
 		methods: {
-			log: function(evt) {
-				console.log(evt);
+			async log(evt) {
+				if (evt["revemoed"]) {
+					await this.getComponent(evt.removed.element._id);
+				}
 			},
 			async initData() {
 				try {
@@ -66,21 +67,28 @@
 						offset: this.offset,
 						limit: this.limit
 					});
-					this.allComponent = [
-						{ name: "header-box", id: 0 },
-						{ name: "scroll-banner", id: 1 },
-						{ name: "section-two", id: 2 }
-					]; //清空数据，否则分页会累积
-					// res.data.data.result.forEach(item => {
-					// 	this.allComponent.push(item);
-					// });
+					this.allComponent = [];
+					res.data.data.result.forEach(item => {
+						this.allComponent.push(item);
+					});
 				} catch (error) {
 					this.$message({
 						type: "error",
 						message: error.response.data.message
 					});
 				}
-			}
+			},
+			async getComponent(id){
+				try {
+					const res = await getComponent(id);
+					this.component = res.data.data;
+				} catch (error) {
+					this.$message({
+						type: "error",
+						message: error.response.data.message
+					});
+				}
+			},
 		}
 	};
 </script>

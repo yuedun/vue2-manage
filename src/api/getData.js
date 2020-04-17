@@ -61,6 +61,10 @@ export const addComponent = data => {
 export const deleteComponent = data => {
 	return axios.delete('/api/component/delete/' + data);
 }
+//获取组件
+export const getComponent = data => {
+	return axios.get('/api/component/getComponent/' + data);
+}
 
 /**
  * api请求量

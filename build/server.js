@@ -55,7 +55,7 @@ app.use(require('connect-history-api-fallback')())
 app.use(cookieParse());
 
 app.use('/api', createProxyMiddleware({
-	target: 'http://localhost:8002/',
+	target: 'http://localhost:8900/',
 	changeOrigin: true,
 	logLevel: 'debug',
 	pathRewrite: { '^/api': '' },
