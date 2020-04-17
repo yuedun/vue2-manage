@@ -27,19 +27,22 @@
 	import draggable from "vuedraggable";
 	import headTop from "../components/headTop";
 	import { componentList, getComponent } from "@/api/getData";
-	import sectionTwo from "../components/section-two";
-	import scrollBanner from "../components/scroll-banner";
 	import headerBox from "../components/header-box";
+	import scrollBanner from "../components/scroll-banner";
+	import sectionTwo from "../components/section-two";
+	import sectionThree from "../components/section-three";
 	export default {
 		components: {
 			draggable,
 			headTop,
 			sectionTwo,
 			scrollBanner,
-			headerBox
+			headerBox,
+			sectionThree,
 		},
 		data() {
 			return {
+				limit: 30,
 				components: {},
 				allComponent: [],
 				selectedComponent: []
@@ -78,7 +81,7 @@
 					});
 				}
 			},
-			async getComponent(id){
+			async getComponent(id) {
 				try {
 					const res = await getComponent(id);
 					this.component = res.data.data;
@@ -88,7 +91,7 @@
 						message: error.response.data.message
 					});
 				}
-			},
+			}
 		}
 	};
 </script>

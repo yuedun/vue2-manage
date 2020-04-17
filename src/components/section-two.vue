@@ -34,7 +34,6 @@
 </template>
 
 <script>
-	import { getComponent } from "@/api/getData";
 	export default {
 		props: ["pcomponent"],
 		data() {
@@ -43,30 +42,9 @@
 			};
 		},
 		created() {
-			console.log("子组件接收父组件值：",this.component);
+			console.log("子组件接收父组件值：", this.component);
 		},
-		methods: {
-			async getComponent(id) {
-				try {
-					const res = await getComponent(id);
-					this.count = res.data.data.count;
-					this.tableData = []; //清空数据，否则分页会累积
-					res.data.data.result.forEach(item => {
-						this.tableData.push(item);
-					});
-				} catch (error) {
-					this.$message({
-						type: "error",
-						message: error.response.data.message
-					});
-				}
-			}
-		},
-		watch: {
-			title: function(val, oldval) {
-				console.log(val, oldval);
-			}
-		}
+		methods: {}
 	};
 </script>
 <style>
