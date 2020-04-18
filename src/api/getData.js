@@ -44,6 +44,10 @@ export const deleteWebsite = data => {
 export const getWebsiteComponents = data => {
 	return axios.get('/api/website/getWebsiteComponents/' + data);
 }
+//修改单个网站的组件
+export const updateWebsiteComponents = data => {
+	return axios.put('/api/website/updateWebsiteComponents/' + data.id, data.data );
+}
 /**
  * 组件列表
  */

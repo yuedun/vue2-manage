@@ -11,6 +11,9 @@
 			</el-col>
 
 			<el-col :span="18">
+				<div class="tools">
+					<el-button type="success" @click="getData">保存</el-button>
+				</div>
 				<draggable class="list-group wrapper" :list="selectedComponent" group="components" @change="log">
 					<component v-for="element in selectedComponent" :key="element.name" v-bind:is="element.name" v-bind:pcomponent="element"></component>
 					<div v-show="!selectedComponent.length" class="empty-info">
@@ -27,7 +30,8 @@
 	import {
 		componentList,
 		getComponent,
-		getWebsiteComponents
+		getWebsiteComponents,
+		updateWebsiteComponents
 	} from "@/api/getData";
 	import headerBox from "../components/header-box";
 	import scrollBanner from "../components/scroll-banner";
@@ -54,10 +58,11 @@
 			sectionSeven,
 			sectionEight,
 			sectionNine,
-			sectionTen,
+			sectionTen
 		},
 		data() {
 			return {
+				currentId: 0,
 				limit: 30,
 				components: {},
 				allComponent: [],
@@ -66,7 +71,7 @@
 		},
 		created() {
 			console.log("query:", this.$route.query);
-
+			this.currentId = this.$route.query.id;
 			this.initData(this.$route.query.id);
 		},
 		methods: {
@@ -78,7 +83,9 @@
 			async initData(id) {
 				try {
 					await this.getComponentList();
-					await this.getWebsiteComponents(id);
+					if (id) {
+						await this.getWebsiteComponents(id);
+					}
 				} catch (err) {
 					console.log("获取数据失败", err);
 				}
@@ -103,7 +110,7 @@
 			async getWebsiteComponents(id) {
 				try {
 					const res = await getWebsiteComponents(id);
-					this.selectedComponent = res.data.data;
+					this.selectedComponent = res.data.data || [];
 				} catch (error) {
 					this.$message({
 						type: "error",
@@ -120,6 +127,28 @@
 						type: "error",
 						message: error.response.data.message
 					});
+				}
+			},
+			async getData() {
+				try {
+					const res = await updateWebsiteComponents({
+						id: this.currentId,
+						data: this.selectedComponent
+					});
+					if (res.status == 200) {
+						this.$message({
+							type: "success",
+							message: "修改成功"
+						});
+					} else {
+						throw new Error(res.message);
+					}
+				} catch (err) {
+					this.$message({
+						type: "error",
+						message: err.message
+					});
+					console.log("修改失败");
 				}
 			}
 		}
@@ -143,5 +172,8 @@
 }
 .col-left {
 	border-right: 1px solid #42b983;
+}
+.tools {
+	background-color: aquamarine;
 }
 </style>

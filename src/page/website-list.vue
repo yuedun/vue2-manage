@@ -40,11 +40,8 @@
 					<el-table-column prop="status" label="状态">
 					</el-table-column>
 					<el-table-column prop="components" label="组件">
-						<!-- <template slot-scope="scope">
-							<el-link icon="el-icon-view" @click="handleComponents(scope.row.components)">查看</el-link>
-						</template> -->
 						<template slot-scope="scope">
-							<router-link :to="{path:'/drag',query: {id: scope.row._id}}">细节列表1</router-link>
+							<el-link icon="el-icon-view" @click="viewComponents(scope.row._id)">查看</el-link>
 						</template>
 					</el-table-column>
 					<el-table-column label="操作">
@@ -271,7 +268,7 @@
 			async handleEdit(index, row) {
 				await this.getAllComponents();
 				console.log(this.allComponents);
-				
+
 				this.selectTable = row;
 				this.updateDialogFormVisible = true;
 			},
@@ -366,10 +363,8 @@
 				this.icon = icon;
 				this.iconDialogVisible = true;
 			},
-			handleComponents(components) {
-				console.log(components);
-				this.components = components;
-				this.componentsDialogVisible = true;
+			viewComponents(id) {
+				this.$router.push({ path: "/drag", query: { id } });
 			}
 		}
 	};
