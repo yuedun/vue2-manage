@@ -3,7 +3,6 @@
 		<head-top></head-top>
 		<el-row :gutter="10">
 			<el-col :span="6" class="col-left">
-				<h3>组件列表</h3>
 				<draggable class="list-group wrapper" :list="allComponent" group="components" @change="log">
 					<div class="list-group-item item" v-for="(element, index) in allComponent" :key="element.name">
 						{{ element.name }} {{ element.category }}-{{index}}
@@ -12,7 +11,6 @@
 			</el-col>
 
 			<el-col :span="18">
-				<h3>展示区</h3>
 				<draggable class="list-group wrapper" :list="selectedComponent" group="components" @change="log">
 					<component v-for="element in selectedComponent" :key="element.name" v-bind:is="element.name" v-bind:pcomponent="element"></component>
 					<div v-show="!selectedComponent.length" class="empty-info">
@@ -26,11 +24,22 @@
 <script>
 	import draggable from "vuedraggable";
 	import headTop from "../components/headTop";
-	import { componentList, getComponent } from "@/api/getData";
+	import {
+		componentList,
+		getComponent,
+		getWebsiteComponents
+	} from "@/api/getData";
 	import headerBox from "../components/header-box";
 	import scrollBanner from "../components/scroll-banner";
 	import sectionTwo from "../components/section-two";
 	import sectionThree from "../components/section-three";
+	import sectionFour from "../components/section-four";
+	import sectionFive from "../components/section-five";
+	import sectionSix from "../components/section-six";
+	import sectionSeven from "../components/section-seven";
+	import sectionEight from "../components/section-eight";
+	import sectionNine from "../components/section-nine";
+	import sectionTen from "../components/section-ten";
 	export default {
 		components: {
 			draggable,
@@ -39,6 +48,13 @@
 			scrollBanner,
 			headerBox,
 			sectionThree,
+			sectionFour,
+			sectionFive,
+			sectionSix,
+			sectionSeven,
+			sectionEight,
+			sectionNine,
+			sectionTen,
 		},
 		data() {
 			return {
@@ -49,7 +65,9 @@
 			};
 		},
 		created() {
-			this.initData();
+			console.log("query:", this.$route.query);
+
+			this.initData(this.$route.query.id);
 		},
 		methods: {
 			async log(evt) {
@@ -57,9 +75,10 @@
 					await this.getComponent(evt.removed.element._id);
 				}
 			},
-			async initData() {
+			async initData(id) {
 				try {
-					this.getComponentList();
+					await this.getComponentList();
+					await this.getWebsiteComponents(id);
 				} catch (err) {
 					console.log("获取数据失败", err);
 				}
@@ -74,6 +93,17 @@
 					res.data.data.result.forEach(item => {
 						this.allComponent.push(item);
 					});
+				} catch (error) {
+					this.$message({
+						type: "error",
+						message: error.response.data.message
+					});
+				}
+			},
+			async getWebsiteComponents(id) {
+				try {
+					const res = await getWebsiteComponents(id);
+					this.selectedComponent = res.data.data;
 				} catch (error) {
 					this.$message({
 						type: "error",

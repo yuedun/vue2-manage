@@ -1,5 +1,4 @@
 <template>
-
 	<div class="section-three">
 		<div class="container-box width-visual text-center">
 			<h1 class="common_title">{{component.title_1}}<i></i></h1><img class="map-bg" src="../assets/VIPKID_files/map_1a3738c2.png">

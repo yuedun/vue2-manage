@@ -40,6 +40,10 @@ export const addWebsite = data => {
 export const deleteWebsite = data => {
 	return axios.delete('/api/website/delete/' + data);
 }
+//获取单个网站的组件
+export const getWebsiteComponents = data => {
+	return axios.get('/api/website/getWebsiteComponents/' + data);
+}
 /**
  * 组件列表
  */

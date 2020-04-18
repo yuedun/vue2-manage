@@ -40,8 +40,11 @@
 					<el-table-column prop="status" label="状态">
 					</el-table-column>
 					<el-table-column prop="components" label="组件">
-						<template slot-scope="scope">
+						<!-- <template slot-scope="scope">
 							<el-link icon="el-icon-view" @click="handleComponents(scope.row.components)">查看</el-link>
+						</template> -->
+						<template slot-scope="scope">
+							<router-link :to="{path:'/drag',query: {id: scope.row._id}}">细节列表1</router-link>
 						</template>
 					</el-table-column>
 					<el-table-column label="操作">

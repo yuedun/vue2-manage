@@ -1,0 +1,55 @@
+<template>
+	<div class="section-five text-center">
+		<video id="jsVideoBoxCon" src="https://image.vipkid.com.cn/market/file/1539516532744-waijiaodahui_bg.mp4" poster="/VIPKID_files/1554182772671-waijiaodahui.png" autoplay="autoplay" preload="preload" loop="loop" muted="">
+		</video>
+		<div class="video-bg" id="jsVideoBgPoster"><img src="../assets/VIPKID_files/1554182772671-waijiaodahui.png">
+		</div>
+		<div class="main-con">
+			<h2 class="common_title">北美好外教 为全球小朋友提供高品质教学服务<i></i></h2>
+			<ul class="clearfix font48 width-visual">
+				<li class="col_3">
+					<div class="font52 num">70,000<span class="font22">名</span></div>
+					<p class="font16">北美优质外教</p>
+				</li>
+				<li class="col_3">
+					<div class="font52 num">100<span class="font22">%</span></div>
+					<p class="font16">纯北美优质外教</p>
+				</li>
+				<li class="col_3">
+					<div class="font52 num">5<span class="font22">%</span></div>
+					<p class="font16">筛选通过率不高于5%</p>
+				</li>
+				<li class="col_3">
+					<div class="font52 num">100<span class="font22">%</span></div>
+					<p class="font16">背景调查机构合作</p>
+				</li>
+			</ul>
+			<div class="register clearfix">
+				<div class="play-btn" id="teacherDahuiBtn" data-video="https://video.vipkid.com.cn/1565570124505-vipkid-teacher.mp4"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgAQMAAABJtOi3AAAABlBMVEUAAAD///+l2Z/dAAAAAXRSTlMAQObYZgAAAD9JREFUCNd9zbENACAIRFEqXZvRGIURGICA+YXYecULCYGTlwVbwSAgoaAVDAISClrB7lSzDfC5nX8BPm3yyQEJuiNId8sQ3gAAAABJRU5ErkJggg==">播放视频
+				</div><a href="#/teachers">
+					<div class="know-btn" id="homeToTeachersBtn">了解北美外教</div>
+				</a>
+			</div>
+		</div>
+	</div>
+</template>
+
+<script>
+	export default {
+		props: ["pcomponent"],
+		data() {
+			return {
+				component: this.pcomponent
+			};
+		},
+		created() {
+			console.log("子组件接收父组件值：", this.component);
+		},
+		methods: {}
+	};
+</script>
+<style>
+*[contenteditable]:hover {
+	background-color: #f6f7ff;
+}
+</style>
