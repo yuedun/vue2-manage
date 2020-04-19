@@ -3,7 +3,7 @@
 		<div class="header-empty" id="headerEmpty"></div>
 		<div class="header-info-pc header-box-fixed" id="headerInfoPc">
 			<div class="header-info clearfix width-visual margin-auto">
-				<div class="vipkid fl"><a href="#"><img src="../assets/VIPKID_files/vipkidlogo_d4b868b3.png"
+				<div class="vipkid fl"><a href="#"><img src="../assets/YUEDUN_files/vipkidlogo_d4b868b3.png"
 							alt="VIPKID在线青少儿英语"></a>
 				</div>
 				<ul class="banner clearfix fl">

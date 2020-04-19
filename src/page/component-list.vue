@@ -10,7 +10,8 @@
 					<el-select v-model="searchForm.category" placeholder="分类">
 						<el-option label="" value=""></el-option>
 						<el-option label="IT" value="IT"></el-option>
-						<el-option label="教育" value="教育"></el-option>
+						<el-option label="教育" value="edu"></el-option>
+						<el-option label="政企" value="gov"></el-option>
 					</el-select>
 				</el-form-item>
 				<el-form-item>
@@ -22,15 +23,17 @@
 			</el-form>
 			<template>
 				<el-table :data="tableData" stripe style="width: 100%">
+					<el-table-column prop="sort" label="排序号">
+					</el-table-column>
 					<el-table-column prop="name" label="组件名">
 					</el-table-column>
 					<el-table-column prop="category" label="分类">
 					</el-table-column>
-					<el-table-column prop="title_h_1" label="标题一">
+					<el-table-column prop="title_1" label="标题一">
 					</el-table-column>
-					<el-table-column prop="title_h_2" label="标题二">
+					<el-table-column prop="title_2" label="标题二">
 					</el-table-column>
-					<el-table-column prop="title_h_3" label="标题三">
+					<el-table-column prop="title_3" label="标题三">
 					</el-table-column>
 					<el-table-column prop="description" label="描述">
 					</el-table-column>
@@ -64,59 +67,61 @@
 					<el-table-column label="操作">
 						<template slot-scope="scope">
 							<el-button size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-							<el-button size="small" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+							<el-button size="small" type="danger" @click="handleDelete(scope.$index, scope.row._id)">删除</el-button>
 						</template>
 					</el-table-column>
 				</el-table>
 			</template>
 			<div class="Pagination">
-				<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-size="20" layout="total, prev, pager, next" :total="count">
+				<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-size="limit" layout="total, prev, pager, next" :total="count">
 				</el-pagination>
 			</div>
 			<el-dialog title="新增组件信息" :visible.sync="addDialogFormVisible">
-				<el-form :model="foodForm">
+				<el-form :model="addForm">
 					<el-form-item label="组件名" label-width="100px">
-						<el-input v-model="foodForm.name" autocomplete="off"></el-input>
+						<el-input v-model="addForm.name" autocomplete="off"></el-input>
 					</el-form-item>
 					<el-form-item label="分类" label-width="100px">
-						<el-select v-model="foodForm.category" placeholder="请选择分类">
-							<el-option label="教育" value="教育"></el-option>
-							<el-option label="政企" value="政企"></el-option>
-							<el-option label="IT" value="IT"></el-option>
+						<el-select v-model="addForm.category" placeholder="请选择分类">
+							<el-option v-for="item in attributes" :key="item.value" :label="item.label" :value="item.value">
+							</el-option>
 						</el-select>
 					</el-form-item>
 					<el-form-item label="标题一" label-width="100px">
-						<el-input v-model="foodForm.title_h_1" autocomplete="off"></el-input>
+						<el-input v-model="addForm.title_1" autocomplete="off"></el-input>
 					</el-form-item>
 					<el-form-item label="标题二" label-width="100px">
-						<el-input v-model="foodForm.title_h_2" autocomplete="off"></el-input>
+						<el-input v-model="addForm.title_2" autocomplete="off"></el-input>
 					</el-form-item>
 					<el-form-item label="标题三" label-width="100px">
-						<el-input v-model="foodForm.title_h_3" autocomplete="off"></el-input>
+						<el-input v-model="addForm.title_3" autocomplete="off"></el-input>
 					</el-form-item>
 					<el-form-item label="描述" label-width="100px">
-						<el-input v-model="foodForm.description" autocomplete="off"></el-input>
+						<el-input v-model="addForm.description" autocomplete="off"></el-input>
 					</el-form-item>
 					<el-form-item label="背景图" label-width="100px">
-						<el-input v-model="foodForm.background_img" autocomplete="off"></el-input>
+						<el-input v-model="addForm.background_img" autocomplete="off"></el-input>
 					</el-form-item>
 					<el-form-item label="展示图" label-width="100px">
-						<el-input v-model="foodForm.big_img" autocomplete="off"></el-input>
+						<el-input v-model="addForm.big_img" autocomplete="off"></el-input>
 					</el-form-item>
 					<el-form-item label="元素" label-width="100px">
-						<el-input v-model="foodForm.elements" autocomplete="off"></el-input>
+						<el-input v-model="addForm.elements" autocomplete="off"></el-input>
 					</el-form-item>
 					<el-form-item label="链接" label-width="100px">
-						<el-input v-model="foodForm.links" autocomplete="off"></el-input>
+						<el-input v-model="addForm.links" autocomplete="off"></el-input>
 					</el-form-item>
 					<el-form-item label="扩展数据" label-width="100px">
-						<el-input v-model="foodForm.extras" autocomplete="off"></el-input>
+						<el-input v-model="addForm.extras" autocomplete="off"></el-input>
 					</el-form-item>
 					<el-form-item label="状态" label-width="100px">
-						<el-select v-model="foodForm.status" placeholder="请选择状态">
+						<el-select v-model="addForm.status" placeholder="请选择状态">
 							<el-option label="启用" value="1"></el-option>
 							<el-option label="禁用" value="0"></el-option>
 						</el-select>
+					</el-form-item>
+					<el-form-item label="排序号" label-width="100px">
+						<el-input v-model="addForm.sort" type="number"></el-input>
 					</el-form-item>
 				</el-form>
 				<div slot="footer" class="dialog-footer">
@@ -136,13 +141,13 @@
 						</el-select>
 					</el-form-item>
 					<el-form-item label="标题一" label-width="100px">
-						<el-input v-model="selectTable.title_h_1" autocomplete="off"></el-input>
+						<el-input v-model="selectTable.title_1" autocomplete="off"></el-input>
 					</el-form-item>
 					<el-form-item label="标题二" label-width="100px">
-						<el-input v-model="selectTable.title_h_2" autocomplete="off"></el-input>
+						<el-input v-model="selectTable.title_2" autocomplete="off"></el-input>
 					</el-form-item>
 					<el-form-item label="标题三" label-width="100px">
-						<el-input v-model="selectTable.title_h_3" autocomplete="off"></el-input>
+						<el-input v-model="selectTable.title_3" autocomplete="off"></el-input>
 					</el-form-item>
 					<el-form-item label="描述" label-width="100px">
 						<el-input v-model="selectTable.description" autocomplete="off"></el-input>
@@ -154,7 +159,7 @@
 						<el-input v-model="selectTable.big_img" autocomplete="off"></el-input>
 					</el-form-item>
 					<el-form-item label="元素" label-width="100px">
-						<el-input v-model="selectTable.elements" autocomplete="off"></el-input>
+						<el-input type="textarea" v-model="selectTable.elements" autocomplete="off"></el-input>
 					</el-form-item>
 					<el-form-item label="链接" label-width="100px">
 						<el-input v-model="selectTable.links" autocomplete="off"></el-input>
@@ -167,6 +172,9 @@
 							<el-option label="启用" value="1"></el-option>
 							<el-option label="禁用" value="0"></el-option>
 						</el-select>
+					</el-form-item>
+					<el-form-item label="排序号" label-width="100px">
+						<el-input v-model="selectTable.sort" type="number"></el-input>
 					</el-form-item>
 				</el-form>
 				<div slot="footer" class="dialog-footer">
@@ -196,7 +204,7 @@
 				baseUrl,
 				baseImgPath,
 				offset: 0,
-				limit: 10,
+				limit: 15,
 				count: 0,
 				tableData: [],
 				currentPage: 1,
@@ -209,7 +217,7 @@
 					name: "",
 					category: ""
 				},
-				foodForm: {
+				addForm: {
 					name: "",
 					category: ""
 				},
@@ -226,10 +234,12 @@
 					{
 						value: "IT",
 						label: "IT"
-					},
-					{
-						value: "教育",
-						label: "教育"
+					},{
+						label: "教育",
+						value: "edu"
+					},{
+						label: "政企",
+						value: "gov"
 					}
 				],
 				icon: ""
@@ -244,7 +254,7 @@
 		methods: {
 			async initData() {
 				try {
-					this.getComponentList();
+					await this.getComponentList();
 				} catch (err) {
 					console.log("获取数据失败", err);
 				}
@@ -263,6 +273,8 @@
 						this.tableData.push(item);
 					});
 				} catch (error) {
+					console.log(error);
+					
 					this.$message({
 						type: "error",
 						message: error.response.data.message
@@ -297,9 +309,13 @@
 			},
 			async addComponent() {
 				try {
-					this.foodForm.status = Number(this.foodForm.status);
-					const result = await addComponent(this.foodForm);
-					if (result.data.status == 1) {
+					this.addForm.status = Number(this.addForm.status);
+					this.addForm.sort = Number(this.addForm.sort);
+					this.addForm.elements = JSON.parse(this.addForm.elements);
+					this.addForm.links = JSON.parse(this.addForm.links);
+					this.addForm.extras = JSON.parse(this.addForm.extras);
+					const result = await addComponent(this.addForm);
+					if (result.status == 200) {
 						this.$message({
 							type: "success",
 							message: "添加成功"
@@ -317,56 +333,58 @@
 				}
 			},
 			async updateComponent() {
+				let that =this;
 				try {
 					let updateObj = {
-						_id: this.selectTable._id,
-						name: this.selectTable.name,
-						category: this.selectTable.category,
-						status: this.selectTable.status,
-						title_h_1: this.selectTable.title_h_1,
-						title_h_2: this.selectTable.title_h_2,
-						title_h_3: this.selectTable.title_h_3,
-						description: this.selectTable.description,
-						background_img: this.selectTable.background_img,
-						big_img: this.selectTable.big_img,
+						_id: that.selectTable._id,
+						name: that.selectTable.name,
+						category: that.selectTable.category,
+						status: that.selectTable.status,
+						title_1: that.selectTable.title_1,
+						title_2: that.selectTable.title_2,
+						title_3: that.selectTable.title_3,
+						description: that.selectTable.description,
+						background_img: that.selectTable.background_img,
+						big_img: that.selectTable.big_img,
 						elements: [],
 						links: [],
-						extras: []
+						extras: [],
+						sort: Number(that.selectTable.sort),
 					};
 
-					let eles = JSON.parse(this.selectTable.elements);
+					let eles = JSON.parse(that.selectTable.elements);
 					updateObj.elements = eles;
-					let links = JSON.parse(this.selectTable.links);
+					let links = JSON.parse(that.selectTable.links);
 					updateObj.links = links;
-					updateObj.extras = JSON.parse(this.selectTable.extras);
+					updateObj.extras = JSON.parse(that.selectTable.extras);
 					const res = await updateComponent(updateObj);
 					if (res.status == 200) {
-						this.$message({
+						that.$message({
 							type: "success",
 							message: "修改成功"
 						});
-						this.updateDialogFormVisible = false;
-						this.getComponentList();
+						that.updateDialogFormVisible = false;
+						that.getComponentList();
 					} else {
 						throw new Error(res.message);
 					}
 				} catch (err) {
-					this.$message({
+					that.$message({
 						type: "error",
 						message: err.message
 					});
 					console.log("修改失败");
 				}
 			},
-			async handleDelete(index, row) {
+			async handleDelete(index, id) {
 				try {
-					const res = await deleteComponent(row.id);
+					const res = await deleteComponent(id);
 					if (res.status == 200) {
 						this.$message({
 							type: "success",
 							message: "删除成功"
 						});
-						this.tableData.splice(index, 1);
+						this.getComponentList();
 					} else {
 						throw new Error(res.message);
 					}

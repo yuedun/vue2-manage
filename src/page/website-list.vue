@@ -30,7 +30,7 @@
 					</el-table-column>
 					<el-table-column prop="icon" label="icon">
 						<template slot-scope="scope">
-							<el-link icon="el-icon-view" @click="handleIcon(scope.row.icon)">查看</el-link>
+							<img :src="scope.row.icon"  min-width="70" height="70" />
 						</template>
 					</el-table-column>
 					<el-table-column prop="keywords" label="keywords">
@@ -123,12 +123,6 @@
 							<el-option label="禁用" value="0"></el-option>
 						</el-select>
 					</el-form-item>
-					<el-form-item label="组件" label-width="100px">
-						<template>
-							<el-transfer v-model="selectTable.components" :data="allComponents">
-							</el-transfer>
-						</template>
-					</el-form-item>
 				</el-form>
 				<div slot="footer" class="dialog-footer">
 					<el-button @click="updateDialogFormVisible = false">取 消</el-button>
@@ -199,15 +193,15 @@
 				},
 				attributes: [
 					{
+						value: "edu",
+						label: "教育"
+					},
+					{
 						value: "IT",
 						label: "IT"
 					},
 					{
-						value: "教育",
-						label: "教育"
-					},
-					{
-						value: "政企",
+						value: "gov",
 						label: "政企"
 					}
 				],
@@ -357,11 +351,6 @@
 					});
 					console.log("删除失败");
 				}
-			},
-			handleIcon(icon) {
-				console.log(icon);
-				this.icon = icon;
-				this.iconDialogVisible = true;
 			},
 			viewComponents(id) {
 				this.$router.push({ path: "/drag", query: { id } });

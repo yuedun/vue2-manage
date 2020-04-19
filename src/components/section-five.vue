@@ -1,8 +1,8 @@
 <template>
 	<div class="section-five text-center">
-		<video id="jsVideoBoxCon" src="https://image.vipkid.com.cn/market/file/1539516532744-waijiaodahui_bg.mp4" poster="/VIPKID_files/1554182772671-waijiaodahui.png" autoplay="autoplay" preload="preload" loop="loop" muted="">
+		<video id="jsVideoBoxCon" src="https://image.vipkid.com.cn/market/file/1539516532744-waijiaodahui_bg.mp4" poster="/YUEDUN_files/1554182772671-waijiaodahui.png" autoplay="autoplay" preload="preload" loop="loop" muted="">
 		</video>
-		<div class="video-bg" id="jsVideoBgPoster"><img src="../assets/VIPKID_files/1554182772671-waijiaodahui.png">
+		<div class="video-bg" id="jsVideoBgPoster"><img src="../assets/YUEDUN_files/1554182772671-waijiaodahui.png">
 		</div>
 		<div class="main-con">
 			<h2 class="common_title">北美好外教 为全球小朋友提供高品质教学服务<i></i></h2>

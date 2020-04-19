@@ -1,8 +1,8 @@
 <template>
 	<div class="section-seven">
 		<div class="con-box width-visual">
-			<h2 class="common_title">我们的承诺<i></i></h2><img class="map-bg" src="../assets/VIPKID_files/promise_be75ce5d.png">
-			<div class="person-img"><img class="img" src="../assets/VIPKID_files/liutao_20b7dae2.png" alt="刘涛">
+			<h2 class="common_title">我们的承诺<i></i></h2><img class="map-bg" src="../assets/YUEDUN_files/promise_be75ce5d.png">
+			<div class="person-img"><img class="img" src="../assets/YUEDUN_files/liutao_20b7dae2.png" alt="刘涛">
 			</div>
 			<ul class="clearfix color-main">
 				<li class="col_6 left-con"></li>
@@ -16,7 +16,7 @@
 							</dd>
 						</dl>
 						<dl class="clearfix">
-							<dt class="fl"><img class="szcn w100" src="../assets/VIPKID_files/icon03_0f850faf.png" alt="师资承诺"></dt>
+							<dt class="fl"><img class="szcn w100" src="../assets/YUEDUN_files/icon03_0f850faf.png" alt="师资承诺"></dt>
 							<dd class="fl">
 								<h5 class="font20 bold500">师资承诺</h5>
 								<p class="font14 color-lgray">VIPKID一贯坚持“纯北美外教”的教学理念，我们保证外教的优质教学水平</p>

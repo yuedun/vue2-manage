@@ -358,7 +358,7 @@ webpackJsonp([2], {
                                 l = (0, o.
                                     default)('<div id="videoPop"></div>'),
                                 d = (0, o.
-                                    default)('<div id="videoCloseBtn"><img style="width: 100%" src="../assets/VIPKID_files/1539676842708-guanbi.png"></div>'),
+                                    default)('<div id="videoCloseBtn"><img style="width: 100%" src="/VIPKID_files/1539676842708-guanbi.png"></div>'),
                                 r = {
                                     width: "100%",
                                     position: "fixed",

@@ -44,6 +44,7 @@
 	import sectionEight from "../components/section-eight";
 	import sectionNine from "../components/section-nine";
 	import sectionTen from "../components/section-ten";
+	import sectionFooter from "../components/section-footer";
 	export default {
 		components: {
 			draggable,
@@ -58,7 +59,8 @@
 			sectionSeven,
 			sectionEight,
 			sectionNine,
-			sectionTen
+			sectionTen,
+			sectionFooter,
 		},
 		data() {
 			return {
@@ -155,8 +157,8 @@
 	};
 </script>
 <style scoped>
-@import "../assets/VIPKID_files/base.css";
-@import "../assets/VIPKID_files/home.css";
+@import "../assets/YUEDUN_files/base.css";
+@import "../assets/YUEDUN_files/home.css";
 .wrapper {
 	display: flex;
 	justify-content: center;
