@@ -1,6 +1,5 @@
 <template>
 	<div class="header-box">
-		<div class="header-empty" id="headerEmpty"></div>
 		<div class="header-info-pc header-box-fixed" id="headerInfoPc">
 			<div class="header-info clearfix width-visual margin-auto">
 				<div class="vipkid fl"><a href="#"><img src="../assets/YUEDUN_files/vipkidlogo_d4b868b3.png"
@@ -29,5 +28,22 @@
 </template>
 
 <script>
-	export default {};
+	export default {
+		props: ["pcomponent"],
+		data() {
+			return {
+				component: this.pcomponent,
+				visible: false,
+			};
+		},
+		created() {
+			console.log("header-box子组件接收父组件值：", this.component);
+		},
+		methods: {
+			getData(){
+				this.visible = false;
+				console.log(this.component)
+			}
+		}
+	};
 </script>

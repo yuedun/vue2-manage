@@ -47,5 +47,22 @@
 </template>
 
 <script>
-	export default {};
+	export default {
+		props: ["pcomponent"],
+		data() {
+			return {
+				component: this.pcomponent,
+				visible: false,
+			};
+		},
+		created() {
+			console.log("scroll-banner子组件接收父组件值：", this.component);
+		},
+		methods: {
+			getData(){
+				this.visible = false;
+				console.log(this.component)
+			}
+		}
+	};
 </script>

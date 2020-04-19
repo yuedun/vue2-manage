@@ -8,7 +8,6 @@
 					</el-menu-item>
 					<el-menu-item index="websiteList">网站列表</el-menu-item>
 					<el-menu-item index="componentList">组件列表</el-menu-item>
-					<el-menu-item index="drag">拖拽</el-menu-item>
 					<!-- 
 					<el-submenu index="2">
 						<template slot="title">

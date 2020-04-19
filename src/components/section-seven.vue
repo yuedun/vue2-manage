@@ -41,7 +41,7 @@
 			};
 		},
 		created() {
-			console.log("子组件接收父组件值：", this.component);
+			console.log("section-seven子组件接收父组件值：", this.component);
 		},
 		methods: {}
 	};

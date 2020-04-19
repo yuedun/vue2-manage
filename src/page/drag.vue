@@ -2,15 +2,15 @@
 	<div class="fillcontain">
 		<head-top></head-top>
 		<el-row :gutter="10">
-			<el-col :span="6" class="col-left">
+			<el-col :span="4" class="col-left">
 				<draggable class="list-group wrapper" :list="allComponent" group="components" @change="log">
-					<div class="list-group-item item" v-for="(element, index) in allComponent" :key="element.name">
-						{{ element.name }} {{ element.category }}-{{index}}
+					<div class="list-group-item item" v-for="(element) in allComponent" :key="element.name">
+						{{ element.name }} {{ element.category }}-{{element.sort}}
 					</div>
 				</draggable>
 			</el-col>
 
-			<el-col :span="18">
+			<el-col :span="20" class="col-right">
 				<div class="tools">
 					<el-button type="success" @click="getData">保存</el-button>
 				</div>
@@ -60,7 +60,7 @@
 			sectionEight,
 			sectionNine,
 			sectionTen,
-			sectionFooter,
+			sectionFooter
 		},
 		data() {
 			return {
@@ -175,7 +175,11 @@
 .col-left {
 	border-right: 1px solid #42b983;
 }
+.col-right {
+	overflow: auto;
+	height: 1080px;
+}
 .tools {
-	background-color: aquamarine;
+	background-color: #dcdfe6;
 }
 </style>
