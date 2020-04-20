@@ -39,27 +39,27 @@
 					</el-table-column>
 					<el-table-column prop="background_img" label="背景图">
 						<template slot-scope="scope">
-							<el-link icon="el-icon-view" @click="handleIcon(scope.row.background_img)">查看</el-link>
+							<el-link icon="el-icon-view" @click="viewData(scope.row.background_img, 'image')" v-show="scope.row.background_img">查看</el-link>
 						</template>
 					</el-table-column>
 					<el-table-column prop="big_img" label="展示大图">
 						<template slot-scope="scope">
-							<el-link icon="el-icon-view" @click="handleIcon(scope.row.big_img)">查看</el-link>
+							<el-link icon="el-icon-view" @click="viewData(scope.row.big_img, 'image')" v-show="scope.row.big_img">查看</el-link>
 						</template>
 					</el-table-column>
 					<el-table-column prop="elements" label="元素">
 						<template slot-scope="scope">
-							<el-link icon="el-icon-view" @click="handleIcon(scope.row.elements)">查看</el-link>
+							<el-link icon="el-icon-view" @click="viewData(scope.row.elements)" v-show="scope.row.elements&&scope.row.elements.length">查看</el-link>
 						</template>
 					</el-table-column>
 					<el-table-column prop="links" label="链接组">
 						<template slot-scope="scope">
-							<el-link icon="el-icon-view" @click="handleIcon(scope.row.links)">查看</el-link>
+							<el-link icon="el-icon-view" @click="viewData(scope.row.links)" v-show="scope.row.links&&scope.row.links.length">查看</el-link>
 						</template>
 					</el-table-column>
 					<el-table-column prop="extras" label="扩展数据">
 						<template slot-scope="scope">
-							<el-link icon="el-icon-view" @click="handleIcon(scope.row.extras)">查看</el-link>
+							<el-link icon="el-icon-view" @click="viewData(scope.row.extras)" v-show="scope.row.extras&&scope.row.extras.length">查看</el-link>
 						</template>
 					</el-table-column>
 					<el-table-column prop="status" label="状态">
@@ -162,10 +162,10 @@
 						<el-input type="textarea" v-model="selectTable.elements" autocomplete="off"></el-input>
 					</el-form-item>
 					<el-form-item label="链接" label-width="100px">
-						<el-input v-model="selectTable.links" autocomplete="off"></el-input>
+						<el-input type="textarea" v-model="selectTable.links" autocomplete="off"></el-input>
 					</el-form-item>
 					<el-form-item label="扩展数据" label-width="100px">
-						<el-input v-model="selectTable.extras" autocomplete="off"></el-input>
+						<el-input type="textarea" v-model="selectTable.extras" autocomplete="off"></el-input>
 					</el-form-item>
 					<el-form-item label="状态" label-width="100px">
 						<el-select v-model="selectTable.status" placeholder="请选择状态">
@@ -183,7 +183,10 @@
 				</div>
 			</el-dialog>
 			<el-dialog title="查看图片" :visible.sync="iconDialogVisible" width="30%">
-				<p>{{icon}}</p>
+				<img :src="icon">
+			</el-dialog>
+			<el-dialog title="查看数据" :visible.sync="dataDialogVisible" width="30%">
+				<p>{{rowData}}</p>
 			</el-dialog>
 		</div>
 	</div>
@@ -212,6 +215,7 @@
 				addDialogFormVisible: false,
 				updateDialogFormVisible: false,
 				iconDialogVisible: false,
+				dataDialogVisible: false,
 				selectedCategory: [],
 				searchForm: {
 					name: "",
@@ -234,15 +238,18 @@
 					{
 						value: "IT",
 						label: "IT"
-					},{
+					},
+					{
 						label: "教育",
 						value: "edu"
-					},{
+					},
+					{
 						label: "政企",
 						value: "gov"
 					}
 				],
-				icon: ""
+				icon: "",
+				rowData: null
 			};
 		},
 		created() {
@@ -274,7 +281,7 @@
 					});
 				} catch (error) {
 					console.log(error);
-					
+
 					this.$message({
 						type: "error",
 						message: error.response.data.message
@@ -296,9 +303,14 @@
 				this.selectTable.extras = JSON.stringify(row.extras);
 				this.updateDialogFormVisible = true;
 			},
-			handleIcon(icon) {
-				this.icon = icon;
-				this.iconDialogVisible = true;
+			viewData(data, type) {
+				if (type == "image") {
+					this.icon = data;
+					this.iconDialogVisible = true;
+				} else {
+					this.rowData = data;
+					this.dataDialogVisible = true;
+				}
 			},
 			// 查询
 			onSubmit() {
@@ -333,7 +345,7 @@
 				}
 			},
 			async updateComponent() {
-				let that =this;
+				let that = this;
 				try {
 					let updateObj = {
 						_id: that.selectTable._id,
@@ -349,7 +361,7 @@
 						elements: [],
 						links: [],
 						extras: [],
-						sort: Number(that.selectTable.sort),
+						sort: Number(that.selectTable.sort)
 					};
 
 					let eles = JSON.parse(that.selectTable.elements);
