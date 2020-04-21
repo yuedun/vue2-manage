@@ -1,5 +1,5 @@
 <template>
-	<div class="section-nine">
+	<div class="section-nine" title="section-nine">
 		<div class="cooperation-box width-visual">
 			<h2 class="common_title">学术合作<i></i></h2>
 			<ul class="clearfix">

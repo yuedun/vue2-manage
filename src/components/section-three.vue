@@ -1,5 +1,5 @@
 <template>
-	<div class="section-three">
+	<div class="section-three" title="section-three">
 		<div class="container-box width-visual text-center">
 			<h1 class="common_title">{{component.title_1}}<i></i></h1><img class="map-bg" src="../assets/YUEDUN_files/map_1a3738c2.png">
 			<ul class="clearfix">

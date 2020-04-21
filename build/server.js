@@ -61,6 +61,7 @@ app.use('/api', createProxyMiddleware({
 	pathRewrite: { '^/api': '' },
 	onProxyReq: function (proxyReq, req, res) {
 		proxyReq.setHeader('Authorization', "Bearer " + req.cookies.token);
+		proxyReq.setHeader('Authorization', "Bearer " + req.cookies.jwt);
 	}
 }))
 

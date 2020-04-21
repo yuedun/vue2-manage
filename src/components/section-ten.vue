@@ -1,5 +1,5 @@
 <template>
-	<div class="section-ten">
+	<div class="section-ten" title="section-ten">
 		<h2 class="common_title">企业荣誉<i></i></h2>
 		<div class="reward-big-box width-visual">
 			<div class="reward-box" id="rewardBox">

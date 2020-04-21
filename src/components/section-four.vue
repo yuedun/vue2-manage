@@ -1,5 +1,5 @@
 <template>
-	<div class="section-four">
+	<div class="section-four" title="section-four">
 		<h2 class="common_title">{{component.title_1}}<i></i></h2>
 		<ul class="width-visual clearfix font18">
 			<li class="col_4">

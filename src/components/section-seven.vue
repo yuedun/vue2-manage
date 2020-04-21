@@ -1,7 +1,8 @@
 <template>
-	<div class="section-seven">
+	<div class="section-seven" title="section-seven">
 		<div class="con-box width-visual">
-			<h2 class="common_title">我们的承诺<i></i></h2><img class="map-bg" src="../assets/YUEDUN_files/promise_be75ce5d.png">
+			<h2 class="common_title" @click="edit('title_1')">{{component.title_1}}<i></i></h2>
+			<img class="map-bg" src="../assets/YUEDUN_files/promise_be75ce5d.png">
 			<div class="person-img"><img class="img" src="../assets/YUEDUN_files/liutao_20b7dae2.png" alt="刘涛">
 			</div>
 			<ul class="clearfix color-main">
@@ -29,6 +30,13 @@
 				</li>
 			</ul>
 		</div>
+		<el-dialog title="提示" :visible.sync="dialogVisible" width="20%" custom-class="mydialog">
+			<el-input type="textarea" v-model="rawhtml" size="small" width="150px;"></el-input>
+			<span slot="footer" class="dialog-footer">
+				<el-button @click="dialogVisible = false">取 消</el-button>
+				<el-button type="primary" @click="editOK">确 定</el-button>
+			</span>
+		</el-dialog>
 	</div>
 </template>
 
@@ -37,17 +45,30 @@
 		props: ["pcomponent"],
 		data() {
 			return {
-				component: this.pcomponent
+				component: this.pcomponent,
+				dialogVisible: false,
+				rawhtml: "",
+				currentProp: ""
 			};
 		},
 		created() {
 			console.log("section-seven子组件接收父组件值：", this.component);
 		},
-		methods: {}
+		methods: {
+			edit(prop) {
+				this.dialogVisible = true;
+				this.currentProp = prop;
+				this.rawhtml = this.component[prop];
+			},
+			editOK() {
+				this.component[this.currentProp] = this.rawhtml;
+				this.dialogVisible = false;
+			}
+		}
 	};
 </script>
 <style>
-*[contenteditable]:hover {
-	background-color: #f6f7ff;
+.mydialog {
+	opacity: 70%;
 }
 </style>

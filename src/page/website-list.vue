@@ -79,15 +79,6 @@
 							</el-option>
 						</el-select>
 					</el-form-item>
-					<el-form-item label="组件" label-width="100px">
-						<template>
-							<el-transfer v-model="selectTable.components" :data="allComponents">
-							</el-transfer>
-						</template>
-					</el-form-item>
-					<el-form-item>
-						<el-button type="primary" @click="addWebsite">确认</el-button>
-					</el-form-item>
 				</el-form>
 				<div slot="footer" class="dialog-footer">
 					<el-button @click="addDialogFormVisible = false">取 消</el-button>

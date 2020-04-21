@@ -1,5 +1,5 @@
 <template>
-	<div class="section-six text-center">
+	<div class="section-six text-center" title="section-six">
 		<h2 class="common_title">科技赋能 守护小朋友的每一堂课<i></i></h2>
 		<ul class="width-visual clearfix color-main">
 			<li class="col_4">

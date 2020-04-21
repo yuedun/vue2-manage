@@ -1,5 +1,5 @@
 <template>
-	<div class="home-container" id="homeContainer">
+	<div class="home-container" title="home-container">
 		<div class="home-banner-container">
 			<div id="focus-banner">
 				<ul class="banner-list" id="focus-banner-list">

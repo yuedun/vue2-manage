@@ -48,7 +48,7 @@
 		},
 		mounted() {
 			this.showLogin = true;
-			if (!this.adminInfo.id) {
+			if (!this.adminInfo._id) {
 				this.getAdminData();
 			}
 		},

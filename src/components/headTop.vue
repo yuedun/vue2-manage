@@ -26,8 +26,8 @@
 			};
 		},
 		created() {
-			if (!this.adminInfo.id) {
-				this.getAdminData();
+			if (!this.adminInfo._id) {
+				this.getAdminData(this.$store.state.adminInfo);
 			}
 		},
 		computed: {

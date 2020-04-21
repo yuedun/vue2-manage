@@ -17,7 +17,7 @@ export const signout = () => axios.get('/api/user/logout');
  * 获取用户信息
  */
 
-export const getAdminInfo = () => fetch('/api/user/info/1');
+export const getAdminInfo = data => axios.get('/api/user/info/' + data);
 
 /**
  * 网站列表
@@ -46,7 +46,7 @@ export const getWebsiteComponents = data => {
 }
 //修改单个网站的组件
 export const updateWebsiteComponents = data => {
-	return axios.put('/api/website/updateWebsiteComponents/' + data.id, data.data );
+	return axios.put('/api/website/updateWebsiteComponents/' + data.id, data.data);
 }
 /**
  * 组件列表

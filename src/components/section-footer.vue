@@ -1,5 +1,5 @@
 <template>
-	<div class="footer">
+	<div class="footer" title="footer">
 		<div class="footer-info clearfix width-visual">
 			<ul class="authentication fl">
 				<li>

@@ -1,5 +1,5 @@
 <template>
-	<div class="section-eight">
+	<div class="section-eight" title="section-eight">
 		<h2 class="common_title">如何免费体验VIPKID试听体验<i></i></h2>
 		<ul class="width-visual clearfix text-center">
 			<li class="col_4">
