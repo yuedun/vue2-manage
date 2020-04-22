@@ -48,6 +48,10 @@ export const getWebsiteComponents = data => {
 export const updateWebsiteComponents = data => {
 	return axios.put('/api/website/updateWebsiteComponents/' + data.id, data.data);
 }
+//复制网页，每个页面就是一个网站，一个网站可以由多个页面组成
+export const copyPage = (id, newUrl) => {
+	return axios.get('/api/website/copyPage/' + id + '/' + newUrl);
+}
 /**
  * 组件列表
  */

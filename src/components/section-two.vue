@@ -74,9 +74,13 @@
 				}
 			},
 			editOK() {
-				this.component[this.currentProp.prop][this.currentProp.index][
-					this.currentProp.prop2
-				] = this.rawhtml;
+				if (this.currentProp.prop2) {
+					this.component[this.currentProp.prop][this.currentProp.index][
+						this.currentProp.prop2
+					] = this.rawhtml;
+				} else {
+					this.component[this.currentProp.prop] = this.rawhtml;
+				}
 				this.dialogVisible = false;
 			}
 		}
