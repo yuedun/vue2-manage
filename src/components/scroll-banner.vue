@@ -47,22 +47,27 @@
 </template>
 
 <script>
+	import edit from "@/common/edit";
 	export default {
 		props: ["pcomponent"],
 		data() {
 			return {
 				component: this.pcomponent,
-				visible: false,
+				dialogVisible: false,
+				rawhtml: "",
+				currentProp: ""
 			};
 		},
 		created() {
-			console.log("scroll-banner子组件接收父组件值：", this.component);
+			console.log(this.$vnode.key + "子组件接收父组件值：", this.component);
 		},
 		methods: {
-			getData(){
-				this.visible = false;
-				console.log(this.component)
-			}
+			...edit()
 		}
 	};
 </script>
+<style>
+.mydialog {
+	opacity: 70%;
+}
+</style>

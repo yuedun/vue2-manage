@@ -42,6 +42,7 @@
 </template>
 
 <script>
+	import edit from "@/common/edit";
 	export default {
 		props: ["pcomponent"],
 		data() {
@@ -49,40 +50,14 @@
 				component: this.pcomponent,
 				dialogVisible: false,
 				rawhtml: "",
-				currentProp: {
-					prop: "",
-					index: 0,
-					prop2: ""
-				}
+				currentProp: ""
 			};
 		},
 		created() {
-			console.log("section-two子组件接收父组件值：", this.component);
+			console.log(this.$vnode.key + "子组件接收父组件值：", this.component);
 		},
 		methods: {
-			edit(prop, index, prop2) {
-				this.dialogVisible = true;
-				this.currentProp = {
-					prop,
-					index,
-					prop2
-				};
-				if (arguments.length == 3) {
-					this.rawhtml = this.component[prop][index][prop2];
-				} else {
-					this.rawhtml = this.component[prop];
-				}
-			},
-			editOK() {
-				if (this.currentProp.prop2) {
-					this.component[this.currentProp.prop][this.currentProp.index][
-						this.currentProp.prop2
-					] = this.rawhtml;
-				} else {
-					this.component[this.currentProp.prop] = this.rawhtml;
-				}
-				this.dialogVisible = false;
-			}
+			...edit()
 		}
 	};
 </script>

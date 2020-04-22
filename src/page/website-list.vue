@@ -30,7 +30,7 @@
 					</el-table-column>
 					<el-table-column prop="icon" label="icon">
 						<template slot-scope="scope">
-							<img :src="scope.row.icon"  min-width="70" height="70" />
+							<img :src="scope.row.icon" min-width="70" height="70" />
 						</template>
 					</el-table-column>
 					<el-table-column prop="keywords" label="keywords">
@@ -41,7 +41,7 @@
 					</el-table-column>
 					<el-table-column prop="components" label="组件">
 						<template slot-scope="scope">
-							<el-link icon="el-icon-view" @click="viewComponents(scope.row._id)">查看</el-link>
+							<el-link icon="el-icon-view" @click="viewComponents(scope.row._id, scope.row.url)">查看</el-link>
 						</template>
 					</el-table-column>
 					<el-table-column label="操作">
@@ -149,7 +149,7 @@
 		deleteWebsite,
 		addWebsite,
 		componentList,
-		copyPage,
+		copyPage
 	} from "@/api/getData";
 	export default {
 		data() {
@@ -209,7 +209,7 @@
 				icon: "",
 				components: [],
 				allComponents: [],
-				copyUrl:"",
+				copyUrl: "",
 				filterMethod(query, item) {
 					return item.pinyin.indexOf(query) > -1;
 				}
@@ -362,8 +362,8 @@
 					console.log("删除失败");
 				}
 			},
-			viewComponents(id) {
-				this.$router.push({ path: "/drag", query: { id } });
+			viewComponents(id, url) {
+				this.$router.push({ path: "/drag", query: { id, url } });
 			}
 		}
 	};

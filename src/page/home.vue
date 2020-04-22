@@ -5,7 +5,7 @@
 			<header class="section_title">项目介绍</header>
 			<div>
 				<p>这是一个网站内容可视化编辑器，可基于现有网站模板快速构建出自己的网站。</p>
-				<p>编辑结果见：<el-link type="primary" href="http://nest.hopefly.top/website/xes" icon="el-icon-view">nest.hopefly.top</el-link></p>
+				<p>编辑结果见：<el-link type="primary" href="http://nest.hopefly.top/ceshi" icon="el-icon-view">nest.hopefly.top</el-link></p>
 			</div>
 		</section>
     </div>

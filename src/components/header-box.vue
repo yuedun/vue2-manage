@@ -18,10 +18,10 @@
 					</li>
 					<li class="toggle xzzx"><a href="#download"><span>下载中心</span><i></i></a></li>
 				</ul>
-				<div class="login-apply fr">
+				<!-- <div class="login-apply fr">
 					<div class="submit" id="loginHeaderBtn">登录</div>
 					<div class="apply" id="registerHeaderBtn">注册</div>
-				</div>
+				</div> -->
 			</div>
 		</div>
 	</div>

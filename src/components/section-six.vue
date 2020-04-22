@@ -28,21 +28,27 @@
 </template>
 
 <script>
+	import edit from "@/common/edit";
 	export default {
 		props: ["pcomponent"],
 		data() {
 			return {
-				component: this.pcomponent
+				component: this.pcomponent,
+				dialogVisible: false,
+				rawhtml: "",
+				currentProp: ""
 			};
 		},
 		created() {
-			console.log("section-six子组件接收父组件值：", this.component);
+			console.log(this.$vnode.key + "子组件接收父组件值：", this.component);
 		},
-		methods: {}
+		methods: {
+			...edit()
+		}
 	};
 </script>
 <style>
-*[contenteditable]:hover {
-	background-color: #f6f7ff;
+.mydialog {
+	opacity: 70%;
 }
 </style>
