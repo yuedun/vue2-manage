@@ -1,10 +1,10 @@
 <template>
-	<div class="fillcontain">
+	<div class="fillcontain drag">
 		<head-top></head-top>
 		<el-row :gutter="10">
 			<el-col :span="4" class="col-left">
 				<draggable class="list-group wrapper" :list="allComponent" group="components" @change="log">
-					<div class="list-group-item item" v-for="(element) in allComponent" :key="element.name">
+					<div class="list-group-item" v-for="(element) in allComponent" :key="element.name">
 						{{ element.name }} {{ element.category }}-{{element.sort}}
 					</div>
 				</draggable>
@@ -13,6 +13,7 @@
 			<el-col :span="20" class="col-right">
 				<div class="tools">
 					<el-button type="success" @click="getData">保存</el-button>
+					<el-button type="default" @click="back">返回</el-button>
 				</div>
 				<draggable class="list-group wrapper" :list="selectedComponent" group="components" @change="log">
 					<component v-for="element in selectedComponent" :key="element.name" v-bind:is="element.name" v-bind:pcomponent="element"></component>
@@ -30,8 +31,8 @@
 	import {
 		componentList,
 		getComponent,
-		getWebsiteComponents,
-		updateWebsiteComponents
+		getPageComponents,
+		updatePageComponents
 	} from "@/api/getData";
 	import headerBox from "../components/header-box";
 	import scrollBanner from "../components/scroll-banner";
@@ -45,6 +46,8 @@
 	import sectionNine from "../components/section-nine";
 	import sectionTen from "../components/section-ten";
 	import sectionFooter from "../components/section-footer";
+	import bannerCon from "../components/banner-con";
+	import naTeacherContent from "../components/na-teacher-content";
 	export default {
 		components: {
 			draggable,
@@ -60,7 +63,9 @@
 			sectionEight,
 			sectionNine,
 			sectionTen,
-			sectionFooter
+			sectionFooter,
+			bannerCon,
+			naTeacherContent
 		},
 		data() {
 			return {
@@ -82,11 +87,14 @@
 					await this.getComponent(evt.removed.element._id);
 				}
 			},
+			back(){
+				this.$router.go(-1);//返回上一层
+			},
 			async initData(id) {
 				try {
 					await this.getComponentList();
 					if (id) {
-						await this.getWebsiteComponents(id);
+						await this.getPageComponents(id);
 					}
 				} catch (err) {
 					console.log("获取数据失败", err);
@@ -109,9 +117,9 @@
 					});
 				}
 			},
-			async getWebsiteComponents(id) {
+			async getPageComponents(id) {
 				try {
-					const res = await getWebsiteComponents(id);
+					const res = await getPageComponents(id);
 					this.selectedComponent = res.data.data || [];
 				} catch (error) {
 					this.$message({
@@ -156,30 +164,35 @@
 		}
 	};
 </script>
-<style scoped>
+<style scoped lang="less">
 @import "../assets/YUEDUN_files/base.css";
 @import "../assets/YUEDUN_files/home.css";
-.wrapper {
-	display: flex;
-	justify-content: center;
-	width: 100%;
-	display: inline-block;
-}
-.item {
-	height: 50px;
-	background-color: #42b983;
-	color: #ffffff;
-	cursor: move;
-	margin-bottom: 5px;
-}
-.col-left {
-	border-right: 1px solid #42b983;
-}
-.col-right {
-	overflow: auto;
-	height: 1080px;
-}
-.tools {
-	background-color: #dcdfe6;
+@import "../assets/YUEDUN_files/teachers.css";
+.drag {
+	.wrapper {
+		display: flex;
+		justify-content: center;
+		width: 100%;
+		display: inline-block;
+	}
+	.list-group-item {
+		height: 30px;
+		line-height: 30px;
+		background-color: #42b983;
+		color: #ffffff;
+		cursor: move;
+		margin-bottom: 5px;
+		padding-left: 20px;
+	}
+	.col-left {
+		/* border-right: 1px solid #42b983; */
+	}
+	.col-right {
+		overflow: auto;
+		height: 1080px;
+	}
+	.tools {
+		background-color: #dcdfe6;
+	}
 }
 </style>

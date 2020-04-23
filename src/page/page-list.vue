@@ -3,8 +3,8 @@
 		<head-top></head-top>
 		<div class="table_container">
 			<el-form :inline="true" :model="searchForm" class="demo-form-inline">
-				<el-form-item label="网站名">
-					<el-input v-model="searchForm.name" placeholder="网站名"></el-input>
+				<el-form-item label="页面名">
+					<el-input v-model="searchForm.name" placeholder="页面名"></el-input>
 				</el-form-item>
 				<el-form-item label="分类">
 					<el-select v-model="searchForm.category" placeholder="分类">
@@ -22,16 +22,9 @@
 			</el-form>
 			<template>
 				<el-table :data="tableData" stripe style="width: 100%">
-					<el-table-column prop="name" label="网站名称">
-					</el-table-column>
-					<el-table-column prop="category" label="分类">
+					<el-table-column prop="name" label="页面名称">
 					</el-table-column>
 					<el-table-column prop="url" label="地址">
-					</el-table-column>
-					<el-table-column prop="icon" label="icon">
-						<template slot-scope="scope">
-							<img :src="scope.row.icon" min-width="70" height="70" />
-						</template>
 					</el-table-column>
 					<el-table-column prop="keywords" label="keywords">
 					</el-table-column>
@@ -39,9 +32,9 @@
 					</el-table-column>
 					<el-table-column prop="status" label="状态">
 					</el-table-column>
-					<el-table-column prop="components" label="页面">
+					<el-table-column prop="components" label="组件">
 						<template slot-scope="scope">
-							<el-link icon="el-icon-view" @click="viewPages(scope.row._id)">查看</el-link>
+							<el-link icon="el-icon-view" @click="viewComponents(scope.row._id, scope.row.url)">查看</el-link>
 						</template>
 					</el-table-column>
 					<el-table-column label="操作">
@@ -57,57 +50,39 @@
 				<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-size="20" layout="total, prev, pager, next" :total="count">
 				</el-pagination>
 			</div>
-			<el-dialog title="新增网站信息" :visible.sync="addDialogFormVisible">
-				<el-form :model="addWebsiteForm" :rules="foodrules" ref="addWebsiteForm" label-width="110px" class="form food_form">
-					<el-form-item label="网站名称" prop="name">
-						<el-input v-model="addWebsiteForm.name"></el-input>
+			<el-dialog title="新增页面信息" :visible.sync="addDialogFormVisible">
+				<el-form :model="addPageForm" :rules="foodrules" ref="addPageForm" label-width="110px" class="form food_form">
+					<el-form-item label="页面名称" prop="name">
+						<el-input v-model="addPageForm.name"></el-input>
 					</el-form-item>
-					<el-form-item label="网站url" prop="url">
-						<el-input v-model="addWebsiteForm.url"></el-input>
-					</el-form-item>
-					<el-form-item label="标签icon" prop="icon">
-						<el-input v-model="addWebsiteForm.icon"></el-input>
+					<el-form-item label="页面url" prop="url">
+						<el-input v-model="addPageForm.url"></el-input>
 					</el-form-item>
 					<el-form-item label="keywords" prop="keywords">
-						<el-input v-model="addWebsiteForm.keywords"></el-input>
+						<el-input v-model="addPageForm.keywords"></el-input>
 					</el-form-item>
 					<el-form-item label="description" prop="description">
-						<el-input v-model="addWebsiteForm.description"></el-input>
-					</el-form-item>
-					<el-form-item label="网站分类">
-						<el-select v-model="addWebsiteForm.category" placeholder="请选择">
-							<el-option v-for="item in attributes" :key="item.value" :label="item.label" :value="item.value">
-							</el-option>
-						</el-select>
+						<el-input v-model="addPageForm.description"></el-input>
 					</el-form-item>
 				</el-form>
 				<div slot="footer" class="dialog-footer">
 					<el-button @click="addDialogFormVisible = false">取 消</el-button>
-					<el-button type="primary" @click="addWebsite">确 定</el-button>
+					<el-button type="primary" @click="addPage">确 定</el-button>
 				</div>
 			</el-dialog>
-			<el-dialog title="修改网站信息" :visible.sync="updateDialogFormVisible">
+			<el-dialog title="修改页面信息" :visible.sync="updateDialogFormVisible">
 				<el-form :model="selectTable">
-					<el-form-item label="网站名称" label-width="100px">
+					<el-form-item label="页面名称" label-width="100px">
 						<el-input v-model="selectTable.name" autocomplete="off"></el-input>
 					</el-form-item>
 					<el-form-item label="url地址" label-width="100px">
 						<el-input v-model="selectTable.url" autocomplete="off"></el-input>
-					</el-form-item>
-					<el-form-item label="标签icon" label-width="100px">
-						<el-input v-model="selectTable.icon"></el-input>
 					</el-form-item>
 					<el-form-item label="keywords" label-width="100px">
 						<el-input v-model="selectTable.keywords"></el-input>
 					</el-form-item>
 					<el-form-item label="description" label-width="100px">
 						<el-input v-model="selectTable.description"></el-input>
-					</el-form-item>
-					<el-form-item label="分类" label-width="100px">
-						<el-select v-model="selectTable.category" placeholder="请选择分类">
-							<el-option v-for="item in attributes" :key="item.value" :label="item.label" :value="item.value">
-							</el-option>
-						</el-select>
 					</el-form-item>
 					<el-form-item label="状态" label-width="100px">
 						<el-select v-model="selectTable.status" placeholder="请选择状态">
@@ -118,11 +93,8 @@
 				</el-form>
 				<div slot="footer" class="dialog-footer">
 					<el-button @click="updateDialogFormVisible = false">取 消</el-button>
-					<el-button type="primary" @click="updateWebsite">确 定</el-button>
+					<el-button type="primary" @click="updatePage">确 定</el-button>
 				</div>
-			</el-dialog>
-			<el-dialog title="查看图片" :visible.sync="iconDialogVisible" width="20%">
-				<img :src="icon" alt="" srcset="">
 			</el-dialog>
 			<el-dialog title="查看组件" :visible.sync="componentsDialogVisible" width="30%">
 				<ul>
@@ -144,10 +116,10 @@
 	import headTop from "../components/headTop";
 	import { baseUrl, baseImgPath } from "@/config/env";
 	import {
-		getWebsiteList,
-		updateWebsite,
-		deleteWebsite,
-		addWebsite,
+		getPageList,
+		updatePage,
+		deletePage,
+		addPage,
 		componentList,
 		copyPage
 	} from "@/api/getData";
@@ -168,11 +140,10 @@
 				iconDialogVisible: false,
 				componentsDialogVisible: false,
 				copyDialogVisible: false,
-				addWebsiteForm: {
+				addPageForm: {
 					name: "",
 					category: "",
 					url: "",
-					icon: "",
 					keywords: "",
 					description: "",
 					components: ""
@@ -187,7 +158,7 @@
 					name: [
 						{
 							required: true,
-							message: "请输入网站名称",
+							message: "请输入页面名称",
 							trigger: "blur"
 						}
 					]
@@ -212,10 +183,12 @@
 				copyUrl: "",
 				filterMethod(query, item) {
 					return item.pinyin.indexOf(query) > -1;
-				}
+				},
+				websiteID:"",
 			};
 		},
 		created() {
+			this.websiteID = this.$route.query.id;
 			this.initData();
 		},
 		components: {
@@ -224,14 +197,15 @@
 		methods: {
 			async initData() {
 				try {
-					this.getWebsiteList();
+					this.getPageList();
 				} catch (err) {
 					console.log("获取数据失败", err);
 				}
 			},
-			async getWebsiteList() {
+			async getPageList() {
 				try {
-					const res = await getWebsiteList({
+					const res = await getPageList({
+						websiteID: this.websiteID,
 						offset: this.offset,
 						limit: this.limit,
 						name: this.searchForm.name,
@@ -245,7 +219,7 @@
 				} catch (error) {
 					this.$message({
 						type: "error",
-						message: error.response.data.message
+						message: error.message
 					});
 				}
 			},
@@ -255,7 +229,7 @@
 			handleCurrentChange(val) {
 				this.currentPage = val;
 				this.offset = (val - 1) * this.limit;
-				this.getWebsiteList();
+				this.getPageList();
 			},
 			handleNew(index, row) {
 				this.getAllComponents();
@@ -297,16 +271,16 @@
 					that.allComponents = [];
 				}
 			},
-			async addWebsite() {
+			async addPage() {
 				try {
-					const result = await addWebsite(this.addWebsiteForm);
+					const result = await addPage(this.addPageForm);
 					if (result.status == 200) {
 						this.$message({
 							type: "success",
 							message: "添加成功"
 						});
 						this.addDialogFormVisible = false;
-						this.getWebsiteList();
+						this.getPageList();
 					} else {
 						this.$message({
 							type: "error",
@@ -319,18 +293,18 @@
 			},
 			//查询
 			onSubmit() {
-				this.getWebsiteList();
+				this.getPageList();
 			},
-			async updateWebsite() {
+			async updatePage() {
 				try {
-					const res = await updateWebsite(this.selectTable);
+					const res = await updatePage(this.selectTable);
 					if (res.status == 200) {
 						this.$message({
 							type: "success",
 							message: "修改成功"
 						});
 						this.updateDialogFormVisible = false;
-						this.getWebsiteList();
+						this.getPageList();
 					} else {
 						throw new Error(res.message);
 					}
@@ -344,7 +318,7 @@
 			},
 			async handleDelete(index, row) {
 				try {
-					const res = await deleteWebsite(row.id);
+					const res = await deletePage(row.id);
 					if (res.status == 200) {
 						this.$message({
 							type: "success",
@@ -362,8 +336,8 @@
 					console.log("删除失败");
 				}
 			},
-			viewPages(id) {
-				this.$router.push({ path: "/pageList", query: { id } });
+			viewComponents(id, url) {
+				this.$router.push({ path: "/drag", query: { id, url } });
 			}
 		}
 	};

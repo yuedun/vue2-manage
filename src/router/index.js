@@ -12,6 +12,7 @@ const login = () => import('@/page/login');
 const menubar = () => import('@/page/menubar');
 const home = () => import('@/page/home');
 const websiteList = () => import('@/page/website-list');
+const pageList = () => import('@/page/page-list');
 const componentList = () => import('@/page/component-list');
 // const addShop = () => import('@/page/addShop');
 // const addGoods = () => import('@/page/addGoods');
@@ -46,6 +47,10 @@ const routes = [
 			path: '/websiteList',
 			component: websiteList,
 			meta: ['网站管理', '网站列表'],
+		}, {
+			path: '/pageList',
+			component: pageList,
+			meta: ['网站管理', '页面列表'],
 		}, {
 			path: '/componentList',
 			component: componentList,

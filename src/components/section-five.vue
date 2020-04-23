@@ -54,7 +54,7 @@
 		}
 	};
 </script>
-<style>
+<style lang="less">
 .mydialog {
 	opacity: 70%;
 }

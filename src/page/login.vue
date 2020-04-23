@@ -60,25 +60,32 @@
 			async submitForm(formName) {
 				this.$refs[formName].validate(async valid => {
 					if (valid) {
-						const res = await login({
-							userName: this.loginForm.username,
-							password: this.loginForm.password
-						});
-						if (res.status == 200) {
-							this.$message({
-								type: "success",
-								message: "登录成功"
+						try {
+							const res = await login({
+								userName: this.loginForm.username,
+								password: this.loginForm.password
 							});
-							document.cookie =
-								"jwt=" +
-								escape(res.data.token) +
-								";expires=" +
-								new Date(res.data.expire).toGMTString();
-							this.$router.push("manage");
-						} else {
+							if (res.status == 200) {
+								this.$message({
+									type: "success",
+									message: "登录成功"
+								});
+								document.cookie =
+									"jwt=" +
+									escape(res.data.token) +
+									";expires=" +
+									new Date(res.data.expire).toGMTString();
+								this.$router.push("manage");
+							} else {
+								this.$message({
+									type: "error",
+									message: res.message
+								});
+							}
+						} catch (error) {
 							this.$message({
 								type: "error",
-								message: res.message
+								message: error.message
 							});
 						}
 					} else {

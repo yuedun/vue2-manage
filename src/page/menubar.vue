@@ -55,7 +55,7 @@
 			</el-col>
 			<el-col :span="22" style="height: 100%;overflow: auto;">
 				<keep-alive>
-					<router-view></router-view>
+					<router-view :key="kk"></router-view>
 				</keep-alive>
 			</el-col>
 		</el-row>
@@ -68,6 +68,9 @@
 			defaultActive: function() {
 				this.$route.path.replace("/", "");
 				return "manage";
+			},
+			kk(){
+				return this.$route.path + Math.random();
 			}
 		}
 	};
