@@ -22,9 +22,9 @@
 			</el-form>
 			<template>
 				<el-table :data="tableData" stripe style="width: 100%">
-					<el-table-column prop="name" label="页面名称">
+					<el-table-column prop="name" label="title">
 					</el-table-column>
-					<el-table-column prop="url" label="地址">
+					<el-table-column prop="url" label="url">
 					</el-table-column>
 					<el-table-column prop="keywords" label="keywords">
 					</el-table-column>
@@ -52,10 +52,10 @@
 			</div>
 			<el-dialog title="新增页面信息" :visible.sync="addDialogFormVisible">
 				<el-form :model="addPageForm" :rules="foodrules" ref="addPageForm" label-width="110px" class="form food_form">
-					<el-form-item label="页面名称" prop="name">
+					<el-form-item label="title" prop="name">
 						<el-input v-model="addPageForm.name"></el-input>
 					</el-form-item>
-					<el-form-item label="页面url" prop="url">
+					<el-form-item label="url" prop="url">
 						<el-input v-model="addPageForm.url"></el-input>
 					</el-form-item>
 					<el-form-item label="keywords" prop="keywords">
@@ -63,6 +63,9 @@
 					</el-form-item>
 					<el-form-item label="description" prop="description">
 						<el-input v-model="addPageForm.description"></el-input>
+					</el-form-item>
+					<el-form-item label="components" label-width="100px">
+						<el-input type="textarea" v-model="addPageForm.components"></el-input>
 					</el-form-item>
 				</el-form>
 				<div slot="footer" class="dialog-footer">
@@ -72,10 +75,10 @@
 			</el-dialog>
 			<el-dialog title="修改页面信息" :visible.sync="updateDialogFormVisible">
 				<el-form :model="selectTable">
-					<el-form-item label="页面名称" label-width="100px">
+					<el-form-item label="title" label-width="100px">
 						<el-input v-model="selectTable.name" autocomplete="off"></el-input>
 					</el-form-item>
-					<el-form-item label="url地址" label-width="100px">
+					<el-form-item label="url" label-width="100px">
 						<el-input v-model="selectTable.url" autocomplete="off"></el-input>
 					</el-form-item>
 					<el-form-item label="keywords" label-width="100px">
@@ -83,6 +86,9 @@
 					</el-form-item>
 					<el-form-item label="description" label-width="100px">
 						<el-input v-model="selectTable.description"></el-input>
+					</el-form-item>
+					<el-form-item label="components" label-width="100px">
+						<el-input type="textarea" v-model="selectTable.components" rows="8"></el-input>
 					</el-form-item>
 					<el-form-item label="状态" label-width="100px">
 						<el-select v-model="selectTable.status" placeholder="请选择状态">
@@ -179,12 +185,11 @@
 				],
 				icon: "",
 				components: [],
-				allComponents: [],
 				copyUrl: "",
 				filterMethod(query, item) {
 					return item.pinyin.indexOf(query) > -1;
 				},
-				websiteID:"",
+				websiteID: ""
 			};
 		},
 		created() {
@@ -232,14 +237,11 @@
 				this.getPageList();
 			},
 			handleNew(index, row) {
-				this.getAllComponents();
 				this.addDialogFormVisible = true;
 			},
 			async handleEdit(index, row) {
-				await this.getAllComponents();
-				console.log(this.allComponents);
-
 				this.selectTable = row;
+				this.selectTable.components = JSON.stringify(row.components);
 				this.updateDialogFormVisible = true;
 			},
 			handleCopyDialog(index, row) {
@@ -249,27 +251,6 @@
 			async handleCopy() {
 				await copyPage(this.selectTable._id, this.copyUrl);
 				this.copyDialogVisible = false;
-			},
-			async getAllComponents() {
-				let that = this;
-				try {
-					const res = await componentList();
-					if (res.status == 200) {
-						var componentArray = [];
-						res.data.data.result.forEach((item, index) => {
-							componentArray.push({
-								label: item.name,
-								key: index
-							});
-						});
-						that.allComponents = componentArray;
-					} else {
-						that.allComponents = [];
-					}
-				} catch (err) {
-					console.log(err);
-					that.allComponents = [];
-				}
 			},
 			async addPage() {
 				try {
@@ -297,7 +278,16 @@
 			},
 			async updatePage() {
 				try {
-					const res = await updatePage(this.selectTable);
+					let updateObj = {
+						_id: this.selectTable._id,
+						name: this.selectTable.name,
+						keywords: this.selectTable.keywords,
+						description: this.selectTable.description,
+						url: this.selectTable.url,
+						components: JSON.parse(this.selectTable.components),
+						status: this.selectTable.status
+					};
+					const res = await updatePage(updateObj);
 					if (res.status == 200) {
 						this.$message({
 							type: "success",

@@ -159,7 +159,7 @@
 						<el-input v-model="selectTable.big_img" autocomplete="off"></el-input>
 					</el-form-item>
 					<el-form-item label="元素" label-width="100px">
-						<el-input type="textarea" v-model="selectTable.elements" autocomplete="off"></el-input>
+						<el-input type="textarea" v-model="selectTable.elements" autocomplete="off" rows="8"></el-input>
 					</el-form-item>
 					<el-form-item label="链接" label-width="100px">
 						<el-input type="textarea" v-model="selectTable.links" autocomplete="off"></el-input>

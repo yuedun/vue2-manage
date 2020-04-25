@@ -19,6 +19,12 @@ new Vue({
 	template: '<App/>',
 	components: { App }
 })
+router.beforeEach((to, from, next) => {
+	if (to.meta[1]) {
+		document.title = to.meta[1] + '-月盾';
+	}
+	next();
+})
 /**
  * 创建一个vue实例，
  * el:index.html中和App.vue中都包含#app，但是App.vue中的模板会完全替换index.html内容

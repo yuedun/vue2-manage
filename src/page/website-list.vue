@@ -26,8 +26,6 @@
 					</el-table-column>
 					<el-table-column prop="category" label="分类">
 					</el-table-column>
-					<el-table-column prop="url" label="地址">
-					</el-table-column>
 					<el-table-column prop="icon" label="icon">
 						<template slot-scope="scope">
 							<img :src="scope.row.icon" min-width="70" height="70" />
@@ -62,9 +60,6 @@
 					<el-form-item label="网站名称" prop="name">
 						<el-input v-model="addWebsiteForm.name"></el-input>
 					</el-form-item>
-					<el-form-item label="网站url" prop="url">
-						<el-input v-model="addWebsiteForm.url"></el-input>
-					</el-form-item>
 					<el-form-item label="标签icon" prop="icon">
 						<el-input v-model="addWebsiteForm.icon"></el-input>
 					</el-form-item>
@@ -90,9 +85,6 @@
 				<el-form :model="selectTable">
 					<el-form-item label="网站名称" label-width="100px">
 						<el-input v-model="selectTable.name" autocomplete="off"></el-input>
-					</el-form-item>
-					<el-form-item label="url地址" label-width="100px">
-						<el-input v-model="selectTable.url" autocomplete="off"></el-input>
 					</el-form-item>
 					<el-form-item label="标签icon" label-width="100px">
 						<el-input v-model="selectTable.icon"></el-input>

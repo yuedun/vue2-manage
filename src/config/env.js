@@ -7,7 +7,7 @@
  * 
  */
 let baseUrl = ''; 
-let routerMode = 'hash';
+let routerMode = 'history';
 let baseImgPath;
 
 if (process.env.NODE_ENV == 'development') {

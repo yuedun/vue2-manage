@@ -1,5 +1,6 @@
-import Vue from 'vue'
-import Router from 'vue-router'
+import Vue from 'vue';
+import Router from 'vue-router';
+import { routerMode } from "@/config/env";
 
 Vue.use(Router)
 /**
@@ -124,6 +125,7 @@ const routes = [
 ]
 
 export default new Router({
+	mode: routerMode,
 	routes,
 	strict: process.env.NODE_ENV !== 'production',
 })

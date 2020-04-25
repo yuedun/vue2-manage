@@ -3,33 +3,15 @@
 		<div class="home-banner-container">
 			<div id="focus-banner">
 				<ul class="banner-list" id="focus-banner-list">
-					<li class="bannerbox2 hidebanner" id="focus-banner-listone" style="z-index: 6;">
-						<div class="focus-banner-text text2 width-visual"><img class="text-txt2" src="../assets/YUEDUN_files/new-liutao-1115_ad249834.png" alt="VIPKID在线青少儿英语"></div>
-					</li>
-					<li class="bannerbox3 hidebanner" style="z-index: 5;"><img class="banner-img" src="../assets/YUEDUN_files/banner3_1_6d3a3b3e.jpg">
-						<div class="focus-banner-text text3 width-visual"><img class="img" src="../assets/YUEDUN_files/text3_87af9482.png" alt="7万名北美好外教让孩子爱学敢说"></div>
-					</li>
-					<li class="bannerbox3-1 hidebanner" style="z-index: 4;"><img class="banner-img" src="../assets/YUEDUN_files/banner3_650b121a.jpg">
-						<div class="focus-banner-text text3-1 width-visual"><img class="img" src="../assets/YUEDUN_files/text3_1_a228e6f7.png" alt="在线青少儿英语全项进阶课程"></div>
-					</li>
-					<li class="bannerbox6 hidebanner" style="z-index: 3;"><img class="banner-img" src="../assets/YUEDUN_files/banner6_f2e0cc55.jpg">
-						<div class="focus-banner-text text6 width-visual"><img class="img" src="../assets/YUEDUN_files/text6_5ff7607d.png" alt="在线学英语随时随地便捷高效"></div>
-					</li>
-					<li class="bannerbox4 hidebanner" style="z-index: 2;"><img class="banner-img" src="../assets/YUEDUN_files/banner-4_b3ddc79e.png"></li>
-					<li class="bannerbox8 hidebanner showbannerAnimation" style="z-index: 1;"><img class="banner-img" src="../assets/YUEDUN_files/banner8_0e37261f.png">
-						<div class="focus-banner-text text8 width-visual"><img class="img" src="../assets/YUEDUN_files/text8_6548ac46.png" alt="21世纪英语演讲大会"></div>
+					<li class="bannerbox6 hidebanner showbannerAnimation" style="z-index: 1;" v-for="item in component.elements" :key="item.title_1">
+						<img class="banner-img" :src="item.img">
 					</li>
 				</ul>
 				<ul class="focus-bubble" id="focus-bubble">
-					<li class=""><span></span></li>
-					<li class=""><span></span></li>
-					<li class=""><span></span></li>
-					<li class=""><span></span></li>
-					<li class=""><span></span></li>
-					<li class="current"><span></span></li>
+					<li class="current" v-for="item in component.elements" :key="item.title_1"><span></span></li>
 				</ul>
 			</div>
-			<div class="register-box" id="jsRegisterBox">
+			<!-- <div class="register-box" id="jsRegisterBox">
 				<div class="container width-visual">
 					<div class="register-con" style="color: rgb(0, 0, 0);">
 						<div class="title">免费领取<br>价值<span class="price">288元</span><br><span class="name">试听体验</span>
@@ -41,7 +23,7 @@
 						<div class="registered-auditions" id="jsRegisterBtn">立即领取</div>
 					</div>
 				</div>
-			</div>
+			</div> -->
 		</div>
 	</div>
 </template>
