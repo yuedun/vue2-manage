@@ -48,6 +48,10 @@
 	import sectionFooter from "../components/section-footer";
 	import bannerCon from "../components/banner-con";
 	import naTeacherContent from "../components/na-teacher-content";
+	import openclassBanner from "../components/openclass-banner";
+	import ourTeacherBox from "../components/our-teacher-box";
+	import searchAll from "../components/search-all";
+	import strictStandard from "../components/strict-standard";
 	export default {
 		components: {
 			draggable,
@@ -65,7 +69,11 @@
 			sectionTen,
 			sectionFooter,
 			bannerCon,
-			naTeacherContent
+			naTeacherContent,
+			openclassBanner,
+			ourTeacherBox,
+			searchAll,
+			strictStandard,
 		},
 		data() {
 			return {
@@ -168,6 +176,7 @@
 @import "../assets/YUEDUN_files/base.css";
 @import "../assets/YUEDUN_files/home.css";
 @import "../assets/YUEDUN_files/teachers.css";
+@import "../assets/YUEDUN_files/classlist.css";
 .drag {
 	.wrapper {
 		display: flex;

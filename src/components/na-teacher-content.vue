@@ -1,5 +1,5 @@
 <template>
-	<div class="na-teacher-content">
+	<div class="na-teacher-content" title="na-teacher-content">
 		<div class="why-choose-na-teacher width-visual">
 			<h2 class="common_title">我们为什么只选用北美优质外教？<i></i></h2>
 			<ul class="why-list clearfix">
