@@ -29,8 +29,8 @@ export const updatePage = data => {
 	return axios.put('/api/page/update', data);
 }
 //添加页面
-export const addPage = data => {
-	return axios.post('/api/page/create', data);
+export const addPage = (webId, data) => {
+	return axios.post('/api/page/create/' + webId, data);
 }
 //删除页面
 export const deletePage = data => {

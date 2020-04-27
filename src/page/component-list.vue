@@ -130,7 +130,7 @@
 				</div>
 			</el-dialog>
 			<el-dialog title="修改组件信息" :visible.sync="updateDialogFormVisible">
-				<el-form :model="selectTable" :rules="foodrules" ref="selectTable" label-width="110px" class="form food_form">
+				<el-form :model="selectTable" :rules="formRules" ref="selectTable" label-width="110px" class="form food_form">
 					<el-form-item label="组件名称" prop="name">
 						<el-input v-model="selectTable.name"></el-input>
 					</el-form-item>
@@ -162,10 +162,10 @@
 						<el-input type="textarea" v-model="selectTable.elements" autocomplete="off" rows="8"></el-input>
 					</el-form-item>
 					<el-form-item label="链接" label-width="100px">
-						<el-input type="textarea" v-model="selectTable.links" autocomplete="off"></el-input>
+						<el-input v-model="selectTable.links" autocomplete="off"></el-input>
 					</el-form-item>
 					<el-form-item label="扩展数据" label-width="100px">
-						<el-input type="textarea" v-model="selectTable.extras" autocomplete="off"></el-input>
+						<el-input v-model="selectTable.extras" autocomplete="off"></el-input>
 					</el-form-item>
 					<el-form-item label="状态" label-width="100px">
 						<el-select v-model="selectTable.status" placeholder="请选择状态">
@@ -216,7 +216,6 @@
 				updateDialogFormVisible: false,
 				iconDialogVisible: false,
 				dataDialogVisible: false,
-				selectedCategory: [],
 				searchForm: {
 					name: "",
 					category: ""
@@ -225,7 +224,7 @@
 					name: "",
 					category: ""
 				},
-				foodrules: {
+				formRules: {
 					name: [
 						{
 							required: true,
@@ -296,13 +295,6 @@
 				this.offset = (val - 1) * this.limit;
 				this.getComponentList();
 			},
-			handleEdit(index, row) {
-				this.selectTable = row;
-				this.selectTable.elements = JSON.stringify(row.elements);
-				this.selectTable.links = JSON.stringify(row.links);
-				this.selectTable.extras = JSON.stringify(row.extras);
-				this.updateDialogFormVisible = true;
-			},
 			viewData(data, type) {
 				if (type == "image") {
 					this.icon = data;
@@ -344,6 +336,20 @@
 					console.log(err);
 				}
 			},
+			handleEdit(index, row) {
+				this.selectTable = row;
+				if (row.elements) {
+					this.selectTable.elements = JSON.stringify(row.elements);
+				}
+				if (row.links) {
+					this.selectTable.links = JSON.stringify(row.links);
+				}
+				if (row.extras) {
+					this.selectTable.extras = JSON.stringify(row.extras);
+				}
+
+				this.updateDialogFormVisible = true;
+			},
 			async updateComponent() {
 				let that = this;
 				try {
@@ -363,12 +369,21 @@
 						extras: [],
 						sort: Number(that.selectTable.sort)
 					};
-
-					let eles = JSON.parse(that.selectTable.elements);
-					updateObj.elements = eles;
-					let links = JSON.parse(that.selectTable.links);
-					updateObj.links = links;
-					updateObj.extras = JSON.parse(that.selectTable.extras);
+					try {
+						let eles = that.selectTable.elements
+							? JSON.parse(that.selectTable.elements)
+							: [];
+						updateObj.elements = eles;
+						let links = that.selectTable.links
+							? JSON.parse(that.selectTable.links)
+							: [];
+						updateObj.links = links;
+						updateObj.extras = that.selectTable.extras
+							? JSON.parse(that.selectTable.extras)
+							: [];
+					} catch (error) {
+						console.log(error);
+					}
 					const res = await updateComponent(updateObj);
 					if (res.status == 200) {
 						that.$message({

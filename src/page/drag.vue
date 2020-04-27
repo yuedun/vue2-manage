@@ -12,11 +12,11 @@
 
 			<el-col :span="20" class="col-right">
 				<div class="tools">
-					<el-button type="success" @click="getData">保存</el-button>
+					<el-button type="success" @click="saveData">保存</el-button>
 					<el-button type="default" @click="back">返回</el-button>
 				</div>
 				<draggable class="list-group wrapper" :list="selectedComponent" group="components" @change="log">
-					<component v-for="element in selectedComponent" :key="element.name" v-bind:is="element.name" v-bind:pcomponent="element"></component>
+					<component class="curs" v-for="element in selectedComponent" :key="element.name" v-bind:is="element.name" v-bind:pcomponent="element"></component>
 					<div v-show="!selectedComponent.length" class="empty-info">
 						从左侧拖入组件进行表单设计
 					</div>
@@ -73,7 +73,7 @@
 			openclassBanner,
 			ourTeacherBox,
 			searchAll,
-			strictStandard,
+			strictStandard
 		},
 		data() {
 			return {
@@ -95,8 +95,8 @@
 					await this.getComponent(evt.removed.element._id);
 				}
 			},
-			back(){
-				this.$router.go(-1);//返回上一层
+			back() {
+				this.$router.go(-1); //返回上一层
 			},
 			async initData(id) {
 				try {
@@ -147,9 +147,9 @@
 					});
 				}
 			},
-			async getData() {
+			async saveData() {
 				try {
-					const res = await updateWebsiteComponents({
+					const res = await updatePageComponents({
 						id: this.currentId,
 						data: this.selectedComponent
 					});
@@ -202,6 +202,9 @@
 	}
 	.tools {
 		background-color: #dcdfe6;
+	}
+	.curs {
+		cursor: move;
 	}
 }
 </style>

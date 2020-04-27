@@ -41,7 +41,7 @@
 						<template slot-scope="scope">
 							<el-button size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
 							<el-button size="small" @click="handleCopyDialog(scope.$index, scope.row)">克隆</el-button>
-							<el-button size="small" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+							<el-button size="small" type="danger" @click="handleDelete(scope.$index, scope.row._id)">删除</el-button>
 						</template>
 					</el-table-column>
 				</el-table>
@@ -51,7 +51,7 @@
 				</el-pagination>
 			</div>
 			<el-dialog title="新增页面信息" :visible.sync="addDialogFormVisible">
-				<el-form :model="addPageForm" :rules="foodrules" ref="addPageForm" label-width="110px" class="form food_form">
+				<el-form :model="addPageForm" :rules="formRules" ref="addPageForm" label-width="110px" class="form food_form">
 					<el-form-item label="title" prop="name">
 						<el-input v-model="addPageForm.name"></el-input>
 					</el-form-item>
@@ -134,7 +134,6 @@
 			return {
 				baseUrl,
 				baseImgPath,
-				city: {},
 				offset: 0,
 				limit: 10,
 				count: 0,
@@ -143,7 +142,6 @@
 				selectTable: {},
 				addDialogFormVisible: false,
 				updateDialogFormVisible: false,
-				iconDialogVisible: false,
 				componentsDialogVisible: false,
 				copyDialogVisible: false,
 				addPageForm: {
@@ -154,13 +152,11 @@
 					description: "",
 					components: ""
 				},
-				selectedCategory: [],
-				address: {},
 				searchForm: {
 					name: "",
 					category: ""
 				},
-				foodrules: {
+				formRules: {
 					name: [
 						{
 							required: true,
@@ -254,7 +250,7 @@
 			},
 			async addPage() {
 				try {
-					const result = await addPage(this.addPageForm);
+					const result = await addPage(this.websiteID, this.addPageForm);
 					if (result.status == 200) {
 						this.$message({
 							type: "success",
@@ -306,9 +302,9 @@
 					console.log("修改失败");
 				}
 			},
-			async handleDelete(index, row) {
+			async handleDelete(index, id) {
 				try {
-					const res = await deletePage(row.id);
+					const res = await deletePage(id);
 					if (res.status == 200) {
 						this.$message({
 							type: "success",

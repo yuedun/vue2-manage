@@ -45,7 +45,6 @@
 					<el-table-column label="操作">
 						<template slot-scope="scope">
 							<el-button size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-							<el-button size="small" @click="handleCopyDialog(scope.$index, scope.row)">克隆</el-button>
 							<el-button size="small" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
 						</template>
 					</el-table-column>
@@ -56,7 +55,7 @@
 				</el-pagination>
 			</div>
 			<el-dialog title="新增网站信息" :visible.sync="addDialogFormVisible">
-				<el-form :model="addWebsiteForm" :rules="foodrules" ref="addWebsiteForm" label-width="110px" class="form food_form">
+				<el-form :model="addWebsiteForm" :rules="formRules" ref="addWebsiteForm" label-width="110px" class="form food_form">
 					<el-form-item label="网站名称" prop="name">
 						<el-input v-model="addWebsiteForm.name"></el-input>
 					</el-form-item>
@@ -121,13 +120,6 @@
 					<li v-for="(value, name) in components" :key="name">{{value.name}}</li>
 				</ul>
 			</el-dialog>
-			<el-dialog title="复制页面" :visible.sync="copyDialogVisible" width="20%">
-				<el-input v-model="copyUrl" placeholder="页面url"></el-input>
-				<div slot="footer" class="dialog-footer">
-					<el-button @click="copyDialogVisible = false">取 消</el-button>
-					<el-button type="primary" @click="handleCopy">确 定</el-button>
-				</div>
-			</el-dialog>
 		</div>
 	</div>
 </template>
@@ -148,7 +140,6 @@
 			return {
 				baseUrl,
 				baseImgPath,
-				city: {},
 				offset: 0,
 				limit: 10,
 				count: 0,
@@ -169,13 +160,11 @@
 					description: "",
 					components: ""
 				},
-				selectedCategory: [],
-				address: {},
 				searchForm: {
 					name: "",
 					category: ""
 				},
-				foodrules: {
+				formRules: {
 					name: [
 						{
 							required: true,
@@ -259,14 +248,6 @@
 
 				this.selectTable = row;
 				this.updateDialogFormVisible = true;
-			},
-			handleCopyDialog(index, row) {
-				this.copyDialogVisible = true;
-				this.selectTable = row;
-			},
-			async handleCopy() {
-				await copyPage(this.selectTable._id, this.copyUrl);
-				this.copyDialogVisible = false;
 			},
 			async getAllComponents() {
 				let that = this;
