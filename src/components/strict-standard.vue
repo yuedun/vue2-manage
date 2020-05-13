@@ -1,8 +1,8 @@
 <template>
 	<div class="strict-standard" title="strict-standard">
 		<div class="width-visual">
-			<h2 class="common_title">严格的外教筛选标准<i></i></h2>
-			<p class="strict-desc">筛选通过率不高于5%，所有老师必须兼备：来自北美，本科及以上学历、<br>1年及以上教学或教育辅导经验</p>
+			<h2 class="common_title" @click="edit('title_1')">严格的外教筛选标准<i></i></h2>
+			<p class="strict-desc" @click="edit('description')">筛选通过率不高于5%，所有老师必须兼备：来自北美，本科及以上学历、<br>1年及以上教学或教育辅导经验</p>
 			<div class="employment-procedure">
 				<ul class="employment-before clearfix">
 					<li>

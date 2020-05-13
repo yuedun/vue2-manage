@@ -1,8 +1,9 @@
 <template>
 	<div class="section-five text-center" title="section-five">
-		<video id="jsVideoBoxCon" src="https://image.vipkid.com.cn/market/file/1539516532744-waijiaodahui_bg.mp4" poster="../assets/YUEDUN_files/1554182772671-waijiaodahui.png" autoplay="autoplay" preload="preload" loop="loop" muted="">
+		<video id="jsVideoBoxCon" src="https://image.vipkid.com.cn/market/file/1539516532744-waijiaodahui_bg.mp4" poster="https://ww1.yunjiexi.club/2019/12/20/5eflU.jpg" autoplay="autoplay" preload="preload" loop="loop" muted="">
 		</video>
-		<div class="video-bg" id="jsVideoBgPoster"><img src="../assets/YUEDUN_files/1554182772671-waijiaodahui.png">
+		<div class="video-bg" id="jsVideoBgPoster">
+			<img src="https://ww1.yunjiexi.club/2019/12/20/5eflU.jpg">
 		</div>
 		<div class="main-con">
 			<h2 class="common_title" @click="edit('title_1')">{{component.title_1}}<i></i></h2>

@@ -3,7 +3,7 @@
 		<div class="con-box width-visual">
 			<h2 class="common_title" @click="edit('title_1')">{{component.title_1}}<i></i></h2>
 			<img class="map-bg" src="../assets/YUEDUN_files/promise_be75ce5d.png">
-			<div class="person-img"><img class="img" src="../assets/YUEDUN_files/liutao_20b7dae2.png" alt="">
+			<div class="person-img"><img class="img" src="https://ww1.yunjiexi.club/2020/02/05/11NCj.jpg" alt="">
 			</div>
 			<ul class="clearfix color-main">
 				<li class="col_6 left-con"></li>

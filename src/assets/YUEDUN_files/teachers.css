@@ -116,7 +116,8 @@
 	top: 0;
 	left: 50%;
 	margin-left: -720px;
-	height: 520px
+	height: 520px;
+	width: 100%;
 }
 
 .banner-con .content {
@@ -130,7 +131,7 @@
 	position: relative;
 	font-size: 48px;
 	font-weight: 400;
-	color: #333;
+	color: #fff;
 	-webkit-animation: bannerTextShow .25s ease-in 0s 1 forwards;
 	-moz-animation: bannerTextShow .25s ease-in 0s 1 forwards;
 	-o-animation: bannerTextShow .25s ease-in 0s 1 forwards;
@@ -138,16 +139,22 @@
 	animation: bannerTextShow .25s ease-in 0s 1 forwards
 }
 
-.banner-con .content h1,.banner-con .content p {
+.banner-con .content h1,.banner-con .content h3 {
 	opacity: 0;
 	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
 	filter: alpha(opacity=0)
 }
 
-.banner-con .content p {
-	padding-top: 18px;
-	font-size: 20px;
-	color: #666;
+.banner-con .content h3 {
+	position: relative;
+	padding-top: 12px;
+	font-size: 22px;
+	font-weight: 400;
+	color: #fff;
+	line-height: 30px;
+	opacity: 0;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+	filter: alpha(opacity=0);
 	-webkit-animation: bannerTextShow .25s ease-in .25s 1 forwards;
 	-moz-animation: bannerTextShow .25s ease-in .25s 1 forwards;
 	-o-animation: bannerTextShow .25s ease-in .25s 1 forwards;

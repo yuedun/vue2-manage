@@ -48,7 +48,6 @@
 	import sectionFooter from "../components/section-footer";
 	import bannerCon from "../components/banner-con";
 	import naTeacherContent from "../components/na-teacher-content";
-	import openclassBanner from "../components/openclass-banner";
 	import ourTeacherBox from "../components/our-teacher-box";
 	import searchAll from "../components/search-all";
 	import strictStandard from "../components/strict-standard";
@@ -70,7 +69,6 @@
 			sectionFooter,
 			bannerCon,
 			naTeacherContent,
-			openclassBanner,
 			ourTeacherBox,
 			searchAll,
 			strictStandard

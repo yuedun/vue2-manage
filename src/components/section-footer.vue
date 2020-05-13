@@ -17,31 +17,21 @@
 			</ul>
 			<div class="copyright fl color-main">
 				<p class="copy">
-					<span>© VIPKID 京ICP证 150842号</span>
+					<span>© 沪ICP备17035008号</span>
 					<span>
-						<img class="icon" src="../assets/YUEDUN_files/1539606525093-policeEmblem.png">京公网安备 11010102001980号</span><span>北京大米科技有限公司</span><span>违法和不良信息举报电话：95753</span></p>
+						<img class="icon" src="../assets/YUEDUN_files/1539606525093-policeEmblem.png">沪ICP备17035008号
+					</span>
+				</p>
 				<p class="permit">
-					<a href="/businesslicenseone">
-						<span>出版物经营许可证(京零)字第海170127号</span></a>
-					<span>广播电视节目制作经营许可证(京)字第08921号</span>
-					<a href="/businesslicensetwo">
-						<span class="yingye">营业执照</span></a>
-					<span>举报邮箱 VKreport@vipkid.com.cn</span></p>
+					<a href="/#">
+						<span>xxx</span>
+					</a>
+					<span>邮箱 huo.win.n@gmail.com</span></p>
 			</div>
 			<div class="copyright-ipad fl color-main">
 				<p class="copy">
-					<span>© VIPKID 京ICP证 150842号</span>
-					<span>
-						<img class="icon" src="../assets/YUEDUN_files/1539606525093-policeEmblem.png">京公网安备 11010102001980号</span><span>北京大米科技有限公司</span></p>
-				<p class="chuban">
-					<a href="/businesslicenseone">
-						<span>出版物经营许可证(京零)字第海170127号</span></a>
-					<span>广播电视节目制作经营许可证(京)字第08921号</span>
-					<a class="yangyelian" href="/businesslicensetwo">
-						<span class="yingye">营业执照</span></a>
+					<span>邮箱 huo.win.n@gmail.com</span>
 				</p>
-				<p class="permit">
-					<span>违法和不良信息举报电话 95753</span><span>举报邮箱 VKreport@vipkid.com.cn</span></p>
 			</div>
 			<div class="country fr">
 				<div class="china">中国<img class="china-img" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcBAMAAACAI8KnAAAAD1BMVEUoKCiXl5c0NDSIiIhtbW0CrxlgAAAAS0lEQVQY02OgM2BSQOEqG6FIGgorIEsKChohSwoKAqURksKGCGkmIFsZIQ1iMsGlISyoNIwBl3YE0mBREQgXJAmShnBVnBhg9IABAI56CF//sUWqAAAAAElFTkSuQmCC">
@@ -49,16 +39,9 @@
 				<div class="national-ul">
 					<ul>
 						<li>
-							<a class="clearfix" href="https://www.vipkid.com/?vk_fromcode=US">
-								<span class="fl">United States</span></a>
-						</li>
-						<li>
-							<a class="clearfix" href="https://kr.vipkid.com/?vk_fromcode=KR">
-								<span class="fl">한국</span></a>
-						</li>
-						<li>
-							<a class="clearfix" href="https://vipkid.com.cn/?vk_fromcode=CN">
-								<span class="fl">中国</span></a>
+							<a class="clearfix" href="/#">
+								<span class="fl">中国</span>
+							</a>
 						</li>
 					</ul>
 				</div>

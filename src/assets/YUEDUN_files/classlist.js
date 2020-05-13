@@ -420,20 +420,6 @@ webpackJsonp([6], {
                                                 e.httpClickYuyue()
                                         }
                                     })
-                            },
-                            httpClickYuyue: function () {
-                                (0, n.
-                                    default)(".wantAppointment").click(function () {
-                                        (0, n.
-                                            default)("#loginOrRegister").show()
-                                    })
-                            },
-                            eventClickCloseModal: function () {
-                                (0, n.
-                                    default)("img.close-modal, a.btn-cancle").click(function () {
-                                        (0, n.
-                                            default)("#loginOrRegister").hide()
-                                    })
                             }
                         };
                     e.init()
