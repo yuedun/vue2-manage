@@ -21,7 +21,7 @@
 				</a>
 			</a>
 		</div>
-		<el-dialog title="提示" :visible.sync="dialogVisible" width="20%" custom-class="mydialog">
+		<el-dialog title="编辑文本" :visible.sync="dialogVisible" width="20%" custom-class="mydialog">
 			<el-input type="textarea" v-model="rawhtml" size="small" width="150px;"></el-input>
 			<span slot="footer" class="dialog-footer">
 				<el-button @click="dialogVisible = false">取 消</el-button>

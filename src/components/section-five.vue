@@ -5,7 +5,7 @@
 		<div class="video-bg" id="jsVideoBgPoster"><img src="../assets/YUEDUN_files/1554182772671-waijiaodahui.png">
 		</div>
 		<div class="main-con">
-			<h2 class="common_title">北美好外教 为全球小朋友提供高品质教学服务<i></i></h2>
+			<h2 class="common_title" @click="edit('title_1')">{{component.title_1}}<i></i></h2>
 			<ul class="clearfix font48 width-visual">
 				<li class="col_3">
 					<div class="font52 num">70,000<span class="font22">名</span></div>
@@ -31,6 +31,13 @@
 				</a>
 			</div>
 		</div>
+		<el-dialog title="编辑文本" :visible.sync="dialogVisible" width="20%" custom-class="mydialog">
+			<el-input type="textarea" v-model="rawhtml" size="small" width="150px;"></el-input>
+			<span slot="footer" class="dialog-footer">
+				<el-button @click="dialogVisible = false">取 消</el-button>
+				<el-button type="primary" @click="editOK">确 定</el-button>
+			</span>
+		</el-dialog>
 	</div>
 </template>
 

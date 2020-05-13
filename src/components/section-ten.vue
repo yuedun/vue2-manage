@@ -1,6 +1,6 @@
 <template>
 	<div class="section-ten" title="section-ten">
-		<h2 class="common_title">企业荣誉<i></i></h2>
+		<h2 class="common_title" @click="edit('title_1')">{{component.title_1}}<i></i></h2>
 		<div class="reward-big-box width-visual">
 			<div class="reward-box" id="rewardBox">
 				<div id="show" rel="autoPlay" style="width: 1064px;">
@@ -98,6 +98,13 @@
 				</div>
 			</div>
 		</div>
+		<el-dialog title="编辑文本" :visible.sync="dialogVisible" width="20%" custom-class="mydialog">
+			<el-input type="textarea" v-model="rawhtml" size="small" width="150px;"></el-input>
+			<span slot="footer" class="dialog-footer">
+				<el-button @click="dialogVisible = false">取 消</el-button>
+				<el-button type="primary" @click="editOK">确 定</el-button>
+			</span>
+		</el-dialog>
 	</div>
 </template>
 

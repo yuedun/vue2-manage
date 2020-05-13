@@ -30,9 +30,18 @@
 				</div>
 			</li>
 		</ul>
-		<div class="register"><a href="#/step">
+		<div class="register">
+			<a href="#/step">
 				<div class="obtain-btn margin-auto" id="freeVipkidLookDeatilBtn">查看详情</div>
-			</a></div>
+			</a>
+		</div>
+		<el-dialog title="编辑文本" :visible.sync="dialogVisible" width="20%" custom-class="mydialog">
+			<el-input type="textarea" v-model="rawhtml" size="small" width="150px;"></el-input>
+			<span slot="footer" class="dialog-footer">
+				<el-button @click="dialogVisible = false">取 消</el-button>
+				<el-button type="primary" @click="editOK">确 定</el-button>
+			</span>
+		</el-dialog>
 	</div>
 </template>
 

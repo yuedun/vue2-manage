@@ -1,6 +1,6 @@
 <template>
 	<div class="section-six text-center" title="section-six">
-		<h2 class="common_title">科技赋能 守护小朋友的每一堂课<i></i></h2>
+		<h2 class="common_title" @click="edit('title_1')">{{component.title_1}}<i></i></h2>
 		<ul class="width-visual clearfix color-main">
 			<li class="col_4">
 				<div class="hover-con"><img class="icon-img" src="../assets/YUEDUN_files/icon01_189746f0.png" alt="AI赋能">
@@ -21,9 +21,18 @@
 				</div>
 			</li>
 		</ul>
-		<div class="register"><a href="#/advantage?#ai">
+		<div class="register">
+			<a href="#/advantage?#ai">
 				<div class="obtain-btn margin-auto" id="lookDetailBtn">查看详情</div>
-			</a></div>
+			</a>
+		</div>
+		<el-dialog title="编辑文本" :visible.sync="dialogVisible" width="20%" custom-class="mydialog">
+			<el-input type="textarea" v-model="rawhtml" size="small" width="150px;"></el-input>
+			<span slot="footer" class="dialog-footer">
+				<el-button @click="dialogVisible = false">取 消</el-button>
+				<el-button type="primary" @click="editOK">确 定</el-button>
+			</span>
+		</el-dialog>
 	</div>
 </template>
 
