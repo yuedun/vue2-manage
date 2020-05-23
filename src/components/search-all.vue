@@ -117,8 +117,9 @@
 </template>
 
 <script>
-	import edit from "@/common/edit";
+	import { Mixins } from "@/common/mixins";
 	export default {
+		mixins: [Mixins],
 		props: ["pcomponent"],
 		data() {
 			return {
@@ -132,7 +133,7 @@
 			console.log(this.$vnode.key + "子组件接收父组件值：", this.component);
 		},
 		methods: {
-			...edit()
+	
 		}
 	};
 </script>

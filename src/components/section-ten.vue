@@ -5,90 +5,10 @@
 			<div class="reward-box" id="rewardBox">
 				<div id="show" rel="autoPlay" style="width: 1064px;">
 					<div class="img" style="width: 1064px;">
-						<div class="box clearfix" style="left: -2660px;">
-							<div class="con" style="width: 266px;">
-								<div class="img-content"><img src="../assets/YUEDUN_files/reward06_bf9ac6ac.png" alt="2017年度时代影响力事件">
-									<p>2017年度<br>时代影响力事件</p>
-								</div>
-							</div>
-							<div class="con" style="width: 266px;">
-								<div class="img-content"><img src="../assets/YUEDUN_files/reward07_055abadd.png" alt="2017年度影响力教育集团">
-									<p>2017年度<br>影响力教育集团</p>
-								</div>
-							</div>
-							<div class="con" style="width: 266px;">
-								<div class="img-content"><img src="../assets/YUEDUN_files/reward08_4888d2d3.png" alt="2017年度影响力事件">
-									<p>2017年度<br>影响力事件</p>
-								</div>
-							</div>
-							<div class="con" style="width: 266px;">
-								<div class="img-content"><img src="../assets/YUEDUN_files/reward09_e6f8d3d0.png" alt="2017年度中国品牌价值少儿英语机构">
-									<p>2017年度<br>中国品牌价值少儿英语机构</p>
-								</div>
-							</div>
-							<div class="con" style="width: 266px;">
-								<div class="img-content"><img src="../assets/YUEDUN_files/reward01_d882c79e.png" alt="2017年度中国创客">
-									<p>2017年度<br>中国创客</p>
-								</div>
-							</div>
-							<div class="con" style="width: 266px;">
-								<div class="img-content"><img src="../assets/YUEDUN_files/reward02_eb6d034c.png" alt="2017年度创新品牌">
-									<p>2017年度<br>创新品牌</p>
-								</div>
-							</div>
-							<div class="con" style="width: 266px;">
-								<div class="img-content"><img src="../assets/YUEDUN_files/reward03_622aef27.png" alt="2017年度中国公益企业">
-									<p>2017年度<br>中国公益企业</p>
-								</div>
-							</div>
-							<div class="con" style="width: 266px;">
-								<div class="img-content"><img src="../assets/YUEDUN_files/reward04_79fde4ca.png" alt="2017年度中国年度创新成长企业100强">
-									<p>2017年度<br>中国年度创新成长企业100强</p>
-								</div>
-							</div>
-							<div class="con" style="width: 266px;">
-								<div class="img-content"><img src="../assets/YUEDUN_files/reward05_c54b9dc7.png" alt="2017年度十大创业家">
-									<p>2017年度<br>十大创业家</p>
-								</div>
-							</div>
-							<div class="con" style="width: 266px;">
-								<div class="img-content"><img src="../assets/YUEDUN_files/reward06_bf9ac6ac.png" alt="2017年度时代影响力事件">
-									<p>2017年度<br>时代影响力事件</p>
-								</div>
-							</div>
-							<div class="con" style="width: 266px;">
-								<div class="img-content"><img src="../assets/YUEDUN_files/reward07_055abadd.png" alt="2017年度影响力教育集团">
-									<p>2017年度<br>影响力教育集团</p>
-								</div>
-							</div>
-							<div class="con" style="width: 266px;">
-								<div class="img-content"><img src="../assets/YUEDUN_files/reward08_4888d2d3.png" alt="2017年度影响力事件">
-									<p>2017年度<br>影响力事件</p>
-								</div>
-							</div>
-							<div class="con" style="width: 266px;">
-								<div class="img-content"><img src="../assets/YUEDUN_files/reward09_e6f8d3d0.png" alt="2017年度中国品牌价值少儿英语机构">
-									<p>2017年度<br>中国品牌价值少儿英语机构</p>
-								</div>
-							</div>
-							<div class="con" style="width: 266px;">
-								<div class="img-content"><img src="../assets/YUEDUN_files/reward01_d882c79e.png" alt="2017年度中国创客">
-									<p>2017年度<br>中国创客</p>
-								</div>
-							</div>
-							<div class="con" style="width: 266px;">
-								<div class="img-content"><img src="../assets/YUEDUN_files/reward02_eb6d034c.png" alt="2017年度创新品牌">
-									<p>2017年度<br>创新品牌</p>
-								</div>
-							</div>
-							<div class="con" style="width: 266px;">
-								<div class="img-content"><img src="../assets/YUEDUN_files/reward03_622aef27.png" alt="2017年度中国公益企业">
-									<p>2017年度<br>中国公益企业</p>
-								</div>
-							</div>
-							<div class="con" style="width: 266px;">
-								<div class="img-content"><img src="../assets/YUEDUN_files/reward04_79fde4ca.png" alt="2017年度中国年度创新成长企业100强">
-									<p>2017年度<br>中国年度创新成长企业100强</p>
+						<div class="box clearfix" style="">
+							<div class="con" style="width: 266px;" v-for="(item, index) in component.elements" :key="index">
+								<div class="img-content"><img :src="item.img" alt="">
+									<p>{{item.title_1}}<br>{{item.title_2}}</p>
 								</div>
 							</div>
 						</div>
@@ -109,8 +29,9 @@
 </template>
 
 <script>
-	import edit from "@/common/edit";
+	import { Mixins } from "@/common/mixins";
 	export default {
+		mixins: [Mixins],
 		props: ["pcomponent"],
 		data() {
 			return {
@@ -124,7 +45,7 @@
 			console.log(this.$vnode.key + "子组件接收父组件值：", this.component);
 		},
 		methods: {
-			...edit()
+			
 		}
 	};
 </script>

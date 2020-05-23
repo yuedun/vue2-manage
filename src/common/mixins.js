@@ -1,10 +1,5 @@
-module.exports = function () {
-    return {
-        //只有第一个参数prop时，修改的是component的属性，有三个参数时修改的是component下的数组类型属性的值
-        //如：component.title_1，component.elements[2].title_1
-        // @prop component的直接属性名
-        // @index prop为数组属性时子元素的索引
-        // @prop2 prop为数组时元素名
+export const Mixins = {
+    methods: {
         edit(prop, index, prop2) {
             this.dialogVisible = true;
             this.currentProp = {
