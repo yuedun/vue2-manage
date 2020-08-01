@@ -1,5 +1,5 @@
 <template>
-	<div class="section-six text-center" title="section-six">
+	<div class="section-six text-center" :title="page_title">
 		<h2 class="common_title" @click="edit('title_1')">{{component.title_1}}<i></i></h2>
 		<ul class="width-visual clearfix color-main">
 			<li class="col_4">
@@ -46,15 +46,14 @@
 				component: this.pcomponent,
 				dialogVisible: false,
 				rawhtml: "",
-				currentProp: ""
+				currentProp: "",
+				page_title: this.$vnode.key,
 			};
 		},
 		created() {
 			console.log(this.$vnode.key + "子组件接收父组件值：", this.component);
 		},
-		methods: {
-	
-		}
+		methods: {},
 	};
 </script>
 <style lang="less">

@@ -42,12 +42,43 @@ npm run dev (访问本地后台系统)
 ```
 
 # 线上部署
+
+> npm run build
+
 NGINX代理配置
 ```
-location ^~ /api/ {
-    add_header 'Access-Control-Allow-Origin' '*';
-    proxy_pass http://localhost:8900/;
+# Virtual Host configuration for example.com
+#
+# You can move that to a different file under sites-available/ and symlink that
+# to sites-enabled/ to enable it.
+#
+server {
+    listen 80;
+    listen [::]:80;
+
+    server_name domain;
+
+    root /xx/vue2-manage/manage;
+
+    location / {
+        try_files $uri $uri/ /index.html;
+      	proxy_http_version 1.1;
+       	proxy_set_header Upgrade $http_upgrade;
+       	proxy_set_header Connection 'upgrade';
+       	proxy_set_header Host $host;
+	proxy_cache_bypass $http_upgrade;
+        proxy_set_header X-NginX-Proxy true;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        expires 300;
+    }
+
+    location ^~ /api/ {
+        add_header 'Access-Control-Allow-Origin' '*';
+        proxy_pass http://localhost:8900/;
+    }  
 }
+
 ```
 
 # 效果演示

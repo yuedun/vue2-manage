@@ -1,5 +1,5 @@
 <template>
-	<div class="strict-standard" title="strict-standard">
+	<div class="strict-standard" :title="page_title">
 		<div class="width-visual">
 			<h2 class="common_title" @click="edit('title_1')">严格的外教筛选标准<i></i></h2>
 			<p class="strict-desc" @click="edit('description')">筛选通过率不高于5%，所有老师必须兼备：来自北美，本科及以上学历、<br>1年及以上教学或教育辅导经验</p>
@@ -80,15 +80,14 @@
 				component: this.pcomponent,
 				dialogVisible: false,
 				rawhtml: "",
-				currentProp: ""
+				currentProp: "",
+				page_title: this.$vnode.key,
 			};
 		},
 		created() {
 			console.log(this.$vnode.key + "子组件接收父组件值：", this.component);
 		},
-		methods: {
-	
-		}
+		methods: {},
 	};
 </script>
 <style lang="less">

@@ -6,12 +6,8 @@
 				<el-form-item label="页面名">
 					<el-input v-model="searchForm.name" placeholder="页面名"></el-input>
 				</el-form-item>
-				<el-form-item label="分类">
-					<el-select v-model="searchForm.category" placeholder="分类">
-						<el-option label="" value=""></el-option>
-						<el-option label="IT" value="IT"></el-option>
-						<el-option label="教育" value="教育"></el-option>
-					</el-select>
+				<el-form-item label="url">
+					<el-input v-model="searchForm.url" placeholder="url"></el-input>
 				</el-form-item>
 				<el-form-item>
 					<el-button type="primary" @click="onSubmit">查询</el-button>
@@ -31,6 +27,10 @@
 					<el-table-column prop="description" label="description">
 					</el-table-column>
 					<el-table-column prop="status" label="状态">
+						<template slot-scope="scope">
+							<span v-if="scope.row.status=== 0"><i class="el-icon-error"></i></span>
+							<span v-if="scope.row.status=== 1"><i class="el-icon-success"></i></span>
+						</template>
 					</el-table-column>
 					<el-table-column prop="components" label="组件">
 						<template slot-scope="scope">
@@ -88,8 +88,11 @@
 						<el-input v-model="selectTable.description"></el-input>
 					</el-form-item>
 					<el-form-item label="components" label-width="100px">
-						<el-input type="textarea" v-model="selectTable.components" rows="8"></el-input>
+						<JsonView :json="JsonData" @changeData="changeData"></JsonView>
 					</el-form-item>
+					<!-- <el-form-item label="components" label-width="100px">
+						<el-input type="textarea" v-model="selectTable.components" rows="8"></el-input>
+					</el-form-item> -->
 					<el-form-item label="状态" label-width="100px">
 						<el-select v-model="selectTable.status" placeholder="请选择状态">
 							<el-option label="启用" value="1"></el-option>
@@ -127,8 +130,9 @@
 		deletePage,
 		addPage,
 		componentList,
-		copyPage
+		copyPage,
 	} from "@/api/getData";
+	import JsonView from "@/common/JsonView";
 	export default {
 		data() {
 			return {
@@ -150,34 +154,34 @@
 					url: "",
 					keywords: "",
 					description: "",
-					components: ""
+					components: "",
 				},
 				searchForm: {
 					name: "",
-					category: ""
+					url: "",
 				},
 				formRules: {
 					name: [
 						{
 							required: true,
 							message: "请输入页面名称",
-							trigger: "blur"
-						}
-					]
+							trigger: "blur",
+						},
+					],
 				},
 				attributes: [
 					{
 						value: "edu",
-						label: "教育"
+						label: "教育",
 					},
 					{
 						value: "IT",
-						label: "IT"
+						label: "IT",
 					},
 					{
 						value: "gov",
-						label: "政企"
-					}
+						label: "政企",
+					},
 				],
 				icon: "",
 				components: [],
@@ -185,7 +189,8 @@
 				filterMethod(query, item) {
 					return item.pinyin.indexOf(query) > -1;
 				},
-				websiteID: ""
+				websiteID: "",
+				JsonData: {},
 			};
 		},
 		created() {
@@ -193,7 +198,8 @@
 			this.initData();
 		},
 		components: {
-			headTop
+			headTop,
+			JsonView,
 		},
 		methods: {
 			async initData() {
@@ -210,17 +216,17 @@
 						offset: this.offset,
 						limit: this.limit,
 						name: this.searchForm.name,
-						category: this.searchForm.category
+						url: this.searchForm.url,
 					});
 					this.count = res.data.data.count;
 					this.tableData = [];
-					res.data.data.result.forEach(item => {
+					res.data.data.result.forEach((item) => {
 						this.tableData.push(item);
 					});
 				} catch (error) {
 					this.$message({
 						type: "error",
-						message: error.message
+						message: error.message,
 					});
 				}
 			},
@@ -236,8 +242,10 @@
 				this.addDialogFormVisible = true;
 			},
 			async handleEdit(index, row) {
+				console.log(row);
 				this.selectTable = row;
-				this.selectTable.components = JSON.stringify(row.components);
+				// this.selectTable.components = JSON.stringify(row.components);
+				this.JsonData = row.components;
 				this.updateDialogFormVisible = true;
 			},
 			handleCopyDialog(index, row) {
@@ -254,14 +262,14 @@
 					if (result.status == 200) {
 						this.$message({
 							type: "success",
-							message: "添加成功"
+							message: "添加成功",
 						});
 						this.addDialogFormVisible = false;
 						this.getPageList();
 					} else {
 						this.$message({
 							type: "error",
-							message: result.message
+							message: result.message,
 						});
 					}
 				} catch (err) {
@@ -273,6 +281,7 @@
 				this.getPageList();
 			},
 			async updatePage() {
+				console.log(JSON.stringify(this.JsonData));
 				try {
 					let updateObj = {
 						_id: this.selectTable._id,
@@ -280,7 +289,7 @@
 						keywords: this.selectTable.keywords,
 						description: this.selectTable.description,
 						url: this.selectTable.url,
-						components: JSON.parse(this.selectTable.components),
+						components: this.JsonData,
 						status: this.selectTable.status
 					};
 					const res = await updatePage(updateObj);
@@ -308,7 +317,7 @@
 					if (res.status == 200) {
 						this.$message({
 							type: "success",
-							message: "删除成功"
+							message: "删除成功",
 						});
 						this.tableData.splice(index, 1);
 					} else {
@@ -317,15 +326,19 @@
 				} catch (err) {
 					this.$message({
 						type: "error",
-						message: err.message
+						message: err.message,
 					});
 					console.log("删除失败");
 				}
 			},
 			viewComponents(id, url) {
 				this.$router.push({ path: "/drag", query: { id, url } });
-			}
-		}
+			},
+			changeData(d) {
+				console.log(">>>>>>>>>>>", JSON.stringify(d));
+				this.JsonData = d;
+			},
+		},
 	};
 </script>
 

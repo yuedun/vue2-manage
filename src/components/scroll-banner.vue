@@ -1,5 +1,5 @@
 <template>
-	<div class="home-container" title="home-container">
+	<div class="home-container" :title="page_title">
 		<div class="home-banner-container">
 			<div id="focus-banner">
 				<ul class="banner-list" id="focus-banner-list">
@@ -38,7 +38,8 @@
 				component: this.pcomponent,
 				dialogVisible: false,
 				rawhtml: "",
-				currentProp: ""
+				currentProp: "",
+				page_title:this.$vnode.key
 			};
 		},
 		created() {

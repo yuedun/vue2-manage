@@ -10,7 +10,7 @@
 					<el-select v-model="searchForm.category" placeholder="分类">
 						<el-option label="" value=""></el-option>
 						<el-option label="IT" value="IT"></el-option>
-						<el-option label="教育" value="教育"></el-option>
+						<el-option label="教育" value="edu"></el-option>
 					</el-select>
 				</el-form-item>
 				<el-form-item>
@@ -36,6 +36,10 @@
 					<el-table-column prop="description" label="description">
 					</el-table-column>
 					<el-table-column prop="status" label="状态">
+						<template slot-scope="scope">
+							<span v-if="scope.row.status=== 0"><i class="el-icon-error"></i></span>
+							<span v-if="scope.row.status=== 1"><i class="el-icon-success"></i></span>
+		　　　　　　　　</template>
 					</el-table-column>
 					<el-table-column prop="components" label="页面">
 						<template slot-scope="scope">
@@ -133,7 +137,7 @@
 		deleteWebsite,
 		addWebsite,
 		componentList,
-		copyPage
+		copyPage,
 	} from "@/api/getData";
 	export default {
 		data() {
@@ -158,34 +162,34 @@
 					icon: "",
 					keywords: "",
 					description: "",
-					components: ""
+					components: "",
 				},
 				searchForm: {
 					name: "",
-					category: ""
+					category: "",
 				},
 				formRules: {
 					name: [
 						{
 							required: true,
 							message: "请输入网站名称",
-							trigger: "blur"
-						}
-					]
+							trigger: "blur",
+						},
+					],
 				},
 				attributes: [
 					{
 						value: "edu",
-						label: "教育"
+						label: "教育",
 					},
 					{
 						value: "IT",
-						label: "IT"
+						label: "IT",
 					},
 					{
 						value: "gov",
-						label: "政企"
-					}
+						label: "政企",
+					},
 				],
 				icon: "",
 				components: [],
@@ -193,14 +197,14 @@
 				copyUrl: "",
 				filterMethod(query, item) {
 					return item.pinyin.indexOf(query) > -1;
-				}
+				},
 			};
 		},
 		created() {
 			this.initData();
 		},
 		components: {
-			headTop
+			headTop,
 		},
 		methods: {
 			async initData() {
@@ -216,17 +220,17 @@
 						offset: this.offset,
 						limit: this.limit,
 						name: this.searchForm.name,
-						category: this.searchForm.category
+						category: this.searchForm.category,
 					});
 					this.count = res.data.data.count;
 					this.tableData = [];
-					res.data.data.result.forEach(item => {
+					res.data.data.result.forEach((item) => {
 						this.tableData.push(item);
 					});
 				} catch (error) {
 					this.$message({
 						type: "error",
-						message: error.response.data.message
+						message: error.response.data.message,
 					});
 				}
 			},
@@ -258,7 +262,7 @@
 						res.data.data.result.forEach((item, index) => {
 							componentArray.push({
 								label: item.name,
-								key: index
+								key: index,
 							});
 						});
 						that.allComponents = componentArray;
@@ -276,14 +280,14 @@
 					if (result.status == 200) {
 						this.$message({
 							type: "success",
-							message: "添加成功"
+							message: "添加成功",
 						});
 						this.addDialogFormVisible = false;
 						this.getWebsiteList();
 					} else {
 						this.$message({
 							type: "error",
-							message: result.message
+							message: result.message,
 						});
 					}
 				} catch (err) {
@@ -300,7 +304,7 @@
 					if (res.status == 200) {
 						this.$message({
 							type: "success",
-							message: "修改成功"
+							message: "修改成功",
 						});
 						this.updateDialogFormVisible = false;
 						this.getWebsiteList();
@@ -310,7 +314,7 @@
 				} catch (err) {
 					this.$message({
 						type: "error",
-						message: err.message
+						message: err.message,
 					});
 					console.log("修改失败");
 				}
@@ -321,7 +325,7 @@
 					if (res.status == 200) {
 						this.$message({
 							type: "success",
-							message: "删除成功"
+							message: "删除成功",
 						});
 						this.tableData.splice(index, 1);
 					} else {
@@ -330,15 +334,15 @@
 				} catch (err) {
 					this.$message({
 						type: "error",
-						message: err.message
+						message: err.message,
 					});
 					console.log("删除失败");
 				}
 			},
 			viewPages(id) {
 				this.$router.push({ path: "/pageList", query: { id } });
-			}
-		}
+			},
+		},
 	};
 </script>
 

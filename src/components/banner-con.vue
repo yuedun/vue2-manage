@@ -1,5 +1,5 @@
 <template>
-	<div class="banner-con" title="banner-con">
+	<div class="banner-con" :title="page_title">
 		<img class="banner" :src="component.background_img">
 		<div class="width-visual content">
 			<h1>{{component.title_1}}</h1>
@@ -18,7 +18,8 @@
 				component: this.pcomponent,
 				dialogVisible: false,
 				rawhtml: "",
-				currentProp: ""
+				currentProp: "",
+				page_title:this.$vnode.key
 			};
 		},
 		created() {

@@ -1,5 +1,5 @@
 <template>
-	<div class="section-two" title="section-two">
+	<div class="section-two" :title="page_title">
 		<div class="width-visual con-box">
 			<div v-for="(item, index) in component.elements" :key="item.title_1">
 				<ul class="clearfix font18" v-if="index%2==1">
@@ -51,15 +51,14 @@
 				component: this.pcomponent,
 				dialogVisible: false,
 				rawhtml: "",
-				currentProp: ""
+				currentProp: "",
+				page_title: this.$vnode.key,
 			};
 		},
 		created() {
 			console.log(this.$vnode.key + "子组件接收父组件值：", this.component);
 		},
-		methods: {
-	
-		}
+		methods: {},
 	};
 </script>
 <style lang="less">

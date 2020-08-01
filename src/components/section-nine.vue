@@ -1,5 +1,5 @@
 <template>
-	<div class="section-nine" title="section-nine">
+	<div class="section-nine" :title="page_title">
 		<div class="cooperation-box width-visual">
 			<h2 class="common_title" @click="edit('title_1')">{{component.title_1}}<i></i></h2>
 			<ul class="clearfix">
@@ -28,15 +28,14 @@
 				component: this.pcomponent,
 				dialogVisible: false,
 				rawhtml: "",
-				currentProp: ""
+				currentProp: "",
+				page_title: this.$vnode.key,
 			};
 		},
 		created() {
-			console.log(this.$vnode.key + "子组件接收父组件值：", this.component);			
+			console.log(this.$vnode.key + "子组件接收父组件值：", this.component);
 		},
-		methods: {
-	
-		}
+		methods: {},
 	};
 </script>
 <style lang="less">

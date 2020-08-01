@@ -1,5 +1,5 @@
 <template>
-	<div class="section-seven" title="section-seven">
+	<div class="section-seven" :title="page_title">
 		<div class="con-box width-visual">
 			<h2 class="common_title" @click="edit('title_1')">{{component.title_1}}<i></i></h2>
 			<img class="map-bg" src="../assets/YUEDUN_files/promise_be75ce5d.png">
@@ -43,15 +43,14 @@
 				component: this.pcomponent,
 				dialogVisible: false,
 				rawhtml: "",
-				currentProp: ""
+				currentProp: "",
+				page_title: this.$vnode.key,
 			};
 		},
 		created() {
 			console.log(this.$vnode.key + "子组件接收父组件值：", this.component);
 		},
-		methods: {
-	
-		}
+		methods: {},
 	};
 </script>
 <style lang="less">

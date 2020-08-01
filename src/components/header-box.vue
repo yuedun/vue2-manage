@@ -1,5 +1,5 @@
 <template>
-	<div class="header-box" title="header-box">
+	<div class="header-box" :title="page_title">
 		<div class="header-info-pc header-box-fixed" id="headerInfoPc">
 			<div class="header-info clearfix width-visual margin-auto">
 				<div class="vipkid fl"><a href="#"><img src="../assets/YUEDUN_files/vipkidlogo_d4b868b3.png" alt="VIPKID在线青少儿英语"></a>
@@ -34,7 +34,8 @@
 		data() {
 			return {
 				component: this.pcomponent,
-				visible: false
+				visible: false,
+				page_title:this.$vnode.key
 			};
 		},
 		created() {

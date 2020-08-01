@@ -1,5 +1,5 @@
 <template>
-	<div class="section-five text-center" title="section-five">
+	<div class="section-five text-center" :title="page_title">
 		<video id="jsVideoBoxCon" src="https://image.vipkid.com.cn/market/file/1539516532744-waijiaodahui_bg.mp4" poster="https://ww1.yunjiexi.club/2019/12/20/5eflU.jpg" autoplay="autoplay" preload="preload" loop="loop" muted="">
 		</video>
 		<div class="video-bg" id="jsVideoBgPoster">
@@ -52,15 +52,14 @@
 				component: this.pcomponent,
 				dialogVisible: false,
 				rawhtml: "",
-				currentProp: ""
+				currentProp: "",
+				page_title: this.$vnode.key,
 			};
 		},
 		created() {
 			console.log(this.$vnode.key + "子组件接收父组件值：", this.component);
 		},
-		methods: {
-	
-		}
+		methods: {},
 	};
 </script>
 <style lang="less">

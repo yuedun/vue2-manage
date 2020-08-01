@@ -5,7 +5,7 @@
 			<el-col :span="4" class="col-left">
 				<draggable class="list-group wrapper" :list="allComponent" group="components" @change="log">
 					<div class="list-group-item" v-for="(element) in allComponent" :key="element.name">
-						{{ element.name }} {{ element.category }}-{{element.sort}}
+						{{ element.category }}:{{ element.name }}-{{element.sort}}
 					</div>
 				</draggable>
 			</el-col>

@@ -1,5 +1,5 @@
 <template>
-	<div class="search-all width-visual" title="search-all">
+	<div class="search-all width-visual" :title="page_title">
 		<div class="search-criteria">
 			<ul class="class-time clearfix" id="classTimeNav">
 				<li class="gray"><i>类型</i></li>
@@ -126,15 +126,14 @@
 				component: this.pcomponent,
 				dialogVisible: false,
 				rawhtml: "",
-				currentProp: ""
+				currentProp: "",
+				page_title: this.$vnode.key,
 			};
 		},
 		created() {
 			console.log(this.$vnode.key + "子组件接收父组件值：", this.component);
 		},
-		methods: {
-	
-		}
+		methods: {},
 	};
 </script>
 <style lang="less">

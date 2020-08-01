@@ -1,5 +1,5 @@
 <template>
-	<div class="footer" title="footer">
+	<div class="footer" :title="page_title">
 		<div class="footer-info clearfix width-visual">
 			<ul class="authentication fl">
 				<li>
@@ -60,15 +60,14 @@
 				component: this.pcomponent,
 				dialogVisible: false,
 				rawhtml: "",
-				currentProp: ""
+				currentProp: "",
+				page_title: this.$vnode.key,
 			};
 		},
 		created() {
 			console.log(this.$vnode.key + "子组件接收父组件值：", this.component);
 		},
-		methods: {
-	
-		}
+		methods: {},
 	};
 </script>
 <style lang="less">
