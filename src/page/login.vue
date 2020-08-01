@@ -117,7 +117,7 @@
 @import "../style/mixin";
 .login_page {
 	background-color: #324057;
-	background-image: url("../assets/login-background.jpg");
+	background-image: url("http://hopefully-img.yuedun.wang/login-background.jpg?imageMogr2/quality/50");
 }
 .manage_tip {
 	position: absolute;

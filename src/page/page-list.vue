@@ -90,9 +90,6 @@
 					<el-form-item label="components" label-width="100px">
 						<JsonView :json="JsonData" @changeData="changeData"></JsonView>
 					</el-form-item>
-					<!-- <el-form-item label="components" label-width="100px">
-						<el-input type="textarea" v-model="selectTable.components" rows="8"></el-input>
-					</el-form-item> -->
 					<el-form-item label="状态" label-width="100px">
 						<el-select v-model="selectTable.status" placeholder="请选择状态">
 							<el-option label="启用" value="1"></el-option>
@@ -335,7 +332,6 @@
 				this.$router.push({ path: "/drag", query: { id, url } });
 			},
 			changeData(d) {
-				console.log(">>>>>>>>>>>", JSON.stringify(d));
 				this.JsonData = d;
 			},
 		},

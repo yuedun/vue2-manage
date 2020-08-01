@@ -92,7 +92,7 @@
 			},
 			oriToJsonView() {
 				this.originShow = false;
-				this.$emit("changeData", JSON.parse(this.originJson))
+				this.$emit("changeData", JSON.parse(this.originJson));
 			},
 		},
 		computed: {
