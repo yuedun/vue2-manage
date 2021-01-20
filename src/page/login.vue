@@ -16,9 +16,6 @@
 						<el-button type="primary" @click="submitForm('loginForm')" class="submit_btn">登陆</el-button>
 					</el-form-item>
 				</el-form>
-				<p class="tip">温馨提示：</p>
-				<p class="tip">未登录过的新用户，自动注册</p>
-				<p class="tip">注册过的用户可凭账号密码登录</p>
 			</section>
 		</transition>
 	</div>

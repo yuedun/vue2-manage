@@ -5,8 +5,8 @@
 				<ul class="clearfix font18" v-if="index%2==1">
 					<li class="col_6">
 						<div class="detail2"><img class="icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGYAAABgCAMAAADYWPdNAAAAmVBMVEUAAAD/yBj/xhf/yBf/xxf/5jj/xxb/xxb/xxb/xhf/yhv/1R7/xxf/yBf/xxb/yBb/xxf/xxb/xxf/xxf/0iX/xxf/xxb/xhb/xxb/xxf/xxb/yBf/xxf/yBf/yRn/yhr/0Rn/xxb/xxb/yBb/xxj/yBj/yBj/xxb/xxb/xxb/yRb/xxf/xhb/xhf/xxf/xxf/yBf/yxr/xhb0h+/EAAAAMnRSTlMAH6aGugT68+/qGQjIWX9P4NyceA332NKhe3FqYzYzIhStlIxUSD7lwrdDLMyxqL5hJ7hZXSwAAAJ3SURBVGje7ZbbctpAEEQRRlcE4iYkMBhsxcZcgp35/49LUi4qRurRtvY1e55b1audnZ7pGdhXzz1bsvSJEyZVKJJZmlxEUkY4XIXyh+nQwmSbyl8+zcofE/li3NkkKeWLeGFQegO5kXsdXR5DufHSrtxE8g/wCkwHvBGc297XUe547fF8hvKd95b6HeSepc+aDGdSY6RebSB15uyFpVLnoLyCF2kSJpTLUyxNHpDSvwriyricQgEEv5rKxUAwb0Sj5QIZNCv4IQqFb0yXQCDNuPJ/isradGO5aExqcVWKTrRvDzFYFxhXK2lhuW1NsYPoBNV36avoTEettfHTFpPZXSbuIv1yN4YHMNNNyh17oMo3PWX9qm8D1FiY2Bic+1gUynrSnAPBHM058yyYqBmbqfoWjWTahTXH4UgwK7OLP1VckmbITLR/MbNWWgBc9tzeZR9hFw/MvFgQeF+gXmjkoXmJQxksaOwJR6iIsDIBWE3ZE/bVJrac/0sYTnD+HwXwTrm88aM2gQGAr0zPTOP6OMcDnGEY8ScsuP+mq3rEgw9XhqLkT7gRALk1x+iEfIxPOJct7kxIiGPGNmgCvAGdBXDibNBa99GjSxP59qVZ8w125Vx2AthhbUFXkRq5haLN4YkoxtJkhqUekOY9jj5fmhOQXkibC+prfiyVpA3KTQ9LH+BAo1igVugwMDL795x2aOSzfaL1FW0K75ci6xCGaDMFCwMbU5WiPQAtmWiPHfbU2L4717A76WkTAxm7qmwUbQC2bNJm3CF0gTQcNJmTnV2AbxNkg+lDGw7P2TgbZ+NsnI2zcTbOxtk4G2fjbJyNs3E2/7PNb5ffIRjZXgSoAAAAAElFTkSuQmCC">
-							<h4 class="font32 color-main" @click="edit('elements', index, 'title_1')">{{item.title_1}}</h4>
-							<p class="font16 color-lgray" @click="edit('elements', index, 'description')">{{item.description}}</p>
+							<h4 class="font32 color-main" @click="edit('elements', index, 'title_1')" @mouseover="setActive($event)" @mouseout="cleanActive($event)">{{item.title_1}}</h4>
+							<p class="font16 color-lgray" @click="edit('elements', index, 'description')" @mouseover="setActive($event)" @mouseout="cleanActive($event)">{{item.description}}</p>
 						</div>
 					</li>
 					<li class="col_6">
@@ -24,8 +24,8 @@
 					</li>
 					<li class="col_6">
 						<div class="detail"><img class="icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGYAAABgCAMAAADYWPdNAAAAmVBMVEUAAAD/yBj/xhf/yBf/xxf/5jj/xxb/xxb/xxb/xhf/yhv/1R7/xxf/yBf/xxb/yBb/xxf/xxb/xxf/xxf/0iX/xxf/xxb/xhb/xxb/xxf/xxb/yBf/xxf/yBf/yRn/yhr/0Rn/xxb/xxb/yBb/xxj/yBj/yBj/xxb/xxb/xxb/yRb/xxf/xhb/xhf/xxf/xxf/yBf/yxr/xhb0h+/EAAAAMnRSTlMAH6aGugT68+/qGQjIWX9P4NyceA332NKhe3FqYzYzIhStlIxUSD7lwrdDLMyxqL5hJ7hZXSwAAAJ3SURBVGje7ZbbctpAEEQRRlcE4iYkMBhsxcZcgp35/49LUi4qRurRtvY1e55b1audnZ7pGdhXzz1bsvSJEyZVKJJZmlxEUkY4XIXyh+nQwmSbyl8+zcofE/li3NkkKeWLeGFQegO5kXsdXR5DufHSrtxE8g/wCkwHvBGc297XUe547fF8hvKd95b6HeSepc+aDGdSY6RebSB15uyFpVLnoLyCF2kSJpTLUyxNHpDSvwriyricQgEEv5rKxUAwb0Sj5QIZNCv4IQqFb0yXQCDNuPJ/isradGO5aExqcVWKTrRvDzFYFxhXK2lhuW1NsYPoBNV36avoTEettfHTFpPZXSbuIv1yN4YHMNNNyh17oMo3PWX9qm8D1FiY2Bic+1gUynrSnAPBHM058yyYqBmbqfoWjWTahTXH4UgwK7OLP1VckmbITLR/MbNWWgBc9tzeZR9hFw/MvFgQeF+gXmjkoXmJQxksaOwJR6iIsDIBWE3ZE/bVJrac/0sYTnD+HwXwTrm88aM2gQGAr0zPTOP6OMcDnGEY8ScsuP+mq3rEgw9XhqLkT7gRALk1x+iEfIxPOJct7kxIiGPGNmgCvAGdBXDibNBa99GjSxP59qVZ8w125Vx2AthhbUFXkRq5haLN4YkoxtJkhqUekOY9jj5fmhOQXkibC+prfiyVpA3KTQ9LH+BAo1igVugwMDL795x2aOSzfaL1FW0K75ci6xCGaDMFCwMbU5WiPQAtmWiPHfbU2L4717A76WkTAxm7qmwUbQC2bNJm3CF0gTQcNJmTnV2AbxNkg+lDGw7P2TgbZ+NsnI2zcTbOxtk4G2fjbJyNs3E2/7PNb5ffIRjZXgSoAAAAAElFTkSuQmCC">
-							<h4 class="font32 color-main" @click="edit('elements', index, 'title_1')">{{item.title_1}}</h4>
-							<p class="font16 color-lgray" @click="edit('elements', index, 'description')">{{item.description}}</p>
+							<h4 class="font32 color-main" @click="edit('elements', index, 'title_1')" @mouseover="setActive($event)" @mouseout="cleanActive($event)">{{item.title_1}}</h4>
+							<p class="font16 color-lgray" @click="edit('elements', index, 'description')" @mouseover="setActive($event)" @mouseout="cleanActive($event)">{{item.description}}</p>
 						</div>
 					</li>
 				</ul>

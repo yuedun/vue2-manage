@@ -47,19 +47,19 @@ const routes = [
 		}, {
 			path: '/websiteList',
 			component: websiteList,
-			meta: ['网站管理', '网站列表'],
+			meta: ['网站列表'],
 		}, {
 			path: '/pageList',
 			component: pageList,
-			meta: ['网站管理', '页面列表'],
+			meta: ['网站列表', '页面列表'],
 		}, {
 			path: '/componentList',
 			component: componentList,
-			meta: ['网站管理', '组件列表'],
+			meta: ['组件列表'],
 		}, {
 			path: '/drag',
 			component: drag,
-			mate: ['网站管理', '拖拽']
+			meta: ['网站列表', '页面列表', '组件']
 		}
 			// , {
 			// 	path: '/addShop',

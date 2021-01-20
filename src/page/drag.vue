@@ -2,7 +2,7 @@
 	<div class="fillcontain drag">
 		<head-top></head-top>
 		<el-row :gutter="10">
-			<el-col :span="4" class="col-left">
+			<el-col :span="3" class="col-left">
 				<draggable class="list-group wrapper" :list="allComponent" group="components" @change="log">
 					<div class="list-group-item" v-for="(element) in allComponent" :key="element.name">
 						{{ element.category }}:{{ element.name }}-{{element.sort}}
@@ -10,7 +10,7 @@
 				</draggable>
 			</el-col>
 
-			<el-col :span="20" class="col-right">
+			<el-col :span="21" class="col-right">
 				<div class="tools">
 					<el-button type="success" @click="saveData">保存</el-button>
 					<el-button type="default" @click="back">返回</el-button>
@@ -171,10 +171,7 @@
 	};
 </script>
 <style scoped lang="less">
-@import "../assets/YUEDUN_files/base.css";
-@import "../assets/YUEDUN_files/home.css";
-@import "../assets/YUEDUN_files/teachers.css";
-@import "../assets/YUEDUN_files/classlist.css";
+@import "../assets/style/all.css";
 .drag {
 	.wrapper {
 		display: flex;
@@ -189,7 +186,7 @@
 		color: #ffffff;
 		cursor: move;
 		margin-bottom: 5px;
-		padding-left: 20px;
+		padding-left: 15px;
 	}
 	.col-left {
 		/* border-right: 1px solid #42b983; */
@@ -203,6 +200,9 @@
 	}
 	.curs {
 		cursor: move;
+	}
+	.active {
+		border: 1px solid  red;
 	}
 }
 </style>

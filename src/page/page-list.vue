@@ -18,9 +18,9 @@
 			</el-form>
 			<template>
 				<el-table :data="tableData" stripe style="width: 100%">
-					<el-table-column prop="name" label="title">
-					</el-table-column>
 					<el-table-column prop="url" label="url">
+					</el-table-column>
+					<el-table-column prop="title" label="title">
 					</el-table-column>
 					<el-table-column prop="keywords" label="keywords">
 					</el-table-column>
@@ -29,7 +29,7 @@
 					<el-table-column prop="status" label="状态">
 						<template slot-scope="scope">
 							<span v-if="scope.row.status=== 0"><i class="el-icon-error"></i></span>
-							<span v-if="scope.row.status=== 1"><i class="el-icon-success"></i></span>
+							<span v-if="scope.row.status=== 1"><i class="el-icon-success success-color"></i></span>
 						</template>
 					</el-table-column>
 					<el-table-column prop="components" label="组件">
@@ -52,8 +52,8 @@
 			</div>
 			<el-dialog title="新增页面信息" :visible.sync="addDialogFormVisible">
 				<el-form :model="addPageForm" :rules="formRules" ref="addPageForm" label-width="110px" class="form food_form">
-					<el-form-item label="title" prop="name">
-						<el-input v-model="addPageForm.name"></el-input>
+					<el-form-item label="title" prop="title">
+						<el-input v-model="addPageForm.title"></el-input>
 					</el-form-item>
 					<el-form-item label="url" prop="url">
 						<el-input v-model="addPageForm.url"></el-input>
@@ -75,11 +75,11 @@
 			</el-dialog>
 			<el-dialog title="修改页面信息" :visible.sync="updateDialogFormVisible">
 				<el-form :model="selectTable">
-					<el-form-item label="title" label-width="100px">
-						<el-input v-model="selectTable.name" autocomplete="off"></el-input>
-					</el-form-item>
 					<el-form-item label="url" label-width="100px">
 						<el-input v-model="selectTable.url" autocomplete="off"></el-input>
+					</el-form-item>
+					<el-form-item label="title" label-width="100px">
+						<el-input v-model="selectTable.title" autocomplete="off"></el-input>
 					</el-form-item>
 					<el-form-item label="keywords" label-width="100px">
 						<el-input v-model="selectTable.keywords"></el-input>
@@ -146,7 +146,7 @@
 				componentsDialogVisible: false,
 				copyDialogVisible: false,
 				addPageForm: {
-					name: "",
+					title: "",
 					category: "",
 					url: "",
 					keywords: "",
@@ -154,11 +154,11 @@
 					components: "",
 				},
 				searchForm: {
-					name: "",
+					title: "",
 					url: "",
 				},
 				formRules: {
-					name: [
+					title: [
 						{
 							required: true,
 							message: "请输入页面名称",
@@ -212,7 +212,7 @@
 						websiteID: this.websiteID,
 						offset: this.offset,
 						limit: this.limit,
-						name: this.searchForm.name,
+						title: this.searchForm.title,
 						url: this.searchForm.url,
 					});
 					this.count = res.data.data.count;
@@ -282,12 +282,12 @@
 				try {
 					let updateObj = {
 						_id: this.selectTable._id,
-						name: this.selectTable.name,
+						title: this.selectTable.title,
 						keywords: this.selectTable.keywords,
 						description: this.selectTable.description,
 						url: this.selectTable.url,
 						components: this.JsonData,
-						status: this.selectTable.status
+						status: Number(this.selectTable.status)
 					};
 					const res = await updatePage(updateObj);
 					if (res.status == 200) {

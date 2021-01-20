@@ -22,6 +22,12 @@ export const Mixins = {
                 this.component[this.currentProp.prop] = this.rawhtml;
             }
             this.dialogVisible = false;
+        },
+        setActive(e){
+            e.currentTarget.classList.add("editorActive");				
+        },
+        cleanActive(e){
+            e.currentTarget.classList.remove("editorActive");				
         }
     }
 }

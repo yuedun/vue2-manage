@@ -38,7 +38,7 @@
 					<el-table-column prop="status" label="状态">
 						<template slot-scope="scope">
 							<span v-if="scope.row.status=== 0"><i class="el-icon-error"></i></span>
-							<span v-if="scope.row.status=== 1"><i class="el-icon-success"></i></span>
+							<span v-if="scope.row.status=== 1"><i class="el-icon-success success-color"></i></span>
 		　　　　　　　　</template>
 					</el-table-column>
 					<el-table-column prop="components" label="页面">

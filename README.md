@@ -32,7 +32,7 @@ git clone https://github.com/yuedun/vue2-manage
 
 cd vue2-manage  
 
-npm install 或 yarn(推荐)
+npm i
 
 npm run dev (访问本地后台系统)
 
