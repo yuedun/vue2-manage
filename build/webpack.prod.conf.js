@@ -19,7 +19,7 @@ var webpackConfig = merge(baseWebpackConfig, {
     rules: [
       {
         test: /\.css|less$/i,
-        use: [MiniCssExtractPlugin.loader, 'css-loader','less-loader'],
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'less-loader'],
       },
     ],
   },
@@ -86,13 +86,11 @@ var webpackConfig = merge(baseWebpackConfig, {
       chunksSortMode: 'auto'
     }),
     // copy custom static assets
-    new CopyWebpackPlugin([
-      {
-        from: path.resolve(__dirname, '../static'),
-        to: config.build.assetsSubDirectory,
-        ignore: ['.*']
-      }
-    ])
+    new CopyWebpackPlugin(
+      [
+        { from: path.resolve(__dirname, '../static'), to: config.build.assetsSubDirectory }
+      ],
+    )
   ]
 })
 
