@@ -24,8 +24,7 @@
 							</span>
 							:
 							<span class="json-value">
-								{{item.value + (index ===
-            items.length - 1 ? '' : ',')}}
+								{{item.value + (index === items.length - 1 ? '' : ',')}}
 							</span>
 						</p>
 					</template>
@@ -37,7 +36,7 @@
 			</div>
 		</div>
 		<div v-if="originShow">
-			<el-input type="textarea" v-model="originJson" rows="8" @blur="oriToJsonView"></el-input>
+			<el-input type="textarea" v-model="originJson" rows="8" @blur="oriToJsonView" autosize></el-input>
 		</div>
 	</div>
 </template>
@@ -74,7 +73,7 @@
 			return {
 				innerclosed: true,
 				originShow: false,
-				originJson: JSON.stringify(this.json),
+				originJson: JSON.stringify(this.json, null, 2),
 			};
 		},
 		methods: {

@@ -4,8 +4,8 @@
 		<el-row :gutter="10">
 			<el-col :span="3" class="col-left">
 				<draggable class="list-group wrapper" :list="allComponent" group="components" @change="log">
-					<div class="list-group-item" v-for="(element) in allComponent" :key="element.name">
-						{{ element.category }}:{{ element.name }}-{{element.sort}}
+					<div class="list-group-item" v-for="(element) in allComponent" :key="element.name" @mouseenter="preview('/static/img/'+element.name+'.png',$event)">
+						<img :src="'/static/img/'+element.name+'.png'" :alt="element.category+':'+element.name+':'+element.sort" width="100%">
 					</div>
 				</draggable>
 			</el-col>
@@ -28,6 +28,8 @@
 <script>
 	import draggable from "vuedraggable";
 	import headTop from "../components/headTop";
+	import tippy from 'tippy.js';
+	import 'tippy.js/dist/tippy.css';
 	import {
 		componentList,
 		getComponent,
@@ -166,6 +168,14 @@
 					});
 					console.log("修改失败");
 				}
+			},
+			preview(imgsrc, e){
+				tippy(e.currentTarget,{
+					allowHTML: true,
+					trigger: 'click',
+					placement: 'right',
+					content: '<img src="'+imgsrc+'" width="400px;"/>'
+				});
 			}
 		}
 	};
@@ -180,16 +190,15 @@
 		display: inline-block;
 	}
 	.list-group-item {
-		height: 30px;
-		line-height: 30px;
+		height: 150px;
 		background-color: #42b983;
 		color: #ffffff;
 		cursor: move;
 		margin-bottom: 5px;
-		padding-left: 15px;
 	}
 	.col-left {
-		/* border-right: 1px solid #42b983; */
+		overflow: auto;
+		height: 1080px;
 	}
 	.col-right {
 		overflow: auto;
