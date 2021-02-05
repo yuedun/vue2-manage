@@ -73,7 +73,7 @@
 					<el-button type="primary" @click="addPage">确 定</el-button>
 				</div>
 			</el-dialog>
-			<el-dialog title="修改页面信息" :visible.sync="updateDialogFormVisible">
+			<el-dialog title="修改页面信息" :visible.sync="updateDialogFormVisible" :close-on-click-modal="false">
 				<el-form :model="selectTable">
 					<el-form-item label="url" label-width="100px">
 						<el-input v-model="selectTable.url" autocomplete="off"></el-input>

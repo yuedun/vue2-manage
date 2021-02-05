@@ -3,7 +3,7 @@
 		<head-top></head-top>
 		<el-row :gutter="10">
 			<el-col :span="3" class="col-left">
-				<draggable class="list-group wrapper" :list="allComponent" group="components" @change="log">
+				<draggable class="list-group wrapper" :list="allComponent" :group="{name:'components', pull:'clone'}" @change="log">
 					<div class="list-group-item" v-for="(element) in allComponent" :key="element.name" @mouseenter="preview('/static/img/'+element.name+'.png',$event)">
 						<img :src="'/static/img/'+element.name+'.png'" :alt="element.category+':'+element.name+':'+element.sort" width="100%">
 					</div>
